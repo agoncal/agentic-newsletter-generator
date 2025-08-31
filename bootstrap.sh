@@ -6,14 +6,14 @@ mvn archetype:generate "-DgroupId=ai.agentic.newsletter.generator" "-DartifactId
 mvn io.quarkus:quarkus-maven-plugin:3.26.1:create \
     -DplatformVersion=3.26.1 \
     -DprojectGroupId=ai.agentic.newsletter.generator \
-    -DprojectArtifactId=statistics-agent \
+    -DprojectArtifactId=agent-statistics \
     -DclassName="ai.agentic.newslettergen.statistics.StatisticsAgent" \
     -Dpath="statistics"
 
 mvn io.quarkus:quarkus-maven-plugin:3.26.1:create \
     -DplatformVersion=3.26.1 \
     -DprojectGroupId=ai.agentic.newsletter.generator \
-    -DprojectArtifactId=release-agent \
+    -DprojectArtifactId=agent-release \
     -DclassName="ai.agentic.newslettergen.release.ReleaseAgent" \
     -Dpath="releases"
 
@@ -21,14 +21,14 @@ mvn io.quarkus:quarkus-maven-plugin:3.26.1:create \
 mvn io.quarkus:quarkus-maven-plugin:3.26.1:create \
     -DplatformVersion=3.26.1 \
     -DprojectGroupId=ai.agentic.newsletter.generator \
-    -DprojectArtifactId=code-sample-agent \
+    -DprojectArtifactId=agent-code-sample \
     -DclassName="ai.agentic.newslettergen.codesample.CodeSampleAgent" \
     -Dpath="codesamples"
 
 mvn io.quarkus:quarkus-maven-plugin:3.26.1:create \
     -DplatformVersion=3.26.1 \
     -DprojectGroupId=ai.agentic.newsletter.generator \
-    -DprojectArtifactId=reference-agent \
+    -DprojectArtifactId=agent-reference \
     -DclassName="ai.agentic.newslettergen.reference.ReferenceAgent" \
     -Dpath="references"
 

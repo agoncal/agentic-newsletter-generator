@@ -3,9 +3,9 @@
 
 version: 2
 updates:
-  # Code Sample Agent module
+  # Agent Code Sample module
   - package-ecosystem: "maven"
-    directory: "/code-sample-agent"
+    directory: "/agent-code-sample"
     schedule:
       interval: "weekly"
       day: "monday"
@@ -14,12 +14,12 @@ updates:
     assignees:
       - "agoncal"
     commit-message:
-      prefix: "deps(code-sample-agent)"
+      prefix: "deps(agent-code-sample)"
       include: "scope"
     labels:
       - "dependencies"
       - "maven"
-      - "code-sample-agent"
+      - "agent-code-sample"
 
   # Commons module
   - package-ecosystem: "maven"
@@ -39,9 +39,9 @@ updates:
       - "maven"
       - "commons"
 
-  # Reference Agent
+  # Agent Reference module
   - package-ecosystem: "maven"
-    directory: "/reference-agent"
+    directory: "/agent-reference"
     schedule:
       interval: "weekly"
       day: "monday"
@@ -50,16 +50,16 @@ updates:
     assignees:
       - "agoncal"
     commit-message:
-      prefix: "deps(reference-agent)"
+      prefix: "deps(agent-reference)"
       include: "scope"
     labels:
       - "dependencies"
       - "maven"
-      - "reference-agent"
+      - "agent-reference"
 
-  # Release Agent
+  # Agent Release module
   - package-ecosystem: "maven"
-    directory: "/release-agent"
+    directory: "/agent-release"
     schedule:
       interval: "weekly"
       day: "monday"
@@ -68,16 +68,16 @@ updates:
     assignees:
       - "agoncal"
     commit-message:
-      prefix: "deps(release-agent)"
+      prefix: "deps(agent-release)"
       include: "scope"
     labels:
       - "dependencies"
       - "maven"
-      - "release-agent"
+      - "agent-release"
 
-  # Statistics Agent
+  # Agent Statistics module
   - package-ecosystem: "maven"
-    directory: "/statistics-agent"
+    directory: "/agent-statistics"
     schedule:
       interval: "weekly"
       day: "monday"
@@ -86,12 +86,12 @@ updates:
     assignees:
       - "agoncal"
     commit-message:
-      prefix: "deps(statistics-agent)"
+      prefix: "deps(agent-statistics)"
       include: "scope"
     labels:
       - "dependencies"
       - "maven"
-      - "statistics-agent"
+      - "agent-statistics"
 
   # GitHub Actions workflows
   - package-ecosystem: "github-actions"
