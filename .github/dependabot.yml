@@ -1,0 +1,112 @@
+# Dependabot configuration for Vintage Store multi-module project
+# https://docs.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
+
+version: 2
+updates:
+  # Code Sample Agent module
+  - package-ecosystem: "maven"
+    directory: "/code-sample-agent"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+    open-pull-requests-limit: 5
+    assignees:
+      - "agoncal"
+    commit-message:
+      prefix: "deps(code-sample-agent)"
+      include: "scope"
+    labels:
+      - "dependencies"
+      - "maven"
+      - "code-sample-agent"
+
+  # Commons module
+  - package-ecosystem: "maven"
+    directory: "/commons"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+    open-pull-requests-limit: 5
+    assignees:
+      - "agoncal"
+    commit-message:
+      prefix: "deps(commons)"
+      include: "scope"
+    labels:
+      - "dependencies"
+      - "maven"
+      - "commons"
+
+  # Reference Agent
+  - package-ecosystem: "maven"
+    directory: "/reference-agent"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+    open-pull-requests-limit: 5
+    assignees:
+      - "agoncal"
+    commit-message:
+      prefix: "deps(reference-agent)"
+      include: "scope"
+    labels:
+      - "dependencies"
+      - "maven"
+      - "reference-agent"
+
+  # Release Agent
+  - package-ecosystem: "maven"
+    directory: "/release-agent"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+    open-pull-requests-limit: 5
+    assignees:
+      - "agoncal"
+    commit-message:
+      prefix: "deps(release-agent)"
+      include: "scope"
+    labels:
+      - "dependencies"
+      - "maven"
+      - "release-agent"
+
+  # Statistics Agent
+  - package-ecosystem: "maven"
+    directory: "/statistics-agent"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+    open-pull-requests-limit: 5
+    assignees:
+      - "agoncal"
+    commit-message:
+      prefix: "deps(statistics-agent)"
+      include: "scope"
+    labels:
+      - "dependencies"
+      - "maven"
+      - "statistics-agent"
+
+  # GitHub Actions workflows
+  - package-ecosystem: "github-actions"
+    directory: "/.github/workflows"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+    open-pull-requests-limit: 5
+    assignees:
+      - "agoncal"
+    commit-message:
+      prefix: "deps(actions)"
+      include: "scope"
+    labels:
+      - "dependencies"
+      - "github-actions"
+      - "ci"
