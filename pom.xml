@@ -14,5 +14,6 @@
     <module>agent-release</module>
     <module>agent-statistics</module>
     <module>commons</module>
+    <module>workflow-newsletter</module>
   </modules>
 </project>

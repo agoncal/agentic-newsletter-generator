@@ -32,3 +32,10 @@ mvn io.quarkus:quarkus-maven-plugin:3.26.1:create \
     -DclassName="ai.agentic.newslettergen.reference.ReferenceAgent" \
     -Dpath="references"
 
+#mvn io.quarkus:quarkus-maven-plugin:3.26.1:create \
+#    -DplatformVersion=3.26.1 \
+#    -DprojectGroupId=ai.agentic.newsletter.generator \
+#    -DprojectArtifactId=workflow-newsletter \
+#    -DclassName="ai.agentic.newslettergen.workflow.NewsletterWorkflow" \
+#    -Dpath="workflow"
+
