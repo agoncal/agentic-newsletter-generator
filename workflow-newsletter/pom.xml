@@ -50,6 +50,27 @@
   </dependencyManagement>
 
   <dependencies>
+    <!-- Agents -->
+    <dependency>
+      <groupId>ai.agentic.newsletter.generator</groupId>
+      <artifactId>agent-code-sample</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>ai.agentic.newsletter.generator</groupId>
+      <artifactId>agent-reference</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>ai.agentic.newsletter.generator</groupId>
+      <artifactId>agent-release</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>ai.agentic.newsletter.generator</groupId>
+      <artifactId>agent-statistics</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+    </dependency>
     <!-- LangChain4j -->
     <dependency>
       <groupId>dev.langchain4j</groupId>
