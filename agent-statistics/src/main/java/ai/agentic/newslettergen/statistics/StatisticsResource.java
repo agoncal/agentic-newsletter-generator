@@ -1,12 +1,12 @@
-package ai.agentic.newslettergen.codesample;
+package ai.agentic.newslettergen.statistics;
 
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 
-@Path("/codesamples")
-public class CodeSampleAgent {
+@Path("/statistics")
+public class StatisticsResource {
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)

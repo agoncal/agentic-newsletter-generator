@@ -6,7 +6,7 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 
 @Path("/references")
-public class ReferenceAgent {
+public class ReferenceResource {
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)

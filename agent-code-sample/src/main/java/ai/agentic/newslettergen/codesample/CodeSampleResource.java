@@ -1,12 +1,12 @@
-package ai.agentic.newslettergen.workflow;
+package ai.agentic.newslettergen.codesample;
 
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 
-@Path("/workflow")
-public class NewsletterWorkflow {
+@Path("/codesamples")
+public class CodeSampleResource {
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)

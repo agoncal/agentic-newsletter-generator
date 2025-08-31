@@ -1,12 +1,12 @@
-package ai.agentic.newslettergen.release;
+package ai.agentic.newslettergen.workflow;
 
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 
-@Path("/releases")
-public class ReleaseAgent {
+@Path("/workflow")
+public class NewsletterResource {
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)

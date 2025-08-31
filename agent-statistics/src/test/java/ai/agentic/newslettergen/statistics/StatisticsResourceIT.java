@@ -1,8 +1,8 @@
-package ai.agentic.newslettergen.release;
+package ai.agentic.newslettergen.statistics;
 
 import io.quarkus.test.junit.QuarkusIntegrationTest;
 
 @QuarkusIntegrationTest
-class ReleaseAgentIT extends ReleaseAgentTest {
+class StatisticsResourceIT extends StatisticsResourceTest {
     // Execute the same tests but in packaged mode.
 }

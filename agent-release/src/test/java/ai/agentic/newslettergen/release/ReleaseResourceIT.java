@@ -1,8 +1,8 @@
-package ai.agentic.newslettergen.workflow;
+package ai.agentic.newslettergen.release;
 
 import io.quarkus.test.junit.QuarkusIntegrationTest;
 
 @QuarkusIntegrationTest
-class NewsletterWorkflowIT extends NewsletterWorkflowTest {
+class ReleaseResourceIT extends ReleaseResourceTest {
     // Execute the same tests but in packaged mode.
 }
