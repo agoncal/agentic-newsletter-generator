@@ -2,7 +2,19 @@
 
 Multi Java agents system that generates monthly technology newsletters using real-time data and intelligent content curation
 
-This project is to create an intelligent newsletter generation system using multiple specialized AI agents that work together to produce a monthly technology newsletters. Built in Java using Quarkus, LangChain4j, Langchain4j Agentic  for agent orchestration, MCP servers and AI Foundry with various language models, this agentic application automatically gathers GitHub statistics (stars, forks, releases), analyzes community engagement, summarizes release notes, curates code examples, and compiles everything into a newsletter ready for email distribution. Each agent has a specific role - data collection, content analysis, writing, and formatting - creating a scalable solution for technology companies, developer communities, and tech enthusiasts who want to stay informed about specific technologies without manual research.
+This project is to create an intelligent newsletter generation system using multiple specialized AI agents that work together to produce a monthly technology newsletters. Built in Java using Quarkus, LangChain4j, Langchain4j Agentic for agent orchestration, MCP servers and AI Foundry with various language models, this agentic application automatically gathers GitHub statistics (stars, forks, releases), analyzes community engagement, summarizes release notes, curates code examples, and compiles everything into a newsletter ready for email distribution. Each agent has a specific role - data collection, content analysis, writing, and formatting - creating a scalable solution for technology companies, developer communities, and tech enthusiasts who want to stay informed about specific technologies without manual research.
+
+## Agents
+
+### Code Sample Agent
+
+### References Agent
+
+### Releases Agent
+
+### Statistics Agent
+
+## References
 
 * [LangChain4j](https://docs.langchain4j.dev)
 * [LangChain4j Agents and Agentic AI](https://docs.langchain4j.dev/tutorials/agents)

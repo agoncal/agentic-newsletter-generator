@@ -20,10 +20,11 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <!-- LangChain4j -->
     <langchain4j.version>1.4.0</langchain4j.version>
+    <langchain4j-community.version>1.4.0-beta10</langchain4j-community.version>
     <!-- Quarkus-->
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
-    <quarkus.platform.version>3.26.1</quarkus.platform.version>
+    <quarkus.platform.version>3.26.2</quarkus.platform.version>
     <skipITs>true</skipITs>
     <surefire-plugin.version>3.5.3</surefire-plugin.version>
   </properties>
