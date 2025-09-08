@@ -8,11 +8,19 @@ This project is to create an intelligent newsletter generation system using mult
 
 ### Code Sample Agent
 
+Generates relevant code examples and snippets that demonstrate the latest features and best practices of the technology being covered in the newsletter. This agent analyzes recent releases and documentation to create practical, working code samples.
+
 ### References Agent
+
+Gathers and curates comprehensive reference documentation, tutorials, and helpful resources related to the technology. This agent identifies the most valuable learning materials, official documentation links, and community resources for newsletter readers.
 
 ### Releases Agent
 
+Analyzes and summarizes recent software releases, including version updates, new features, bug fixes, and breaking changes. This agent processes release notes and changelog information to provide clear, digestible summaries of what's new.
+
 ### Statistics Agent
+
+Collects and analyzes GitHub statistics such as star counts, fork numbers, contributor activity, issue resolution rates, and community engagement metrics. This agent provides quantitative insights into project health and growth trends.
 
 ## References
 
