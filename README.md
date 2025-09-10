@@ -45,6 +45,42 @@ Collects and analyzes GitHub statistics such as star counts, fork numbers, contr
 
 ## Infrastructure
 
+This project is designed to run on Azure AI Foundry with automated infrastructure deployment scripts.
+
+### Azure AI Foundry Setup
+
+The system uses Azure AI Foundry for hosting AI models with individual Phi-4 model deployments for each agent:
+
+- **Statistics Agent**: Collects GitHub repository metrics
+- **Releases Agent**: Analyzes software release information  
+- **References Agent**: Curates documentation and resources
+- **Code Sample Agent**: Generates practical code examples
+- **Newsletter Workflow**: Orchestrates all agents to produce the final newsletter
+
+### Deployment
+
+```bash
+# Deploy all Azure resources
+./infrastructure/create-azure-ai-foundry-resources.sh
+
+# Clean up resources when done
+./infrastructure/delete-azure-ai-foundry-resources.sh
+```
+
+The deployment creates:
+- Azure Resource Group (`rg-hack2025agenticnews`)
+- Azure AI Foundry service with multiple model deployments
+- Individual Phi-4 model instances for each specialized agent
+- Required environment variables for service connectivity
+
+### GitHub Integration
+
+Uses [GitHub MCP Server](https://github.com/github/github-mcp-server) via Model Context Protocol for:
+- Repository statistics and metrics collection
+- Release notes and changelog access  
+- Documentation and code sample extraction
+- Community engagement analysis
+
 ## References
 
 * LangChain4j

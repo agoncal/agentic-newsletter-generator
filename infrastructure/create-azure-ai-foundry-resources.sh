@@ -10,7 +10,7 @@
 printf "%s\n" "-----------------------------------"
 printf "%s\n" "Setting up environment variables..."
 printf "%s\n" "-----------------------------------"
-export PROJECT="hack2025agenticnews10"
+export PROJECT="hack2025agenticnews"
 export RESOURCE_GROUP="rg-$PROJECT"
 export LOCATION="swedencentral" # check https://learn.microsoft.com/azure/ai-foundry/reference/region-support
 export TAG="$PROJECT"
