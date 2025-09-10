@@ -7,82 +7,97 @@
 # Register the CognitiveServices provider if it's not registered with `az provider register --namespace 'Microsoft.CognitiveServices'`
 
 
-echo "Setting up environment variables..."
-echo "----------------------------------"
-PROJECT="hack2025agenticnews"
-RESOURCE_GROUP="rg-$PROJECT"
-LOCATION="swedencentral" # check https://learn.microsoft.com/azure/ai-foundry/reference/region-support
-TAG="$PROJECT"
-UNIQUE_IDENTIFIER=${GITHUB_USER:-$(whoami)}
-COGNITIVE_SERVICES_NAME="ai-$PROJECT"
+printf "%s\n" "-----------------------------------"
+printf "%s\n" "Setting up environment variables..."
+printf "%s\n" "-----------------------------------"
+export PROJECT="hack2025agenticnews"
+export RESOURCE_GROUP="rg-$PROJECT"
+export LOCATION="swedencentral" # check https://learn.microsoft.com/azure/ai-foundry/reference/region-support
+export TAG="$PROJECT"
+export UNIQUE_IDENTIFIER=${GITHUB_USER:-$(whoami)}
+export AZURE_AI_FOUNDRY_NAME="ai-$PROJECT"
 # Agent Code Sample
-AGENT_CODE_SAMPLE_NAME="agent-code-sample"
-AGENT_CODE_SAMPLE_MODEL_FORMAT="Microsoft"
-AGENT_CODE_SAMPLE_MODEL_NAME="Phi-4"
-AGENT_CODE_SAMPLE_MODEL_VERSION="7"
-AGENT_CODE_SAMPLE_SKU_CAPACITY="1"
-AGENT_CODE_SAMPLE_SKU_NAME="GlobalStandard"
+export AGENT_CODE_SAMPLE_NAME="agent-code-sample"
+export AGENT_CODE_SAMPLE_MODEL="$AGENT_CODE_SAMPLE_NAME-model"
+export AGENT_CODE_SAMPLE_MODEL_FORMAT="Microsoft"
+export AGENT_CODE_SAMPLE_MODEL_NAME="Phi-4"
+export AGENT_CODE_SAMPLE_MODEL_VERSION="7"
+export AGENT_CODE_SAMPLE_SKU_CAPACITY="1"
+export AGENT_CODE_SAMPLE_SKU_NAME="GlobalStandard"
+# Setting verbose to true will display extra information
+verbose=false
+
+#printf "\n%s\n" "Logging in..."
+#printf "%s\n"   "-------------"
+#az login
 
 
-echo "Logging in..."
-echo "----------------------------------"
-az login
-az account show
+if [ "$verbose" = true ]; then  
+    printf "\n%s\n" "Checking the Azure account..."
+    printf "%s\n"   "-----------------------------"
+    az account show
+fi
 
 
-echo "Creating the resource group..."
-echo "------------------------------"
+printf "\n%s\n" "Creating the resource group..."
+printf "%s\n"   "------------------------------"
 az group create \
   --name "$RESOURCE_GROUP" \
   --location "$LOCATION" \
   --tags system="$TAG"
 
 
-echo "Creating Cognitive Service..."
-echo "------------------------------"
-# Check the SKUs with `az cognitiveservices account list-skus --location "$LOCATION" --output table`
+if [ "$verbose" = true ]; then  
+    printf "\n%s\n" "Checking the SKUs..."
+    printf "%s\n"   "--------------------"
+    az cognitiveservices account list-skus --location "$LOCATION" --output table
+fi
+
+
+printf "\n%s\n" "Creating Azure AI Foundry service..."
+printf "%s\n"   "------------------------------------"
 az cognitiveservices account create \
   --resource-group "$RESOURCE_GROUP" \
   --location "$LOCATION" \
-  --name "$COGNITIVE_SERVICES_NAME" \
-  --custom-domain "$COGNITIVE_SERVICES_NAME" \
+  --name "$AZURE_AI_FOUNDRY_NAME" \
+  --custom-domain "$AZURE_AI_FOUNDRY_NAME" \
   --kind AIServices \
   --sku S0
 
-COGNITIVE_SERVICES_KEY=$(az cognitiveservices account keys list \
-  --name "$COGNITIVE_SERVICES_NAME" \
+export AZURE_AI_FOUNDRY_KEY=$(az cognitiveservices account keys list \
+  --name "$AZURE_AI_FOUNDRY_NAME" \
   --resource-group "$RESOURCE_GROUP" \
   --query "key1" \
   --output tsv)
-echo "$COGNITIVE_SERVICES_KEY"
+printf "\n%s\n" "$AZURE_AI_FOUNDRY_KEY"
 
-COGNITIVE_SERVICES_URL=$(az cognitiveservices account show \
-  --name "$COGNITIVE_SERVICES_NAME" \
+export AZURE_AI_FOUNDRY_ENDPOINT=$(az cognitiveservices account show \
+  --name "$AZURE_AI_FOUNDRY_NAME" \
   --resource-group "$RESOURCE_GROUP" \
   --query "properties.endpoint" \
   --output tsv)
-echo "$COGNITIVE_SERVICES_URL"
-
-  
-echo "Checking all the available models..."
-echo "------------------------------"
-az cognitiveservices account list-models \
-  --resource-group "$RESOURCE_GROUP" \
-  --name "$COGNITIVE_SERVICES_NAME" \
-  --query "sort_by(@, &format)[].{Format:format,Name:name,Version:version,Sku:skus[0].name,Capacity:skus[0].capacity.default}" \
-  --output table
+printf "%s\n" "$AZURE_AI_FOUNDRY_ENDPOINT"
 
 
-echo "Deploying the model for the Agent Code Sample..."
-echo "------------------------------"
+if [ "$verbose" = true ]; then  
+    printf "\n%s\n" "Checking all the available models..."
+    printf "%s\n"   "------------------------------------"
+    az cognitiveservices account list-models \
+      --resource-group "$RESOURCE_GROUP" \
+      --name "$AZURE_AI_FOUNDRY_NAME" \
+      --query "sort_by(@, &format)[].{Format:format,Name:name,Version:version,Sku:skus[0].name,Capacity:skus[0].capacity.default}" \
+      --output table
+fi
+
+
+printf "\n%s\n" "Deploying the model for the Agent Code Sample..."
+printf "%s\n"   "------------------------------------------------"
 az cognitiveservices account deployment create \
   --resource-group "$RESOURCE_GROUP" \
-  --name "$COGNITIVE_SERVICES_NAME" \
-  --deployment-name "$AGENT_CODE_SAMPLE_NAME" \
+  --name "$AZURE_AI_FOUNDRY_NAME" \
+  --deployment-name "$AGENT_CODE_SAMPLE_MODEL" \
   --model-format "$AGENT_CODE_SAMPLE_MODEL_FORMAT" \
   --model-name "$AGENT_CODE_SAMPLE_MODEL_NAME" \
   --model-version "$AGENT_CODE_SAMPLE_MODEL_VERSION" \
   --sku-capacity "$AGENT_CODE_SAMPLE_SKU_CAPACITY" \
   --sku-name "$AGENT_CODE_SAMPLE_SKU_NAME"
-
-

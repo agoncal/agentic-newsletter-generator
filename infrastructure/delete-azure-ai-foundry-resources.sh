@@ -3,6 +3,8 @@
 # Execute this script to delete the Azure AI Foundry resources used by the application.
 # For this, you need Azure CLI installed: https://learn.microsoft.com/cli/azure/install-azure-cli
 
+
+echo "----------------------------------"
 echo "Setting up environment variables..."
 echo "----------------------------------"
 PROJECT="hack2025agenticnews"
@@ -13,3 +15,4 @@ echo "------------------------------"
 az group delete \
   --name "$RESOURCE_GROUP" \
   --yes
+
