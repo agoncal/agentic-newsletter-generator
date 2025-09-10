@@ -10,20 +10,58 @@
 printf "%s\n" "-----------------------------------"
 printf "%s\n" "Setting up environment variables..."
 printf "%s\n" "-----------------------------------"
-export PROJECT="hack2025agenticnews"
+export PROJECT="hack2025agenticnews10"
 export RESOURCE_GROUP="rg-$PROJECT"
 export LOCATION="swedencentral" # check https://learn.microsoft.com/azure/ai-foundry/reference/region-support
 export TAG="$PROJECT"
 export UNIQUE_IDENTIFIER=${GITHUB_USER:-$(whoami)}
 export AZURE_AI_FOUNDRY_NAME="ai-$PROJECT"
+
 # Agent Code Sample
 export AGENT_CODE_SAMPLE_NAME="agent-code-sample"
-export AGENT_CODE_SAMPLE_MODEL="$AGENT_CODE_SAMPLE_NAME-model"
+export AGENT_CODE_SAMPLE_DEPLOYMENT="$AGENT_CODE_SAMPLE_NAME-model"
 export AGENT_CODE_SAMPLE_MODEL_FORMAT="Microsoft"
 export AGENT_CODE_SAMPLE_MODEL_NAME="Phi-4"
 export AGENT_CODE_SAMPLE_MODEL_VERSION="7"
 export AGENT_CODE_SAMPLE_SKU_CAPACITY="1"
 export AGENT_CODE_SAMPLE_SKU_NAME="GlobalStandard"
+
+# Agent Reference
+export AGENT_REFERENCE_NAME="agent-reference"
+export AGENT_REFERENCE_DEPLOYMENT="$AGENT_CODE_SAMPLE_NAME-model"
+export AGENT_REFERENCE_MODEL_FORMAT="Microsoft"
+export AGENT_REFERENCE_MODEL_NAME="Phi-4"
+export AGENT_REFERENCE_MODEL_VERSION="7"
+export AGENT_REFERENCE_SKU_CAPACITY="1"
+export AGENT_REFERENCE_SKU_NAME="GlobalStandard"
+
+# Agent Release
+export AGENT_RELEASE_NAME="agent-release"
+export AGENT_RELEASE_DEPLOYMENT="$AGENT_CODE_SAMPLE_NAME-model"
+export AGENT_RELEASE_MODEL_FORMAT="Microsoft"
+export AGENT_RELEASE_MODEL_NAME="Phi-4"
+export AGENT_RELEASE_MODEL_VERSION="7"
+export AGENT_RELEASE_SKU_CAPACITY="1"
+export AGENT_RELEASE_SKU_NAME="GlobalStandard"
+
+# Agent Statistics
+export AGENT_STATISTICS_NAME="agent-statistics"
+export AGENT_STATISTICS_DEPLOYMENT="$AGENT_CODE_SAMPLE_NAME-model"
+export AGENT_STATISTICS_MODEL_FORMAT="Microsoft"
+export AGENT_STATISTICS_MODEL_NAME="Phi-4"
+export AGENT_STATISTICS_MODEL_VERSION="7"
+export AGENT_STATISTICS_SKU_CAPACITY="1"
+export AGENT_STATISTICS_SKU_NAME="GlobalStandard"
+
+# Agent Workflow Newsletter
+export AGENT_NEWSLETTER_NAME="agent-newsletter"
+export AGENT_NEWSLETTER_DEPLOYMENT="$AGENT_CODE_SAMPLE_NAME-model"
+export AGENT_NEWSLETTER_MODEL_FORMAT="Microsoft"
+export AGENT_NEWSLETTER_MODEL_NAME="Phi-4"
+export AGENT_NEWSLETTER_MODEL_VERSION="7"
+export AGENT_NEWSLETTER_SKU_CAPACITY="1"
+export AGENT_NEWSLETTER_SKU_NAME="GlobalStandard"
+
 # Setting verbose to true will display extra information
 verbose=false
 
@@ -95,9 +133,61 @@ printf "%s\n"   "------------------------------------------------"
 az cognitiveservices account deployment create \
   --resource-group "$RESOURCE_GROUP" \
   --name "$AZURE_AI_FOUNDRY_NAME" \
-  --deployment-name "$AGENT_CODE_SAMPLE_MODEL" \
+  --deployment-name "$AGENT_CODE_SAMPLE_DEPLOYMENT" \
   --model-format "$AGENT_CODE_SAMPLE_MODEL_FORMAT" \
   --model-name "$AGENT_CODE_SAMPLE_MODEL_NAME" \
   --model-version "$AGENT_CODE_SAMPLE_MODEL_VERSION" \
   --sku-capacity "$AGENT_CODE_SAMPLE_SKU_CAPACITY" \
   --sku-name "$AGENT_CODE_SAMPLE_SKU_NAME"
+
+
+printf "\n%s\n" "Deploying the model for the Agent Reference..."
+printf "%s\n"   "------------------------------------------------"
+az cognitiveservices account deployment create \
+  --resource-group "$RESOURCE_GROUP" \
+  --name "$AZURE_AI_FOUNDRY_NAME" \
+  --deployment-name "$AGENT_REFERENCE_DEPLOYMENT" \
+  --model-format "$AGENT_REFERENCE_MODEL_FORMAT" \
+  --model-name "$AGENT_REFERENCE_MODEL_NAME" \
+  --model-version "$AGENT_REFERENCE_MODEL_VERSION" \
+  --sku-capacity "$AGENT_REFERENCE_SKU_CAPACITY" \
+  --sku-name "$AGENT_REFERENCE_SKU_NAME"
+
+
+printf "\n%s\n" "Deploying the model for the Agent Reference..."
+printf "%s\n"   "------------------------------------------------"
+az cognitiveservices account deployment create \
+  --resource-group "$RESOURCE_GROUP" \
+  --name "$AZURE_AI_FOUNDRY_NAME" \
+  --deployment-name "$AGENT_RELEASE_DEPLOYMENT" \
+  --model-format "$AGENT_RELEASE_MODEL_FORMAT" \
+  --model-name "$AGENT_RELEASE_MODEL_NAME" \
+  --model-version "$AGENT_RELEASE_MODEL_VERSION" \
+  --sku-capacity "$AGENT_RELEASE_SKU_CAPACITY" \
+  --sku-name "$AGENT_RELEASE_SKU_NAME"
+
+
+printf "\n%s\n" "Deploying the model for the Agent Reference..."
+printf "%s\n"   "------------------------------------------------"
+az cognitiveservices account deployment create \
+  --resource-group "$RESOURCE_GROUP" \
+  --name "$AZURE_AI_FOUNDRY_NAME" \
+  --deployment-name "$AGENT_STATISTICS_DEPLOYMENT" \
+  --model-format "$AGENT_STATISTICS_MODEL_FORMAT" \
+  --model-name "$AGENT_STATISTICS_MODEL_NAME" \
+  --model-version "$AGENT_STATISTICS_MODEL_VERSION" \
+  --sku-capacity "$AGENT_STATISTICS_SKU_CAPACITY" \
+  --sku-name "$AGENT_STATISTICS_SKU_NAME"
+
+
+printf "\n%s\n" "Deploying the model for the Agent Reference..."
+printf "%s\n"   "------------------------------------------------"
+az cognitiveservices account deployment create \
+  --resource-group "$RESOURCE_GROUP" \
+  --name "$AZURE_AI_FOUNDRY_NAME" \
+  --deployment-name "$AGENT_NEWSLETTER_DEPLOYMENT" \
+  --model-format "$AGENT_NEWSLETTER_MODEL_FORMAT" \
+  --model-name "$AGENT_NEWSLETTER_MODEL_NAME" \
+  --model-version "$AGENT_NEWSLETTER_MODEL_VERSION" \
+  --sku-capacity "$AGENT_NEWSLETTER_SKU_CAPACITY" \
+  --sku-name "$AGENT_NEWSLETTER_SKU_NAME"
