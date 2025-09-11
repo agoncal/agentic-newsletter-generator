@@ -18,8 +18,8 @@ export UNIQUE_IDENTIFIER=${GITHUB_USER:-$(whoami)}
 export AZURE_AI_FOUNDRY_NAME="ai-$PROJECT"
 
 # Agent Code Sample
-export AGENT_CODE_SAMPLE_NAME="agent-code-sample"
-export AGENT_CODE_SAMPLE_DEPLOYMENT="$AGENT_CODE_SAMPLE_NAME-model"
+export AGENT_CODE_SAMPLE="agent-code-sample"
+export AGENT_CODE_SAMPLE_DEPLOYMENT="$AGENT_CODE_SAMPLE-model"
 export AGENT_CODE_SAMPLE_MODEL_FORMAT="Microsoft"
 export AGENT_CODE_SAMPLE_MODEL_NAME="Phi-4"
 export AGENT_CODE_SAMPLE_MODEL_VERSION="7"
@@ -27,8 +27,8 @@ export AGENT_CODE_SAMPLE_SKU_CAPACITY="1"
 export AGENT_CODE_SAMPLE_SKU_NAME="GlobalStandard"
 
 # Agent Reference
-export AGENT_REFERENCE_NAME="agent-reference"
-export AGENT_REFERENCE_DEPLOYMENT="$AGENT_CODE_SAMPLE_NAME-model"
+export AGENT_REFERENCE="agent-reference"
+export AGENT_REFERENCE_DEPLOYMENT="$AGENT_REFERENCE-model"
 export AGENT_REFERENCE_MODEL_FORMAT="Microsoft"
 export AGENT_REFERENCE_MODEL_NAME="Phi-4"
 export AGENT_REFERENCE_MODEL_VERSION="7"
@@ -36,8 +36,8 @@ export AGENT_REFERENCE_SKU_CAPACITY="1"
 export AGENT_REFERENCE_SKU_NAME="GlobalStandard"
 
 # Agent Release
-export AGENT_RELEASE_NAME="agent-release"
-export AGENT_RELEASE_DEPLOYMENT="$AGENT_CODE_SAMPLE_NAME-model"
+export AGENT_RELEASE="agent-release"
+export AGENT_RELEASE_DEPLOYMENT="$AGENT_RELEASE-model"
 export AGENT_RELEASE_MODEL_FORMAT="Microsoft"
 export AGENT_RELEASE_MODEL_NAME="Phi-4"
 export AGENT_RELEASE_MODEL_VERSION="7"
@@ -45,8 +45,8 @@ export AGENT_RELEASE_SKU_CAPACITY="1"
 export AGENT_RELEASE_SKU_NAME="GlobalStandard"
 
 # Agent Statistics
-export AGENT_STATISTICS_NAME="agent-statistics"
-export AGENT_STATISTICS_DEPLOYMENT="$AGENT_CODE_SAMPLE_NAME-model"
+export AGENT_STATISTICS="agent-statistics"
+export AGENT_STATISTICS_DEPLOYMENT="$AGENT_STATISTICS-model"
 export AGENT_STATISTICS_MODEL_FORMAT="Microsoft"
 export AGENT_STATISTICS_MODEL_NAME="Phi-4"
 export AGENT_STATISTICS_MODEL_VERSION="7"
@@ -54,8 +54,8 @@ export AGENT_STATISTICS_SKU_CAPACITY="1"
 export AGENT_STATISTICS_SKU_NAME="GlobalStandard"
 
 # Agent Workflow Newsletter
-export AGENT_NEWSLETTER_NAME="agent-newsletter"
-export AGENT_NEWSLETTER_DEPLOYMENT="$AGENT_CODE_SAMPLE_NAME-model"
+export AGENT_NEWSLETTER="agent-newsletter"
+export AGENT_NEWSLETTER_DEPLOYMENT="$AGENT_NEWSLETTER-model"
 export AGENT_NEWSLETTER_MODEL_FORMAT="Microsoft"
 export AGENT_NEWSLETTER_MODEL_NAME="Phi-4"
 export AGENT_NEWSLETTER_MODEL_VERSION="7"
@@ -101,21 +101,6 @@ az cognitiveservices account create \
   --custom-domain "$AZURE_AI_FOUNDRY_NAME" \
   --kind AIServices \
   --sku S0
-
-export AZURE_AI_FOUNDRY_KEY=$(az cognitiveservices account keys list \
-  --name "$AZURE_AI_FOUNDRY_NAME" \
-  --resource-group "$RESOURCE_GROUP" \
-  --query "key1" \
-  --output tsv)
-printf "\n%s\n" "$AZURE_AI_FOUNDRY_KEY"
-
-export AZURE_AI_FOUNDRY_ENDPOINT=$(az cognitiveservices account show \
-  --name "$AZURE_AI_FOUNDRY_NAME" \
-  --resource-group "$RESOURCE_GROUP" \
-  --query "properties.endpoint" \
-  --output tsv)
-printf "%s\n" "$AZURE_AI_FOUNDRY_ENDPOINT"
-
 
 if [ "$verbose" = true ]; then  
     printf "\n%s\n" "Checking all the available models..."
@@ -191,3 +176,21 @@ az cognitiveservices account deployment create \
   --model-version "$AGENT_NEWSLETTER_MODEL_VERSION" \
   --sku-capacity "$AGENT_NEWSLETTER_SKU_CAPACITY" \
   --sku-name "$AGENT_NEWSLETTER_SKU_NAME"
+
+
+printf "\n%s\n" "Displaying environment variables..."
+printf "%s\n"   "-----------------------------------"
+export AZURE_AI_FOUNDRY_KEY=$(az cognitiveservices account keys list \
+  --name "$AZURE_AI_FOUNDRY_NAME" \
+  --resource-group "$RESOURCE_GROUP" \
+  --query "key1" \
+  --output tsv)
+printf "\n%s\n" "$AZURE_AI_FOUNDRY_KEY"
+
+# TODO append with `models`
+export AZURE_AI_FOUNDRY_ENDPOINT=$(az cognitiveservices account show \
+  --name "$AZURE_AI_FOUNDRY_NAME" \
+  --resource-group "$RESOURCE_GROUP" \
+  --query "properties.endpoint" \
+  --output tsv)
+printf "%s\n" "$AZURE_AI_FOUNDRY_ENDPOINT"

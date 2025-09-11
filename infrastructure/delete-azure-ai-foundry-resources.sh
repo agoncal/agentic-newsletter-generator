@@ -9,6 +9,20 @@ echo "Setting up environment variables..."
 echo "----------------------------------"
 PROJECT="hack2025agenticnews"
 RESOURCE_GROUP="rg-$PROJECT"
+AZURE_AI_FOUNDRY_NAME="ai-$PROJECT"
+
+
+echo "Deleting Azure AI Foundry..."
+echo "------------------------------"
+az cognitiveservices account delete \
+  --resource-group "$RESOURCE_GROUP" \
+  --name "$AZURE_AI_FOUNDRY_NAME"
+   
+az cognitiveservices account purge \
+  --resource-group "$RESOURCE_GROUP" \
+  --location "$LOCATION" \
+  --name "$AZURE_AI_FOUNDRY_NAME"
+
 
 echo "Deleting the resource group..."
 echo "------------------------------"
