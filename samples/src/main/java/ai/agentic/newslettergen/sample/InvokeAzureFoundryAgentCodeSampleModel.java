@@ -7,7 +7,7 @@ public class InvokeAzureFoundryAgentCodeSampleModel {
 
     private static final String AZURE_AI_FOUNDRY_KEY = System.getenv("AZURE_AI_FOUNDRY_KEY");
     private static final String AZURE_AI_FOUNDRY_ENDPOINT = System.getenv("AZURE_AI_FOUNDRY_ENDPOINT");
-    private static final String AGENT_CODE_SAMPLE_MODEL = System.getenv("AGENT_CODE_SAMPLE_MODEL");
+    private static final String AGENT_CODE_SAMPLE_MODEL = "agent-code-sample-model";
 
     private static final boolean IS_LOGGING_ENABLED = true;
 

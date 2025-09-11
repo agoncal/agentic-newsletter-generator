@@ -90,6 +90,7 @@ Uses [GitHub MCP Server](https://github.com/github/github-mcp-server) via Model 
   * [GitHub MCP Server](https://github.com/github/github-mcp-server)
 * Azure AI Foundry
   * [Azure AI Foundry feature availability across clouds regions](https://learn.microsoft.com/azure/ai-foundry/reference/region-support)
+  * [Use model router for Azure AI Foundry](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/model-router)
 * Azure CLI
   * [Create and configure all the resources for Azure AI Foundry Models](https://learn.microsoft.com/azure/ai-foundry/foundry-models/how-to/quickstart-create-resources?pivots=programming-language-cli)
   * [az cognitiveservices](https://learn.microsoft.com/cli/azure/cognitiveservices)
