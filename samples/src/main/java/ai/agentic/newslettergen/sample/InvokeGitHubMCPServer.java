@@ -4,9 +4,11 @@ import dev.langchain4j.mcp.McpToolProvider;
 import dev.langchain4j.mcp.client.DefaultMcpClient;
 import dev.langchain4j.mcp.client.McpClient;
 import dev.langchain4j.mcp.client.transport.McpTransport;
-import dev.langchain4j.mcp.client.transport.http.StreamableHttpMcpTransport;
+import dev.langchain4j.mcp.client.transport.stdio.StdioMcpTransport;
 import dev.langchain4j.model.openai.OpenAiChatModel;
 import dev.langchain4j.service.AiServices;
+
+import java.util.List;
 
 public class InvokeGitHubMCPServer {
 
@@ -19,14 +21,17 @@ public class InvokeGitHubMCPServer {
     public static void main(String[] args) {
 
         // GitHub MCP Server
-        McpTransport transport = new StreamableHttpMcpTransport.Builder()
-            .url("http://localhost:8780/mcp")
-            .logRequests(IS_LOGGING_ENABLED)
-            .logResponses(IS_LOGGING_ENABLED)
+        McpTransport transport = new StdioMcpTransport.Builder()
+            .command(List.of("/usr/local/bin/docker", "run",
+                "-e", "GITHUB_PERSONAL_ACCESS_TOKEN=<your_github_token>",
+                "-e", "GITHUB_TOOLSETS=repos",
+                "-e", "GITHUB_READ_ONLY=1",
+                "-i", "ghcr.io/github/github-mcp-server"))
+            .logEvents(IS_LOGGING_ENABLED)
             .build();
 
         McpClient mcpClient = new DefaultMcpClient.Builder()
-            .key("VintageStoreMCPClient")
+            .key("GitHubMCPClient")
             .transport(transport)
             .build();
 
@@ -48,7 +53,7 @@ public class InvokeGitHubMCPServer {
             .toolProvider(mcpToolProvider)
             .build();
 
-        String completion = assistant.chat("What are the last 3 releases of LangChain4j?");
+        String completion = assistant.chat("What are the last 3 tags of the LangChain4j repository?");
 
         System.out.println(completion);
     }
