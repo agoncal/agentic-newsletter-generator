@@ -14,7 +14,7 @@ public class InvokeGitHubMCPServer {
 
     private static final String AZURE_AI_FOUNDRY_KEY = System.getenv("AZURE_AI_FOUNDRY_KEY");
     private static final String AZURE_AI_FOUNDRY_ENDPOINT = System.getenv("AZURE_AI_FOUNDRY_ENDPOINT");
-    private static final String AGENT_CODE_SAMPLE_MODEL = System.getenv("AGENT_CODE_SAMPLE_MODEL");
+    private static final String AGENT_RELEASE_MODEL = "agent-release-model";
 
     private static final boolean IS_LOGGING_ENABLED = true;
 
@@ -42,7 +42,7 @@ public class InvokeGitHubMCPServer {
         OpenAiChatModel model = OpenAiChatModel.builder()
             .apiKey(AZURE_AI_FOUNDRY_KEY)
             .baseUrl(AZURE_AI_FOUNDRY_ENDPOINT)
-            .modelName(AGENT_CODE_SAMPLE_MODEL)
+            .modelName(AGENT_RELEASE_MODEL)
             .temperature(0.3)
             .logRequests(IS_LOGGING_ENABLED)
             .logResponses(IS_LOGGING_ENABLED)
