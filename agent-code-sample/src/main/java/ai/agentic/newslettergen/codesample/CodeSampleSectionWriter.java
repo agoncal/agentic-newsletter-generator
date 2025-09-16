@@ -39,7 +39,7 @@ import dev.langchain4j.service.V;
 public interface CodeSampleSectionWriter {
 
     @UserMessage("""
-        Create practical Java code examples that showcase the key features and capabilities of LangChain4j version {{version}}.
+        Write the "Some Code" section with one practical Java code example that showcase the key features and capabilities of LangChain4j version {{version}}.
         """)
     @Agent(name = "agent-code-sample", description = "Generates a practical Java code example that demonstrate the latest LangChain4j features, best practices, and real-world usage patterns for newsletter readers")
     String write(@V("version") String langchain4jVersion);

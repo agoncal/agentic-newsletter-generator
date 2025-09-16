@@ -1,16 +1,17 @@
 package ai.agentic.newslettergen.workflow;
 
 import ai.agentic.newslettergen.codesample.CodeSampleSectionWriter;
+import static ai.agentic.newslettergen.codesample.CodeSampleSectionWriter.codeSampleSectionModel;
 import dev.langchain4j.agentic.AgenticServices;
 
 public class NewsletterGenerator {
 
     public static void main(String[] args) {
 
-        CodeSampleSectionWriter codeSampleSectionWriter = AgenticServices
-            .createAgenticSystem(CodeSampleSectionWriter.class);
-
-        codeSampleSectionWriter.write("hi");
+        CodeSampleSectionWriter codeSampleSectionWriter = AgenticServices.agentBuilder(CodeSampleSectionWriter.class)
+            .chatModel(codeSampleSectionModel())
+            .outputName("newsletter")
+            .build();
 
 //        ReferenceAgent referenceAgent = AgenticServices
 //            .agentBuilder(ReferenceAgent.class)
@@ -29,7 +30,7 @@ public class NewsletterGenerator {
 
         NewsletterWorkflow newsletterWorkflow = AgenticServices
             .sequenceBuilder(NewsletterWorkflow.class)
-            .subAgents(codeSampleSectionWriter/*, referenceAgent, releaseAgent, statisticsAgent*/)
+            .subAgents(codeSampleSectionWriter/*, releaseAgent, referenceAgent, statisticsAgent*/)
             .outputName("newsletter")
             .build();
 
