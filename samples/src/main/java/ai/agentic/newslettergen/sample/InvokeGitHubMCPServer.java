@@ -14,6 +14,7 @@ public class InvokeGitHubMCPServer {
 
     private static final String AZURE_AI_FOUNDRY_KEY = System.getenv("AZURE_AI_FOUNDRY_KEY");
     private static final String AZURE_AI_FOUNDRY_ENDPOINT = System.getenv("AZURE_AI_FOUNDRY_ENDPOINT");
+    private static final String GITHUB_PERSONAL_ACCESS_TOKEN = System.getenv("GITHUB_PERSONAL_ACCESS_TOKEN");
     private static final String AGENT_RELEASE_MODEL = "agent-release-model";
 
     private static final boolean IS_LOGGING_ENABLED = true;
@@ -23,7 +24,7 @@ public class InvokeGitHubMCPServer {
         // GitHub MCP Server
         McpTransport transport = new StdioMcpTransport.Builder()
             .command(List.of("/usr/local/bin/docker", "run",
-                "-e", "GITHUB_PERSONAL_ACCESS_TOKEN=<your_github_token>",
+                "-e", "GITHUB_PERSONAL_ACCESS_TOKEN=" + GITHUB_PERSONAL_ACCESS_TOKEN,
                 "-e", "GITHUB_TOOLSETS=repos",
                 "-e", "GITHUB_READ_ONLY=1",
                 "-i", "ghcr.io/github/github-mcp-server"))
@@ -53,7 +54,7 @@ public class InvokeGitHubMCPServer {
             .toolProvider(mcpToolProvider)
             .build();
 
-        String completion = assistant.chat("What are the last 3 tags of the LangChain4j repository?");
+        String completion = assistant.chat("What are the last 3 tags of the LangChain4j repository at https://github.com/langchain4j/langchain4j?");
 
         System.out.println(completion);
     }
