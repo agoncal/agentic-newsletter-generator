@@ -17,6 +17,7 @@
     <!-- LangChain4j -->
     <langchain4j.version>1.4.0</langchain4j.version>
     <langchain4j-community.version>1.4.0-beta10</langchain4j-community.version>
+    <tinylog.version>2.7.0</tinylog.version>
     <!-- Quarkus-->
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
@@ -88,6 +89,16 @@
     <dependency>
       <groupId>dev.langchain4j</groupId>
       <artifactId>langchain4j-agentic</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.tinylog</groupId>
+      <artifactId>tinylog-impl</artifactId>
+      <version>${tinylog.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.tinylog</groupId>
+      <artifactId>slf4j-tinylog</artifactId>
+      <version>${tinylog.version}</version>
     </dependency>
     <!-- Quarkus -->
     <dependency>

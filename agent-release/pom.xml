@@ -15,19 +15,22 @@
   <name>Newsletter Generator :: Agent Release</name>
 
   <properties>
-    <compiler-plugin.version>3.14.0</compiler-plugin.version>
-    <maven.compiler.release>21</maven.compiler.release>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <!-- LangChain4j -->
     <langchain4j.version>1.4.0</langchain4j.version>
     <langchain4j-community.version>1.4.0-beta10</langchain4j-community.version>
+    <tinylog.version>2.7.0</tinylog.version>
     <!-- Quarkus-->
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
     <quarkus.platform.version>3.26.3</quarkus.platform.version>
     <skipITs>true</skipITs>
+    <!-- Plugins -->
+    <compiler-plugin.version>3.14.0</compiler-plugin.version>
     <surefire-plugin.version>3.5.4</surefire-plugin.version>
+    <!-- Project -->
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
 
   <dependencyManagement>
@@ -60,6 +63,16 @@
     <dependency>
       <groupId>dev.langchain4j</groupId>
       <artifactId>langchain4j-agentic</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.tinylog</groupId>
+      <artifactId>tinylog-impl</artifactId>
+      <version>${tinylog.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.tinylog</groupId>
+      <artifactId>slf4j-tinylog</artifactId>
+      <version>${tinylog.version}</version>
     </dependency>
     <!-- Quarkus -->
     <dependency>
