@@ -1,6 +1,6 @@
 package ai.agentic.newslettergen.workflow;
 
-import ai.agentic.newslettergen.codesample.CodeSampleAgent;
+import ai.agentic.newslettergen.codesample.CodeSampleSectionWriter;
 import ai.agentic.newslettergen.reference.ReferenceAgent;
 import ai.agentic.newslettergen.release.ReleaseAgent;
 import ai.agentic.newslettergen.statistics.StatisticsAgent;
@@ -17,8 +17,8 @@ public class NewsletterResource {
     @Produces(MediaType.TEXT_PLAIN)
     public String hello() {
 
-        CodeSampleAgent codeSampleAgent = AgenticServices
-            .agentBuilder(CodeSampleAgent.class)
+        CodeSampleSectionWriter codeSampleSectionWriter = AgenticServices
+            .agentBuilder(CodeSampleSectionWriter.class)
             .outputName("newsletter")
             .build();
 
@@ -39,7 +39,7 @@ public class NewsletterResource {
 
         NewsletterWorkflow newsletterWorkflow = AgenticServices
             .sequenceBuilder(NewsletterWorkflow.class)
-            .subAgents(codeSampleAgent, referenceAgent, releaseAgent, statisticsAgent)
+            .subAgents(codeSampleSectionWriter, referenceAgent, releaseAgent, statisticsAgent)
             .outputName("newsletter")
             .build();
 

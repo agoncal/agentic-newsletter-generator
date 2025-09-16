@@ -14,10 +14,6 @@
   <name>Newsletter Generator :: Workflow Newsletter</name>
 
   <properties>
-    <compiler-plugin.version>3.14.0</compiler-plugin.version>
-    <maven.compiler.release>21</maven.compiler.release>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <!-- LangChain4j -->
     <langchain4j.version>1.4.0</langchain4j.version>
     <langchain4j-community.version>1.4.0-beta10</langchain4j-community.version>
@@ -26,7 +22,14 @@
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
     <quarkus.platform.version>3.26.3</quarkus.platform.version>
     <skipITs>true</skipITs>
-    <surefire-plugin.version>3.5.3</surefire-plugin.version>
+    <!-- Plugins -->
+    <exec-plugin.version>3.5.1</exec-plugin.version>
+    <compiler-plugin.version>3.14.0</compiler-plugin.version>
+    <surefire-plugin.version>3.5.4</surefire-plugin.version>
+    <!-- Project -->
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
 
   <dependencyManagement>
@@ -104,6 +107,14 @@
 
   <build>
     <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>${exec-plugin.version}</version>
+        <configuration>
+          <mainClass>ai.agentic.newslettergen.workflow.NewsletterGenerator</mainClass>
+        </configuration>
+      </plugin>
       <plugin>
         <groupId>${quarkus.platform.group-id}</groupId>
         <artifactId>quarkus-maven-plugin</artifactId>

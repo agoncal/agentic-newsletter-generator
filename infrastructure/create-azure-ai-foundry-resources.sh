@@ -10,11 +10,11 @@
 printf "%s\n" "-----------------------------------"
 printf "%s\n" "Setting up environment variables..."
 printf "%s\n" "-----------------------------------"
-export PROJECT="hack2025agenticnews"
+export UNIQUE_IDENTIFIER=${GITHUB_USER:-$(whoami)}
+export PROJECT="hack2025agenticnews$UNIQUE_IDENTIFIER"
 export RESOURCE_GROUP="rg-$PROJECT"
 export LOCATION="swedencentral" # check https://learn.microsoft.com/azure/ai-foundry/reference/region-support
 export TAG="$PROJECT"
-export UNIQUE_IDENTIFIER=${GITHUB_USER:-$(whoami)}
 export AZURE_AI_FOUNDRY_NAME="ai-$PROJECT"
 
 # Agent Code Sample
@@ -187,10 +187,10 @@ export AZURE_AI_FOUNDRY_KEY=$(az cognitiveservices account keys list \
   --output tsv)
 printf "\n%s\n" "$AZURE_AI_FOUNDRY_KEY"
 
-# TODO append with `models`
+# Appending `models` at the end of the URL
 export AZURE_AI_FOUNDRY_ENDPOINT=$(az cognitiveservices account show \
   --name "$AZURE_AI_FOUNDRY_NAME" \
   --resource-group "$RESOURCE_GROUP" \
   --query "properties.endpoint" \
-  --output tsv)
+  --output tsv)models
 printf "%s\n" "$AZURE_AI_FOUNDRY_ENDPOINT"
