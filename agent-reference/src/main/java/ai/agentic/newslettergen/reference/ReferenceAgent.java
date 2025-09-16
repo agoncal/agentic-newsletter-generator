@@ -5,6 +5,6 @@ import dev.langchain4j.service.V;
 
 public interface ReferenceAgent {
 
-    @Agent("blah blah blah")
-    String foo(@V("topic") String topic);
+    @Agent(outputName = "referenceSection")
+    String write(@V("version") String langchain4jVersion);
 }

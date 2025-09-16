@@ -5,6 +5,6 @@ import dev.langchain4j.service.V;
 
 public interface ReleaseAgent {
 
-    @Agent("blah blah blah")
-    String foo(@V("topic") String topic);
+    @Agent(outputName = "releaseSection")
+    String write(@V("version") String langchain4jVersion);
 }
