@@ -1,5 +1,6 @@
 package ai.agentic.newslettergen.editor;
 
+import static ai.agentic.newslettergen.commons.Constants.LANGCHAIN4J_VERSTION;
 import static ai.agentic.newslettergen.editor.NewsletterEditor.newsletterEditorModel;
 import dev.langchain4j.agentic.AgenticServices;
 
@@ -12,7 +13,7 @@ public class EditNewsletter {
             .outputName("newsletter")
             .build();
 
-        String newsletter = newsletterEditor.editAndCompileNewsletter(CODE_SAMPLE_SECTION, "1.4");
+        String newsletter = newsletterEditor.editAndCompileNewsletter(CODE_SAMPLE_SECTION, LANGCHAIN4J_VERSTION);
 
         System.out.println(newsletter);
     }

@@ -11,7 +11,8 @@ public class Constants {
     public static final String AGENT_RELEASE_MODEL = "agent-release-model";
     public static final String AGENT_STATISTICS_MODEL = "agent-statistics-model";
     public static final String AGENT_NEWSLETTER_MODEL = "agent-newsletter-model";
-
     // LangChain4j
     public static final boolean IS_LOGGING_ENABLED = true;
+
+    public static final String LANGCHAIN4J_VERSTION = "1.4";
 }
