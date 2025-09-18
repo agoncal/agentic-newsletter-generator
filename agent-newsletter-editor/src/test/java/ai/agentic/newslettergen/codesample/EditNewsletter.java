@@ -1,5 +1,6 @@
-package ai.agentic.newslettergen.editor;
+package ai.agentic.newslettergen.codesample;
 
+import ai.agentic.newslettergen.editor.NewsletterEditor;
 import static ai.agentic.newslettergen.editor.NewsletterEditor.newsletterEditorModel;
 import dev.langchain4j.agentic.AgenticServices;
 

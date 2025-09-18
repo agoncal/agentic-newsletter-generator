@@ -113,7 +113,8 @@
         <artifactId>exec-maven-plugin</artifactId>
         <version>${exec-plugin.version}</version>
         <configuration>
-          <mainClass>ai.agentic.newslettergen.editor.EditNewsletter</mainClass>
+          <classpathScope>test</classpathScope>
+          <mainClass>ai.agentic.newslettergen.codesample.EditNewsletter</mainClass>
         </configuration>
       </plugin>
       <plugin>
