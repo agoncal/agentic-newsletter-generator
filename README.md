@@ -1,39 +1,38 @@
 # Agentic Newsletter Generator
 
-Multi Java agents system that generates monthly technology newsletters using real-time data and intelligent content curation
+Multi-agent Java system that generates monthly technology newsletters using real-time data and intelligent content curation
 
-This project is to create an intelligent newsletter generation system using multiple specialized AI agents that work together to produce a monthly technology newsletters. Built in Java using Quarkus, LangChain4j, Langchain4j Agentic for agent orchestration, MCP servers and AI Foundry with various language models, this agentic application automatically gathers GitHub statistics (stars, forks, releases), analyzes community engagement, summarizes release notes, curates code examples, and compiles everything into a newsletter ready for email distribution. Each agent has a specific role - data collection, content analysis, writing, and formatting - creating a scalable solution for technology companies, developer communities, and tech enthusiasts who want to stay informed about specific technologies without manual research.
+This project creates an intelligent newsletter generation system using multiple specialized AI agents that work together to produce monthly technology newsletters. Built in Java using Quarkus, LangChain4j 1.5.0, LangChain4j Agentic for agent orchestration, MCP servers and Azure AI Foundry with various language models, this agentic application automatically gathers GitHub statistics (stars, forks, releases), analyzes community engagement, summarizes release notes, curates code examples, and compiles everything into a newsletter ready for email distribution. Each agent has a specific role - data collection, content analysis, writing, and formatting - creating a scalable solution for technology companies, developer communities, and tech enthusiasts who want to stay informed about specific technologies without manual research.
 
 ## Agents
 
 ```mermaid
 graph TD
-    A[Newsletter Workflow] --> B[Statistics Agent]
-    A --> C[Releases Agent]
-    A --> D[References Agent]
-    A --> E[Code Sample Agent]
-    
-    B --> F[GitHub Stats<br/>- Stars, Forks<br/>- Contributors<br/>- Issues/PRs]
-    C --> G[Release Notes<br/>- Version Updates<br/>- New Features<br/>- Bug Fixes]
-    D --> H[Documentation<br/>- Tutorials<br/>- Resources<br/>- Links]
-    E --> I[Code Examples<br/>- Best Practices<br/>- Working Samples<br/>- Demonstrations]
-    
-    F --> J[Generated Newsletter]
-    G --> J
-    H --> J
-    I --> J
-    
+    A[Newsletter Workflow] --> B[Agent<br/>Statistics Writer]
+    A --> C[Agent<br/>Releases Writer]
+    A --> D[Agent<br/>References Writer]
+    A --> E[Agent<br/>Code Sample Writer]
+
+    B --> G[GitHub Stats<br/>- Stars, Forks<br/>- Contributors<br/>- Issues/PRs]
+    C --> H[Release Notes<br/>- Version Updates<br/>- New Features<br/>- Bug Fixes]
+    D --> I[Documentation<br/>- Tutorials<br/>- Resources<br/>- Links]
+    E --> J[Code Examples<br/>- Best Practices<br/>- Working Samples<br/>- Demonstrations]
+
+    G --> K[Agent<br/>Newsletter Editor<br/>Compiled Newsletter<br/>- Formatted Content<br/>- Final Editing<br/>- Ready for Distribution]
+    H --> K
+    I --> K
+    J --> K
+
     style A fill:#e1f5fe
-    style J fill:#c8e6c9
 ```
 
 ### Code Sample Agent
 
-Generates relevant code examples and snippets that demonstrate the latest features and best practices of the technology being covered in the newsletter. This agent analyzes recent releases and documentation to create practical, working code samples.
+Generates one snippet of Java code that demonstrates the latest features and best practices of LangChain4j being covered in the newsletter. This agent analyzes recent releases and documentation to create practical, working code samples.
 
 ### References Agent
 
-Gathers and curates comprehensive reference documentation, tutorials, and helpful resources related to the technology. This agent identifies the most valuable learning materials, official documentation links, and community resources for newsletter readers.
+Gathers and curates comprehensive reference documentation, tutorials, and helpful resources related to LangChain4j. This agent identifies the most valuable learning materials, official documentation links, and community resources for newsletter readers.
 
 ### Releases Agent
 
@@ -43,18 +42,23 @@ Analyzes and summarizes recent software releases, including version updates, new
 
 Collects and analyzes GitHub statistics such as star counts, fork numbers, contributor activity, issue resolution rates, and community engagement metrics. This agent provides quantitative insights into project health and growth trends.
 
+### Newsletter Editor Agent
+
+Compiles and formats all content from the specialized agents into a cohesive, well-structured newsletter. This agent takes the raw output from statistics, releases, references, and code sample agents and creates the final newsletter with proper formatting, flow, and editorial polish ready for distribution.
+
 ## Infrastructure
 
 This project is designed to run on Azure AI Foundry with automated infrastructure deployment scripts.
 
 ### Azure AI Foundry Setup
 
-The system uses Azure AI Foundry for hosting AI models with individual Phi-4 model deployments for each agent:
+The system uses Azure AI Foundry for hosting AI models with individual model deployments for each agent:
 
-- **Statistics Agent**: Collects GitHub repository metrics
-- **Releases Agent**: Analyzes software release information  
-- **References Agent**: Curates documentation and resources
-- **Code Sample Agent**: Generates practical code examples
+- **Agent Statistics Writer**: Collects GitHub repository metrics
+- **Agent Releases Writer**: Analyzes software release information
+- **Agent References Writer**: Curates documentation and resources
+- **Agent Code Sample Writer**: Generates practical code examples
+- **Agent Newsletter Editor**: Compiles and formats the final newsletter
 - **Newsletter Workflow**: Orchestrates all agents to produce the final newsletter
 
 ### Deployment
@@ -68,9 +72,11 @@ The system uses Azure AI Foundry for hosting AI models with individual Phi-4 mod
 ```
 
 The deployment creates:
-- Azure Resource Group (`rg-hack2025agenticnews`)
+- Azure Resource Group (`rg-hack2025agenticnews{username}`)
 - Azure AI Foundry service with multiple model deployments
-- Individual Phi-4 model instances for each specialized agent
+- Individual model instances for each specialized agent:
+  - Phi-4 models for statistics, references, code sample, and newsletter editor agents
+  - gpt-5-mini model for the releases agent
 - Required environment variables for service connectivity
 
 ### GitHub Integration

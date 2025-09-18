@@ -3,7 +3,7 @@ package ai.agentic.newslettergen.codesample;
 import static ai.agentic.newslettergen.codesample.CodeSampleSectionWriter.codeSampleSectionModel;
 import dev.langchain4j.agentic.AgenticServices;
 
-public class GenerateCodeSampleSection {
+public class WriteCodeSampleSection {
 
     public static void main(String[] args) {
 
@@ -12,7 +12,7 @@ public class GenerateCodeSampleSection {
             .outputName("newsletter")
             .build();
 
-        String newsletter = codeSampleSectionWriter.write("1.4");
+        String newsletter = codeSampleSectionWriter.write("1.5");
 
         System.out.println(newsletter);
     }

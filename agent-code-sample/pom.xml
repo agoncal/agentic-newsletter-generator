@@ -113,7 +113,8 @@
         <artifactId>exec-maven-plugin</artifactId>
         <version>${exec-plugin.version}</version>
         <configuration>
-          <mainClass>ai.agentic.newslettergen.codesample.GenerateCodeSampleSection</mainClass>
+          <classpathScope>test</classpathScope>
+          <mainClass>ai.agentic.newslettergen.codesample.WriteCodeSampleSection</mainClass>
         </configuration>
       </plugin>
       <plugin>
