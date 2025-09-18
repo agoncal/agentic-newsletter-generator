@@ -12,7 +12,7 @@ public class WriteCodeSampleSection {
             .outputName("newsletter")
             .build();
 
-        String newsletter = codeSampleSectionWriter.write("1.4");
+        String newsletter = codeSampleSectionWriter.write("1.5");
 
         System.out.println(newsletter);
     }
