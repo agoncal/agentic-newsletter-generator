@@ -13,10 +13,16 @@ public class EditNewsletter {
             .outputName("newsletter")
             .build();
 
-        String newsletter = newsletterEditor.editAndCompileNewsletter(CODE_SAMPLE_SECTION, "1.2", "1.5");
+        String newsletter = newsletterEditor.editAndCompileNewsletter(STATISTICS_SECTION, RELEASE_SECTION, REFERENCE_SECTION, CODE_SAMPLE_SECTION, "1.2", "1.5");
 
         System.out.println(newsletter);
     }
+
+    private static final String STATISTICS_SECTION = "";
+
+    private static final String RELEASE_SECTION = "";
+
+    private static final String REFERENCE_SECTION = "";
 
     public static final String CODE_SAMPLE_SECTION = """
         LangChain4j is a Java library designed to facilitate the integration of language models into applications. As of version 1.4, it provides various features to streamline the process of working with language models, such as OpenAI's GPT models. Below are some practical Java code examples that showcase key features and capabilities of LangChain4j version 1.4.
