@@ -37,7 +37,8 @@ public class NewsletterGenerator {
             .build();
 
         Map<String, Object> input = Map.of(
-            "version", "1.4"
+            "fromLangchain4jVersion", "1.2",
+            "toLangchain4jVersion", "1.5"
         );
 
         UntypedAgent newsletterGenerator = AgenticServices

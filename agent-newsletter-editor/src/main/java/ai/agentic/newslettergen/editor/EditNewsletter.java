@@ -12,7 +12,7 @@ public class EditNewsletter {
             .outputName("newsletter")
             .build();
 
-        String newsletter = newsletterEditor.editAndCompileNewsletter(CODE_SAMPLE_SECTION, "1.4");
+        String newsletter = newsletterEditor.editAndCompileNewsletter(CODE_SAMPLE_SECTION, "1.2", "1.5");
 
         System.out.println(newsletter);
     }

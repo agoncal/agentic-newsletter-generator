@@ -6,5 +6,5 @@ import dev.langchain4j.service.V;
 public interface StatisticsAgent {
 
     @Agent(outputName = "statisticsSection")
-    String write(@V("version") String langchain4jVersion);
+    String write(@V("toLangchain4jVersion") String toLangchain4jVersion);
 }
