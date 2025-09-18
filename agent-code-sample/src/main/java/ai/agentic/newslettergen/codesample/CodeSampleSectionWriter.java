@@ -37,7 +37,7 @@ public interface CodeSampleSectionWriter {
         - Include brief explanations before each code example
         - Structure examples from simple to more complex
         """)
-    @Agent(outputName = "codeSampleSection", description = "Generates a practical Java code example that demonstrate the latest LangChain4j features, best practices, and real-world usage patterns for newsletter readers")
+    @Agent(outputName = "codeSampleSection", description = "Generates a practical Java code example that demonstrates the latest LangChain4j features, best practices, and real-world usage patterns for newsletter readers")
     String write(@V("toLangchain4jVersion") String toLangchain4jVersion);
 
     @ChatModelSupplier
