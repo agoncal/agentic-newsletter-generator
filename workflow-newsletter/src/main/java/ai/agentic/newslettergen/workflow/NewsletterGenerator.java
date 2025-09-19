@@ -17,18 +17,18 @@ public class NewsletterGenerator {
             .chatModel(codeSampleSectionModel())
             .build();
 
-//        ReferenceAgent referenceAgent = AgenticServices
-//            .agentBuilder(ReferenceAgent.class)
+//        ReferenceSectionWriter referenceAgent = AgenticServices
+//            .agentBuilder(ReferenceSectionWriter.class)
 //            .outputName("newsletter")
 //            .build();
 //
-//        ReleaseAgent releaseAgent = AgenticServices
-//            .agentBuilder(ReleaseAgent.class)
+//        ReleaseSectionWriter releaseAgent = AgenticServices
+//            .agentBuilder(ReleaseSectionWriter.class)
 //            .outputName("newsletter")
 //            .build();
 //
-//        StatisticsAgent statisticsAgent = AgenticServices
-//            .agentBuilder(StatisticsAgent.class)
+//        StatisticsSectionWriter statisticsAgent = AgenticServices
+//            .agentBuilder(StatisticsSectionWriter.class)
 //            .outputName("newsletter")
 //            .build();
 

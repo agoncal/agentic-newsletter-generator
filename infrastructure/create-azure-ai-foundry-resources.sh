@@ -18,16 +18,16 @@ export TAG="$PROJECT"
 export AZURE_AI_FOUNDRY_NAME="ai-$PROJECT"
 
 # Agent Code Sample Writer
-export AGENT_CODE_SAMPLE="agent-code-sample"
+export AGENT_CODE_SAMPLE="agent-code-sample-writer"
 export AGENT_CODE_SAMPLE_DEPLOYMENT="$AGENT_CODE_SAMPLE-model"
-export AGENT_CODE_SAMPLE_MODEL_FORMAT="Microsoft"
-export AGENT_CODE_SAMPLE_MODEL_NAME="Phi-4"
-export AGENT_CODE_SAMPLE_MODEL_VERSION="7"
-export AGENT_CODE_SAMPLE_SKU_CAPACITY="1"
+export AGENT_CODE_SAMPLE_MODEL_FORMAT="OpenAI"
+export AGENT_CODE_SAMPLE_MODEL_NAME="o4-mini"
+export AGENT_CODE_SAMPLE_MODEL_VERSION="2025-04-16"
+export AGENT_CODE_SAMPLE_SKU_CAPACITY="10"
 export AGENT_CODE_SAMPLE_SKU_NAME="GlobalStandard"
 
 # Agent Reference Writer
-export AGENT_REFERENCE="agent-reference"
+export AGENT_REFERENCE="agent-reference-writer"
 export AGENT_REFERENCE_DEPLOYMENT="$AGENT_REFERENCE-model"
 export AGENT_REFERENCE_MODEL_FORMAT="Microsoft"
 export AGENT_REFERENCE_MODEL_NAME="Phi-4"
@@ -36,7 +36,7 @@ export AGENT_REFERENCE_SKU_CAPACITY="1"
 export AGENT_REFERENCE_SKU_NAME="GlobalStandard"
 
 # Agent Release Writer
-export AGENT_RELEASE="agent-release"
+export AGENT_RELEASE="agent-release-writer"
 export AGENT_RELEASE_DEPLOYMENT="$AGENT_RELEASE-model"
 export AGENT_RELEASE_MODEL_FORMAT="OpenAI"
 export AGENT_RELEASE_MODEL_NAME="gpt-5-mini"
@@ -45,21 +45,21 @@ export AGENT_RELEASE_SKU_CAPACITY="10"
 export AGENT_RELEASE_SKU_NAME="GlobalStandard"
 
 # Agent Statistics Writer
-export AGENT_STATISTICS="agent-statistics"
+export AGENT_STATISTICS="agent-statistics-writer"
 export AGENT_STATISTICS_DEPLOYMENT="$AGENT_STATISTICS-model"
-export AGENT_STATISTICS_MODEL_FORMAT="Microsoft"
-export AGENT_STATISTICS_MODEL_NAME="Phi-4"
-export AGENT_STATISTICS_MODEL_VERSION="7"
-export AGENT_STATISTICS_SKU_CAPACITY="1"
+export AGENT_STATISTICS_MODEL_FORMAT="OpenAI"
+export AGENT_STATISTICS_MODEL_NAME="gpt-5-mini"
+export AGENT_STATISTICS_MODEL_VERSION="2025-08-07"
+export AGENT_STATISTICS_SKU_CAPACITY="10"
 export AGENT_STATISTICS_SKU_NAME="GlobalStandard"
 
 # Agent Newsletter Editor
-export AGENT_NEWSLETTER="agent-newsletter"
+export AGENT_NEWSLETTER="agent-newsletter-editor"
 export AGENT_NEWSLETTER_DEPLOYMENT="$AGENT_NEWSLETTER-model"
-export AGENT_NEWSLETTER_MODEL_FORMAT="Microsoft"
-export AGENT_NEWSLETTER_MODEL_NAME="Phi-4"
-export AGENT_NEWSLETTER_MODEL_VERSION="7"
-export AGENT_NEWSLETTER_SKU_CAPACITY="1"
+export AGENT_NEWSLETTER_MODEL_FORMAT="OpenAI"
+export AGENT_NEWSLETTER_MODEL_NAME="gpt-5-chat"
+export AGENT_NEWSLETTER_MODEL_VERSION="2025-08-07"
+export AGENT_NEWSLETTER_SKU_CAPACITY="10"
 export AGENT_NEWSLETTER_SKU_NAME="GlobalStandard"
 
 # Setting verbose to true will display extra information

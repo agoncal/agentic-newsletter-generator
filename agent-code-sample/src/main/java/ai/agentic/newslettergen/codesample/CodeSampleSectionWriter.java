@@ -56,7 +56,7 @@ public interface CodeSampleSectionWriter {
             .apiKey(AZURE_AI_FOUNDRY_KEY)
             .baseUrl(AZURE_AI_FOUNDRY_ENDPOINT)
             .modelName(AGENT_CODE_SAMPLE_MODEL)
-            .temperature(0.3)
+            .temperature(1.0)
             .logRequests(IS_LOGGING_ENABLED)
             .logResponses(IS_LOGGING_ENABLED)
             .build();

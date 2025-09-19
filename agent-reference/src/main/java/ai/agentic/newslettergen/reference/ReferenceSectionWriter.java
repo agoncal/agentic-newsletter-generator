@@ -1,10 +1,17 @@
 package ai.agentic.newslettergen.reference;
 
+import static ai.agentic.newslettergen.commons.Constants.AGENT_REFERENCE_MODEL;
+import static ai.agentic.newslettergen.commons.Constants.AZURE_AI_FOUNDRY_ENDPOINT;
+import static ai.agentic.newslettergen.commons.Constants.AZURE_AI_FOUNDRY_KEY;
+import static ai.agentic.newslettergen.commons.Constants.IS_LOGGING_ENABLED;
 import dev.langchain4j.agentic.Agent;
+import dev.langchain4j.agentic.declarative.ChatModelSupplier;
+import dev.langchain4j.model.chat.ChatModel;
+import dev.langchain4j.model.openai.OpenAiChatModel;
 import dev.langchain4j.service.UserMessage;
 import dev.langchain4j.service.V;
 
-public interface ReferenceAgent {
+public interface ReferenceSectionWriter {
 
     @UserMessage("""
         You are a specialized reference curation agent for LangChain4j newsletter creation. Your role is to generate a complete, standalone "References" section that provides valuable learning resources and links for LangChain4j {{toLangchain4jVersion}} users.
@@ -50,4 +57,16 @@ public interface ReferenceAgent {
         """)
     @Agent(outputName = "referenceSection", description = "Curates comprehensive reference documentation, tutorials, learning resources, and community links related to LangChain4j to help newsletter readers discover valuable educational materials")
     String write(@V("toLangchain4jVersion") String toLangchain4jVersion);
+
+    @ChatModelSupplier
+    static ChatModel referenceSectionModel() {
+        return OpenAiChatModel.builder()
+            .apiKey(AZURE_AI_FOUNDRY_KEY)
+            .baseUrl(AZURE_AI_FOUNDRY_ENDPOINT)
+            .modelName(AGENT_REFERENCE_MODEL)
+            .temperature(1.0)
+            .logRequests(IS_LOGGING_ENABLED)
+            .logResponses(IS_LOGGING_ENABLED)
+            .build();
+    }
 }

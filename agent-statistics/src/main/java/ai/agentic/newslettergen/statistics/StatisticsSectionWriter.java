@@ -11,7 +11,7 @@ import dev.langchain4j.model.openai.OpenAiChatModel;
 import dev.langchain4j.service.UserMessage;
 import dev.langchain4j.service.V;
 
-public interface StatisticsAgent {
+public interface StatisticsSectionWriter {
 
     @UserMessage("""
         You are a specialized statistics collection agent for LangChain4j newsletter creation. Your role is to generate a complete, standalone "Some Numbers" section that provides quantitative insights into LangChain4j {{toLangchain4jVersion}} project health and community engagement.
@@ -68,7 +68,7 @@ public interface StatisticsAgent {
             .apiKey(AZURE_AI_FOUNDRY_KEY)
             .baseUrl(AZURE_AI_FOUNDRY_ENDPOINT)
             .modelName(AGENT_STATISTICS_MODEL)
-            .temperature(0.3)
+            .temperature(1.0)
             .logRequests(IS_LOGGING_ENABLED)
             .logResponses(IS_LOGGING_ENABLED)
             .build();
