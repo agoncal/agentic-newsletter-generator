@@ -25,16 +25,16 @@ public class NewsletterGenerator {
             .chatModel(codeSampleSectionModel())
             .build();
 
-        ReferenceSectionWriter referenceAgent = AgenticServices.agentBuilder(ReferenceSectionWriter.class)
+        ReferenceSectionWriter referenceSectionWriter = AgenticServices.agentBuilder(ReferenceSectionWriter.class)
             .chatModel(referenceSectionModel())
             .build();
 
-        ReleaseSectionWriter releaseAgent = AgenticServices.agentBuilder(ReleaseSectionWriter.class)
+        ReleaseSectionWriter releaseSectionWriter = AgenticServices.agentBuilder(ReleaseSectionWriter.class)
             .chatModel(releaseSectionModel())
             .toolProvider(releaseSectionMCP())
             .build();
 
-        StatisticsSectionWriter statisticsAgent = AgenticServices.agentBuilder(StatisticsSectionWriter.class)
+        StatisticsSectionWriter statisticsSectionWriter = AgenticServices.agentBuilder(StatisticsSectionWriter.class)
             .chatModel(statisticsSectionModel())
             .toolProvider(statisticsSectionMCP())
             .build();
@@ -50,7 +50,11 @@ public class NewsletterGenerator {
 
         UntypedAgent newsletterGenerator = AgenticServices
             .sequenceBuilder()
-            .subAgents(codeSampleSectionWriter, newsletterEditor, releaseAgent, referenceAgent, statisticsAgent)
+            .subAgents(codeSampleSectionWriter,
+                releaseSectionWriter,
+                referenceSectionWriter,
+                statisticsSectionWriter,
+                newsletterEditor)
             .outputName("newsletter")
             .build();
 

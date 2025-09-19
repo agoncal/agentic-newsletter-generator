@@ -11,6 +11,8 @@ import dev.langchain4j.model.openai.OpenAiChatModel;
 import dev.langchain4j.service.UserMessage;
 import dev.langchain4j.service.V;
 
+import java.time.Duration;
+
 public interface NewsletterEditor {
 
     @UserMessage("""
@@ -61,10 +63,10 @@ public interface NewsletterEditor {
         """)
     @Agent(outputName = "newsletter", description = "Compiles, edits, and formats the complete monthly newsletter by integrating content from all specialized agents, ensuring consistency, removing duplications, and producing a polished Markdown publication ready for distribution")
     String editAndCompileNewsletter(
-        @V("statisticsSection") String statisticsSection,
-        @V("releaseSection") String releaseSection,
-        @V("referenceSection") String referenceSection,
-        @V("codeSampleSection") String codeSampleSection,
+//        @V("statisticsSection") String statisticsSection,
+//        @V("releaseSection") String releaseSection,
+//        @V("referenceSection") String referenceSection,
+//        @V("codeSampleSection") String codeSampleSection,
         @V("fromLangchain4jVersion") String fromLangchain4jVersion,
         @V("toLangchain4jVersion") String toLangchain4jVersion
     );
@@ -76,6 +78,7 @@ public interface NewsletterEditor {
             .baseUrl(AZURE_AI_FOUNDRY_ENDPOINT)
             .modelName(AGENT_NEWSLETTER_MODEL)
             .temperature(0.3)
+            .timeout(Duration.ofMinutes(1))
             .logRequests(IS_LOGGING_ENABLED)
             .logResponses(IS_LOGGING_ENABLED)
             .build();

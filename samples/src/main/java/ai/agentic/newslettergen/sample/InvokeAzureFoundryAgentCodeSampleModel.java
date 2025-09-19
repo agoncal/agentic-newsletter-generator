@@ -7,6 +7,8 @@ import static ai.agentic.newslettergen.commons.Constants.IS_LOGGING_ENABLED;
 import dev.langchain4j.model.openai.OpenAiChatModel;
 import dev.langchain4j.service.AiServices;
 
+import java.time.Duration;
+
 public class InvokeAzureFoundryAgentCodeSampleModel {
 
     public static void main(String[] args) {
@@ -16,6 +18,7 @@ public class InvokeAzureFoundryAgentCodeSampleModel {
             .baseUrl(AZURE_AI_FOUNDRY_ENDPOINT)
             .modelName(AGENT_CODE_SAMPLE_MODEL)
             .temperature(1.0)
+            .timeout(Duration.ofMinutes(1))
             .logRequests(IS_LOGGING_ENABLED)
             .logResponses(IS_LOGGING_ENABLED)
             .build();

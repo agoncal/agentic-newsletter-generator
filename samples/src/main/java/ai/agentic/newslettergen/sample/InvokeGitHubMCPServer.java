@@ -13,6 +13,7 @@ import dev.langchain4j.mcp.client.transport.stdio.StdioMcpTransport;
 import dev.langchain4j.model.openai.OpenAiChatModel;
 import dev.langchain4j.service.AiServices;
 
+import java.time.Duration;
 import java.util.List;
 
 public class InvokeGitHubMCPServer {
@@ -43,6 +44,7 @@ public class InvokeGitHubMCPServer {
             .baseUrl(AZURE_AI_FOUNDRY_ENDPOINT)
             .modelName(AGENT_RELEASE_MODEL)
             .temperature(1.0)
+            .timeout(Duration.ofMinutes(1))
             .logRequests(IS_LOGGING_ENABLED)
             .logResponses(IS_LOGGING_ENABLED)
             .build();
