@@ -13,6 +13,7 @@ printf "%s\n" "-----------------------------------"
 export UNIQUE_IDENTIFIER=${GITHUB_USER:-$(whoami)}
 export PROJECT="hack2025agenticnews$UNIQUE_IDENTIFIER"
 export RESOURCE_GROUP="rg-$PROJECT"
+export LOCATION="francecentral"
 export LOCATION="swedencentral" # check https://learn.microsoft.com/azure/ai-foundry/reference/region-support
 export TAG="$PROJECT"
 export AZURE_AI_FOUNDRY_NAME="ai-$PROJECT"
@@ -77,6 +78,14 @@ if [ "$verbose" = true ]; then
 fi
 
 
+if [ "$verbose" = true ]; then  
+    printf "\n%s\n" "Displaying Azure locations..."
+    printf "%s\n"   "-----------------------------"
+    az account list-locations \
+      --query "sort_by([].{Name:name, DisplayName:displayName, RegionalDisplayName:regionalDisplayName}, &Name)" --output table
+fi
+
+
 printf "\n%s\n" "Creating the resource group..."
 printf "%s\n"   "------------------------------"
 az group create \
@@ -113,8 +122,8 @@ if [ "$verbose" = true ]; then
 fi
 
 
-printf "\n%s\n" "Deploying the model for the Agent Code Sample..."
-printf "%s\n"   "------------------------------------------------"
+printf "\n%s\n" "Deploying the model for the Agent Code Sample Writer..."
+printf "%s\n"   "-------------------------------------------------------"
 az cognitiveservices account deployment create \
   --resource-group "$RESOURCE_GROUP" \
   --name "$AZURE_AI_FOUNDRY_NAME" \
@@ -126,8 +135,8 @@ az cognitiveservices account deployment create \
   --sku-name "$AGENT_CODE_SAMPLE_SKU_NAME"
 
 
-printf "\n%s\n" "Deploying the model for the Agent Reference..."
-printf "%s\n"   "------------------------------------------------"
+printf "\n%s\n" "Deploying the model for the Agent Reference Writer..."
+printf "%s\n"   "-----------------------------------------------------"
 az cognitiveservices account deployment create \
   --resource-group "$RESOURCE_GROUP" \
   --name "$AZURE_AI_FOUNDRY_NAME" \
@@ -139,8 +148,8 @@ az cognitiveservices account deployment create \
   --sku-name "$AGENT_REFERENCE_SKU_NAME"
 
 
-printf "\n%s\n" "Deploying the model for the Agent Reference..."
-printf "%s\n"   "------------------------------------------------"
+printf "\n%s\n" "Deploying the model for the Agent Release Writer..."
+printf "%s\n"   "---------------------------------------------------"
 az cognitiveservices account deployment create \
   --resource-group "$RESOURCE_GROUP" \
   --name "$AZURE_AI_FOUNDRY_NAME" \
@@ -152,8 +161,8 @@ az cognitiveservices account deployment create \
   --sku-name "$AGENT_RELEASE_SKU_NAME"
 
 
-printf "\n%s\n" "Deploying the model for the Agent Reference..."
-printf "%s\n"   "------------------------------------------------"
+printf "\n%s\n" "Deploying the model for the Agent Statistics Writer..."
+printf "%s\n"   "------------------------------------------------------"
 az cognitiveservices account deployment create \
   --resource-group "$RESOURCE_GROUP" \
   --name "$AZURE_AI_FOUNDRY_NAME" \
@@ -165,8 +174,8 @@ az cognitiveservices account deployment create \
   --sku-name "$AGENT_STATISTICS_SKU_NAME"
 
 
-printf "\n%s\n" "Deploying the model for the Agent Reference..."
-printf "%s\n"   "------------------------------------------------"
+printf "\n%s\n" "Deploying the model for the Agent Newsletter Editor..."
+printf "%s\n"   "------------------------------------------------------"
 az cognitiveservices account deployment create \
   --resource-group "$RESOURCE_GROUP" \
   --name "$AZURE_AI_FOUNDRY_NAME" \
