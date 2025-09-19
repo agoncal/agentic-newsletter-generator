@@ -13,6 +13,9 @@ public class Constants {
     public static final String AGENT_STATISTICS_MODEL = "agent-statistics-writer-model";
     public static final String AGENT_NEWSLETTER_MODEL = "agent-newsletter-editor-model";
 
+    // GitHub MCP Server
+    public static final String GITHUB_PERSONAL_ACCESS_TOKEN = System.getenv("GITHUB_PERSONAL_ACCESS_TOKEN");
+
     // LangChain4j
     public static final boolean IS_LOGGING_ENABLED = true;
 }

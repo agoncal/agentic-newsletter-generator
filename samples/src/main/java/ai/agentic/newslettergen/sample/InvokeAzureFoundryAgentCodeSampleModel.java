@@ -1,15 +1,13 @@
 package ai.agentic.newslettergen.sample;
 
+import static ai.agentic.newslettergen.commons.Constants.AGENT_CODE_SAMPLE_MODEL;
+import static ai.agentic.newslettergen.commons.Constants.AZURE_AI_FOUNDRY_ENDPOINT;
+import static ai.agentic.newslettergen.commons.Constants.AZURE_AI_FOUNDRY_KEY;
+import static ai.agentic.newslettergen.commons.Constants.IS_LOGGING_ENABLED;
 import dev.langchain4j.model.openai.OpenAiChatModel;
 import dev.langchain4j.service.AiServices;
 
 public class InvokeAzureFoundryAgentCodeSampleModel {
-
-    private static final String AZURE_AI_FOUNDRY_KEY = System.getenv("AZURE_AI_FOUNDRY_KEY");
-    private static final String AZURE_AI_FOUNDRY_ENDPOINT = System.getenv("AZURE_AI_FOUNDRY_ENDPOINT");
-    private static final String AGENT_CODE_SAMPLE_MODEL = "agent-code-sample-model";
-
-    private static final boolean IS_LOGGING_ENABLED = true;
 
     public static void main(String[] args) {
 
@@ -17,7 +15,7 @@ public class InvokeAzureFoundryAgentCodeSampleModel {
             .apiKey(AZURE_AI_FOUNDRY_KEY)
             .baseUrl(AZURE_AI_FOUNDRY_ENDPOINT)
             .modelName(AGENT_CODE_SAMPLE_MODEL)
-            .temperature(0.3)
+            .temperature(1.0)
             .logRequests(IS_LOGGING_ENABLED)
             .logResponses(IS_LOGGING_ENABLED)
             .build();

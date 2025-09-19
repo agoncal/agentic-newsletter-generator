@@ -3,18 +3,27 @@ package ai.agentic.newslettergen.statistics;
 import static ai.agentic.newslettergen.commons.Constants.AGENT_STATISTICS_MODEL;
 import static ai.agentic.newslettergen.commons.Constants.AZURE_AI_FOUNDRY_ENDPOINT;
 import static ai.agentic.newslettergen.commons.Constants.AZURE_AI_FOUNDRY_KEY;
+import static ai.agentic.newslettergen.commons.Constants.GITHUB_PERSONAL_ACCESS_TOKEN;
 import static ai.agentic.newslettergen.commons.Constants.IS_LOGGING_ENABLED;
 import dev.langchain4j.agentic.Agent;
 import dev.langchain4j.agentic.declarative.ChatModelSupplier;
+import dev.langchain4j.agentic.declarative.ToolProviderSupplier;
+import dev.langchain4j.mcp.McpToolProvider;
+import dev.langchain4j.mcp.client.DefaultMcpClient;
+import dev.langchain4j.mcp.client.McpClient;
+import dev.langchain4j.mcp.client.transport.McpTransport;
+import dev.langchain4j.mcp.client.transport.stdio.StdioMcpTransport;
 import dev.langchain4j.model.chat.ChatModel;
 import dev.langchain4j.model.openai.OpenAiChatModel;
 import dev.langchain4j.service.UserMessage;
 import dev.langchain4j.service.V;
 
+import java.util.List;
+
 public interface StatisticsSectionWriter {
 
     @UserMessage("""
-        You are a specialized statistics collection agent for LangChain4j newsletter creation. Your role is to generate a complete, standalone "Some Numbers" section that provides quantitative insights into LangChain4j {{toLangchain4jVersion}} project health and community engagement.
+        You are a specialized statistics collection agent for LangChain4j newsletter creation. Your role is to generate a complete, standalone "Some Numbers" section that provides quantitative insights into LangChain4j {{toLangchain4jVersion}} project health and community engagement. Base your statistics on the LangChain4j GitHub repository located at https://github.com/langchain4j/langchain4j.
         
         Generate a complete statistics section with the following structure and content:
         
@@ -71,6 +80,27 @@ public interface StatisticsSectionWriter {
             .temperature(1.0)
             .logRequests(IS_LOGGING_ENABLED)
             .logResponses(IS_LOGGING_ENABLED)
+            .build();
+    }
+
+    @ToolProviderSupplier
+    static McpToolProvider releaseSectionMCP() {
+        McpTransport transport = new StdioMcpTransport.Builder()
+            .command(List.of("/usr/local/bin/docker", "run",
+                "-e", "GITHUB_PERSONAL_ACCESS_TOKEN=" + GITHUB_PERSONAL_ACCESS_TOKEN,
+                "-e", "GITHUB_TOOLSETS=repos",
+                "-e", "GITHUB_READ_ONLY=1",
+                "-i", "ghcr.io/github/github-mcp-server"))
+            .logEvents(IS_LOGGING_ENABLED)
+            .build();
+
+        McpClient mcpClient = new DefaultMcpClient.Builder()
+            .key("GitHubMCPClient")
+            .transport(transport)
+            .build();
+
+        return McpToolProvider.builder()
+            .mcpClients(mcpClient)
             .build();
     }
 }

@@ -9,6 +9,7 @@ public class WriteStatisticsSection {
 
         StatisticsSectionWriter statisticsSectionWriter = AgenticServices.agentBuilder(StatisticsSectionWriter.class)
             .chatModel(statisticsSectionModel())
+            .toolProvider(statisticsSectionMCP())
             .outputName("newsletter")
             .build();
 

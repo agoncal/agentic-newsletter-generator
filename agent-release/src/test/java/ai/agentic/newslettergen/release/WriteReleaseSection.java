@@ -1,5 +1,6 @@
 package ai.agentic.newslettergen.release;
 
+import static ai.agentic.newslettergen.release.ReleaseSectionWriter.releaseSectionMCP;
 import static ai.agentic.newslettergen.release.ReleaseSectionWriter.releaseSectionModel;
 import dev.langchain4j.agentic.AgenticServices;
 
@@ -9,6 +10,7 @@ public class WriteReleaseSection {
 
         ReleaseSectionWriter releaseSectionWriter = AgenticServices.agentBuilder(ReleaseSectionWriter.class)
             .chatModel(releaseSectionModel())
+            .toolProvider(releaseSectionMCP())
             .outputName("newsletter")
             .build();
 

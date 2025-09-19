@@ -1,5 +1,10 @@
 package ai.agentic.newslettergen.sample;
 
+import static ai.agentic.newslettergen.commons.Constants.AGENT_RELEASE_MODEL;
+import static ai.agentic.newslettergen.commons.Constants.AZURE_AI_FOUNDRY_ENDPOINT;
+import static ai.agentic.newslettergen.commons.Constants.AZURE_AI_FOUNDRY_KEY;
+import static ai.agentic.newslettergen.commons.Constants.GITHUB_PERSONAL_ACCESS_TOKEN;
+import static ai.agentic.newslettergen.commons.Constants.IS_LOGGING_ENABLED;
 import dev.langchain4j.mcp.McpToolProvider;
 import dev.langchain4j.mcp.client.DefaultMcpClient;
 import dev.langchain4j.mcp.client.McpClient;
@@ -11,13 +16,6 @@ import dev.langchain4j.service.AiServices;
 import java.util.List;
 
 public class InvokeGitHubMCPServer {
-
-    private static final String AZURE_AI_FOUNDRY_KEY = System.getenv("AZURE_AI_FOUNDRY_KEY");
-    private static final String AZURE_AI_FOUNDRY_ENDPOINT = System.getenv("AZURE_AI_FOUNDRY_ENDPOINT");
-    private static final String GITHUB_PERSONAL_ACCESS_TOKEN = System.getenv("GITHUB_PERSONAL_ACCESS_TOKEN");
-    private static final String AGENT_RELEASE_MODEL = "agent-release-model";
-
-    private static final boolean IS_LOGGING_ENABLED = true;
 
     public static void main(String[] args) {
 
