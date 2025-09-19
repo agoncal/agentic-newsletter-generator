@@ -1,7 +1,9 @@
 package ai.agentic.newslettergen.reference;
 
+import static ai.agentic.newslettergen.commons.Utils.sout;
 import static ai.agentic.newslettergen.reference.ReferenceSectionWriter.referenceSectionModel;
 import dev.langchain4j.agentic.AgenticServices;
+import dev.langchain4j.service.Result;
 
 public class WriteReferenceSection {
 
@@ -12,8 +14,8 @@ public class WriteReferenceSection {
             .outputName("newsletter")
             .build();
 
-        String newsletterSection = referenceSectionWriter.write("1.5");
+        Result<String> newsletterSection = referenceSectionWriter.write("1.5");
 
-        System.out.println(newsletterSection);
+        sout(newsletterSection);
     }
 }

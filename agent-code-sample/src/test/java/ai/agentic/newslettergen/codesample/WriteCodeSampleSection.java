@@ -1,7 +1,9 @@
 package ai.agentic.newslettergen.codesample;
 
 import static ai.agentic.newslettergen.codesample.CodeSampleSectionWriter.codeSampleSectionModel;
+import static ai.agentic.newslettergen.commons.Utils.sout;
 import dev.langchain4j.agentic.AgenticServices;
+import dev.langchain4j.service.Result;
 
 public class WriteCodeSampleSection {
 
@@ -12,8 +14,8 @@ public class WriteCodeSampleSection {
             .outputName("newsletter")
             .build();
 
-        String newsletterSection = codeSampleSectionWriter.write("1.5");
+        Result<String> newsletterSection = codeSampleSectionWriter.write("1.5");
 
-        System.out.println(newsletterSection);
+        sout(newsletterSection);
     }
 }

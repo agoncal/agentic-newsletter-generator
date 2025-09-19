@@ -1,8 +1,10 @@
 package ai.agentic.newslettergen.release;
 
+import static ai.agentic.newslettergen.commons.Utils.sout;
 import static ai.agentic.newslettergen.release.ReleaseSectionWriter.releaseSectionMCP;
 import static ai.agentic.newslettergen.release.ReleaseSectionWriter.releaseSectionModel;
 import dev.langchain4j.agentic.AgenticServices;
+import dev.langchain4j.service.Result;
 
 public class WriteReleaseSection {
 
@@ -14,8 +16,8 @@ public class WriteReleaseSection {
             .outputName("newsletter")
             .build();
 
-        String newsletterSection = releaseSectionWriter.write("1.2", "1.5");
+        Result<String> newsletterSection = releaseSectionWriter.write("1.2", "1.5");
 
-        System.out.println(newsletterSection);
+        sout(newsletterSection);
     }
 }

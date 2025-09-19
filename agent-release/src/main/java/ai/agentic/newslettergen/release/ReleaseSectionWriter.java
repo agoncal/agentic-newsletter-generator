@@ -15,6 +15,7 @@ import dev.langchain4j.mcp.client.transport.McpTransport;
 import dev.langchain4j.mcp.client.transport.stdio.StdioMcpTransport;
 import dev.langchain4j.model.chat.ChatModel;
 import dev.langchain4j.model.openai.OpenAiChatModel;
+import dev.langchain4j.service.Result;
 import dev.langchain4j.service.UserMessage;
 import dev.langchain4j.service.V;
 
@@ -93,8 +94,8 @@ public interface ReleaseSectionWriter {
         Generate the complete release section now, ensuring it's ready for direct integration into the newsletter:
         """)
     @Agent(outputName = "releaseSection", description = "Analyzes and summarizes LangChain4j software releases including version updates, new features, bug fixes, breaking changes, and migration guidance from release notes and changelogs")
-    String write(@V("fromLangchain4jVersion") String fromLangchain4jVersion,
-                 @V("toLangchain4jVersion") String toLangchain4jVersion);
+    Result<String> write(@V("fromLangchain4jVersion") String fromLangchain4jVersion,
+                         @V("toLangchain4jVersion") String toLangchain4jVersion);
 
     @ChatModelSupplier
     static ChatModel releaseSectionModel() {

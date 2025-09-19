@@ -15,6 +15,7 @@ import dev.langchain4j.mcp.client.transport.McpTransport;
 import dev.langchain4j.mcp.client.transport.stdio.StdioMcpTransport;
 import dev.langchain4j.model.chat.ChatModel;
 import dev.langchain4j.model.openai.OpenAiChatModel;
+import dev.langchain4j.service.Result;
 import dev.langchain4j.service.UserMessage;
 import dev.langchain4j.service.V;
 
@@ -70,7 +71,7 @@ public interface StatisticsSectionWriter {
         Generate the complete statistics section now, ensuring it's ready for direct integration into the newsletter:
         """)
     @Agent(outputName = "statisticsSection", description = "Collects and analyzes GitHub repository metrics including stars, forks, contributors, issues, and pull requests to provide quantitative insights into LangChain4j project health and community engagement")
-    String write(@V("toLangchain4jVersion") String toLangchain4jVersion);
+    Result<String> write(@V("toLangchain4jVersion") String toLangchain4jVersion);
 
     @ChatModelSupplier
     static ChatModel statisticsSectionModel() {
