@@ -84,7 +84,7 @@ public interface StatisticsSectionWriter {
     }
 
     @ToolProviderSupplier
-    static McpToolProvider releaseSectionMCP() {
+    static McpToolProvider statisticsSectionMCP() {
         McpTransport transport = new StdioMcpTransport.Builder()
             .command(List.of("/usr/local/bin/docker", "run",
                 "-e", "GITHUB_PERSONAL_ACCESS_TOKEN=" + GITHUB_PERSONAL_ACCESS_TOKEN,
