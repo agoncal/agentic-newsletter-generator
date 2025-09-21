@@ -13,12 +13,11 @@ printf "%s\n" "-----------------------------------"
 export UNIQUE_IDENTIFIER=${GITHUB_USER:-$(whoami)}
 export PROJECT="hack2025agenticnews$UNIQUE_IDENTIFIER"
 export RESOURCE_GROUP="rg-$PROJECT"
-#export LOCATION="francecentral"
 export LOCATION="swedencentral" # check https://learn.microsoft.com/azure/ai-foundry/reference/region-support
 export TAG="$PROJECT"
 export AZURE_AI_FOUNDRY_NAME="ai-$PROJECT"
 
-# Agent Code Sample Writer
+# Agent Code Sample Writer (writes Java code)
 export AGENT_CODE_SAMPLE="agent-code-sample-writer"
 export AGENT_CODE_SAMPLE_DEPLOYMENT="$AGENT_CODE_SAMPLE-model"
 export AGENT_CODE_SAMPLE_MODEL_FORMAT="OpenAI"
@@ -27,7 +26,7 @@ export AGENT_CODE_SAMPLE_MODEL_VERSION="2025-04-16"
 export AGENT_CODE_SAMPLE_SKU_CAPACITY="10"
 export AGENT_CODE_SAMPLE_SKU_NAME="GlobalStandard"
 
-# Agent Reference Writer
+# Agent Reference Writer (searches the web)
 export AGENT_REFERENCE="agent-reference-writer"
 export AGENT_REFERENCE_DEPLOYMENT="$AGENT_REFERENCE-model"
 export AGENT_REFERENCE_MODEL_FORMAT="Microsoft"
@@ -36,7 +35,7 @@ export AGENT_REFERENCE_MODEL_VERSION="7"
 export AGENT_REFERENCE_SKU_CAPACITY="1"
 export AGENT_REFERENCE_SKU_NAME="GlobalStandard"
 
-# Agent Release Writer
+# Agent Release Writer (uses tools, needs summarization)
 export AGENT_RELEASE="agent-release-writer"
 export AGENT_RELEASE_DEPLOYMENT="$AGENT_RELEASE-model"
 export AGENT_RELEASE_MODEL_FORMAT="OpenAI"
@@ -45,7 +44,7 @@ export AGENT_RELEASE_MODEL_VERSION="2025-04-14"
 export AGENT_RELEASE_SKU_CAPACITY="50"
 export AGENT_RELEASE_SKU_NAME="GlobalStandard"
 
-# Agent Statistics Writer
+# Agent Statistics Writer (uses tools)
 export AGENT_STATISTICS="agent-statistics-writer"
 export AGENT_STATISTICS_DEPLOYMENT="$AGENT_STATISTICS-model"
 export AGENT_STATISTICS_MODEL_FORMAT="OpenAI"
