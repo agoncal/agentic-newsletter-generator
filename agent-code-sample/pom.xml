@@ -22,7 +22,7 @@
     <!-- Quarkus-->
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
-    <quarkus.platform.version>3.26.3</quarkus.platform.version>
+    <quarkus.platform.version>3.28.0</quarkus.platform.version>
     <skipITs>true</skipITs>
     <!-- Plugins -->
     <exec-plugin.version>3.5.1</exec-plugin.version>
