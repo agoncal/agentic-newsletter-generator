@@ -26,7 +26,7 @@
     <skipITs>true</skipITs>
     <!-- Plugins -->
     <exec-plugin.version>3.5.1</exec-plugin.version>
-    <compiler-plugin.version>3.14.0</compiler-plugin.version>
+    <compiler-plugin.version>3.14.1</compiler-plugin.version>
     <surefire-plugin.version>3.5.4</surefire-plugin.version>
     <!-- Project -->
     <maven.compiler.release>21</maven.compiler.release>
