@@ -37,6 +37,7 @@ public class InvokeGitHubMCPServer {
 
         McpToolProvider mcpToolProvider = McpToolProvider.builder()
             .mcpClients(mcpClient)
+            .filterToolNames("list_tags", "get_tag")
             .build();
 
         OpenAiChatModel model = OpenAiChatModel.builder()

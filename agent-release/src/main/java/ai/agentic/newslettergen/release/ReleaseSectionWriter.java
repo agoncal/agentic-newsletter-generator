@@ -25,7 +25,7 @@ import java.util.List;
 public interface ReleaseSectionWriter {
 
     @UserMessage("""
-        You are a specialized release analysis agent for LangChain4j newsletter creation. Your role is to generate a complete, standalone "What's New Since the Last Newsletter?" section that covers recent LangChain4j developments from version {{fromLangchain4jVersion}} to version {{toLangchain4jVersion}}. Base your work on the LangChain4j release notes located in the LangChain4j GitHub repository at https://github.com/langchain4j/langchain4j.
+        You are a specialized release analysis agent for LangChain4j newsletter creation. Your role is to generate a complete, standalone "What's New Since the Last Newsletter?" section that covers recent LangChain4j developments from version {{fromLangchain4jVersion}} to version {{toLangchain4jVersion}}. Base your work on the "Notable Changes" section of the LangChain4j release notes for each tag (from tag {{fromLangchain4jVersion}} to tag {{toLangchain4jVersion}}) located in the LangChain4j GitHub repository at https://github.com/langchain4j/langchain4j.
         
         Generate a complete release section with the following structure and content:
         
@@ -33,19 +33,29 @@ public interface ReleaseSectionWriter {
         
         [WRITE_AN_INTRODUCTION]
         
-        * **[FEATURE_1]**: [DESCRIPTION_1]
-        * **[FEATURE_2]**: [DESCRIPTION_2]
-        * **[FEATURE_3]**: [DESCRIPTION_3]
-        * **[FEATURE_4]**: [DESCRIPTION_4]
-        * **[FEATURE_5]**: [DESCRIPTION_5]
+        ### [TAG_VERSION_1]
+        
+        * **[FEATURE_11]**: [SHORT_DESCRIPTION_11]
+        * **[FEATURE_12]**: [SHORT_DESCRIPTION_12]
+        * **[FEATURE_13]**: [SHORT_DESCRIPTION_13]
+        * **[FEATURE_14]**: [SHORT_DESCRIPTION_14]
+        * **[FEATURE_15]**: [SHORT_DESCRIPTION_15]
+        
+        ### [TAG_VERSION_2]
+        
+        * **[FEATURE_21]**: [SHORT_DESCRIPTION_21]
+        * **[FEATURE_22]**: [SHORT_DESCRIPTION_22]
+        * **[FEATURE_23]**: [SHORT_DESCRIPTION_23]
+        * **[FEATURE_24]**: [SHORT_DESCRIPTION_24]
+        * **[FEATURE_25]**: [SHORT_DESCRIPTION_25]
         
         ### Release Pace
         
         [WRITE_AN_INTRODUCTION]
         
-        * [[VERSION_1]](https://github.com/langchain4j/langchain4j/releases/tag/[VERSION_1]) released in [MONTH_YEAR_1]
-        * [[VERSION_2]](https://github.com/langchain4j/langchain4j/releases/tag/[VERSION_2]) released in [MONTH_YEAR_2]
-        * [[VERSION_3]](https://github.com/langchain4j/langchain4j/releases/tag/[VERSION_3]) released in [MONTH_YEAR_3]
+        * [[TAG_VERSION_1]](https://github.com/langchain4j/langchain4j/releases/tag/[TAG_VERSION_1]) released in [MONTH_YEAR_1]
+        * [[TAG_VERSION_2]](https://github.com/langchain4j/langchain4j/releases/tag/[TAG_VERSION_2]) released in [MONTH_YEAR_2]
+        * [[TAG_VERSION_3]](https://github.com/langchain4j/langchain4j/releases/tag/[TAG_VERSION_3]) released in [MONTH_YEAR_3]
         
         ### Azure AI Support
         
@@ -56,20 +66,19 @@ public interface ReleaseSectionWriter {
         * [AZURE_FEATURE_3]
         * [AZURE_FEATURE_4]
         
-        
         ### Other Models Support
         
         Other major model providers have also significantly invested in enhancing their LangChain4j integrations.
         * **Google Vertex AI**: [GOOGLE_FEATURES]
         * **Amazon Bedrock**: [AMAZON_FEATURES]
         * **OpenAI**: [OPENAI_FEATURES]
-        
+
         INSTRUCTIONS:
         * Replace all placeholder values [LIKE_THIS] with realistic current data
         * Complete Independence: Generate a self-contained section that needs no additional editing
-        * Version Coverage: Analyze changes from {{fromLangchain4jVersion}} to {{toLangchain4jVersion}}
+        * Version Coverage: Analyze changes from tag {{fromLangchain4jVersion}} to tag {{toLangchain4jVersion}}
         * Feature Focus: Highlight the most significant new features and improvements
-        * Release Tracking: Include recent version releases with proper GitHub links
+        * Release Tracking: Include recent tag version with proper GitHub links
         * Provider Coverage: Cover major AI model provider integrations and updates
         * Proper Formatting: Use correct Markdown syntax for all headers and links
         
@@ -128,6 +137,7 @@ public interface ReleaseSectionWriter {
 
         return McpToolProvider.builder()
             .mcpClients(mcpClient)
+            .filterToolNames("list_tags", "get_tag")
             .build();
     }
 }

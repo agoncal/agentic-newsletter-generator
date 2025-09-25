@@ -21,7 +21,9 @@
     <!-- Other -->
     <version.tinylog>2.7.0</version.tinylog>
     <version.log4j>2.24.3</version.log4j>
+    <version.jtokkit>1.1.0</version.jtokkit>
     <!-- Project -->
+    <exec-plugin.version>3.5.1</exec-plugin.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.release>21</maven.compiler.release>
   </properties>
@@ -59,6 +61,7 @@
       <groupId>dev.langchain4j</groupId>
       <artifactId>langchain4j-mcp</artifactId>
     </dependency>
+    <!-- Other -->
     <dependency>
       <groupId>org.tinylog</groupId>
       <artifactId>slf4j-tinylog</artifactId>
@@ -74,6 +77,23 @@
       <artifactId>log4j-to-slf4j</artifactId>
       <version>${version.log4j}</version>
     </dependency>
+    <dependency>
+      <groupId>com.knuddels</groupId>
+      <artifactId>jtokkit</artifactId>
+      <version>${version.jtokkit}</version>
+    </dependency>
   </dependencies>
 
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>${exec-plugin.version}</version>
+        <configuration>
+          <mainClass>ai.agentic.newslettergen.sample.CountTokens</mainClass>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>
