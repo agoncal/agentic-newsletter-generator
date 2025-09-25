@@ -37,8 +37,13 @@ public class InvokeGitHubMCPServer {
 
         McpToolProvider mcpToolProvider = McpToolProvider.builder()
             .mcpClients(mcpClient)
-            .filterToolNames("list_tags", "get_tag")
+            .filterToolNames("list_tags")
             .build();
+
+//        McpToolProvider mcpToolProvider = McpToolProvider.builder()
+//            .mcpClients(mcpClient)
+//            .filter((client, tool) -> tool.name().contains("tag"))
+//            .build();
 
         OpenAiChatModel model = OpenAiChatModel.builder()
             .apiKey(AZURE_AI_FOUNDRY_KEY)
