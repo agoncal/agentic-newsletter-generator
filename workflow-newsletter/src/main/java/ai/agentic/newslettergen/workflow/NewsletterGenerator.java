@@ -1,17 +1,10 @@
 package ai.agentic.newslettergen.workflow;
 
 import ai.agentic.newslettergen.codesample.CodeSampleSectionWriter;
-import static ai.agentic.newslettergen.codesample.CodeSampleSectionWriter.codeSampleSectionModel;
 import ai.agentic.newslettergen.editor.NewsletterEditor;
-import static ai.agentic.newslettergen.editor.NewsletterEditor.newsletterEditorModel;
 import ai.agentic.newslettergen.reference.ReferenceSectionWriter;
-import static ai.agentic.newslettergen.reference.ReferenceSectionWriter.referenceSectionModel;
 import ai.agentic.newslettergen.release.ReleaseSectionWriter;
-import static ai.agentic.newslettergen.release.ReleaseSectionWriter.releaseSectionMCP;
-import static ai.agentic.newslettergen.release.ReleaseSectionWriter.releaseSectionModel;
 import ai.agentic.newslettergen.statistics.StatisticsSectionWriter;
-import static ai.agentic.newslettergen.statistics.StatisticsSectionWriter.statisticsSectionMCP;
-import static ai.agentic.newslettergen.statistics.StatisticsSectionWriter.statisticsSectionModel;
 import dev.langchain4j.agentic.AgenticServices;
 import dev.langchain4j.agentic.UntypedAgent;
 
@@ -21,28 +14,6 @@ public class NewsletterGenerator {
 
     public static void main(String[] args) {
 
-        CodeSampleSectionWriter codeSampleSectionWriter = AgenticServices.agentBuilder(CodeSampleSectionWriter.class)
-            .chatModel(codeSampleSectionModel())
-            .build();
-
-        ReferenceSectionWriter referenceSectionWriter = AgenticServices.agentBuilder(ReferenceSectionWriter.class)
-            .chatModel(referenceSectionModel())
-            .build();
-
-        ReleaseSectionWriter releaseSectionWriter = AgenticServices.agentBuilder(ReleaseSectionWriter.class)
-            .chatModel(releaseSectionModel())
-            .toolProvider(releaseSectionMCP())
-            .build();
-
-        StatisticsSectionWriter statisticsSectionWriter = AgenticServices.agentBuilder(StatisticsSectionWriter.class)
-            .chatModel(statisticsSectionModel())
-            .toolProvider(statisticsSectionMCP())
-            .build();
-
-        NewsletterEditor newsletterEditor = AgenticServices.agentBuilder(NewsletterEditor.class)
-            .chatModel(newsletterEditorModel())
-            .build();
-
         Map<String, Object> input = Map.of(
             "fromLangchain4jVersion", "1.2",
             "toLangchain4jVersion", "1.5"
@@ -50,11 +21,11 @@ public class NewsletterGenerator {
 
         UntypedAgent newsletterGenerator = AgenticServices
             .sequenceBuilder()
-            .subAgents(codeSampleSectionWriter,
-                releaseSectionWriter,
-                referenceSectionWriter,
-                statisticsSectionWriter,
-                newsletterEditor)
+            .subAgents(CodeSampleSectionWriter.class,
+                ReleaseSectionWriter.class,
+                ReferenceSectionWriter.class,
+                StatisticsSectionWriter.class,
+                NewsletterEditor.class)
             .outputName("newsletter")
             .build();
 

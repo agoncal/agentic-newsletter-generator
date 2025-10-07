@@ -18,6 +18,7 @@ import dev.langchain4j.model.openai.OpenAiChatModel;
 import dev.langchain4j.service.Result;
 import dev.langchain4j.service.UserMessage;
 import dev.langchain4j.service.V;
+import dev.langchain4j.service.tool.ToolProvider;
 
 import java.time.Duration;
 import java.util.List;
@@ -87,7 +88,7 @@ public interface StatisticsSectionWriter {
     }
 
     @ToolProviderSupplier
-    static McpToolProvider statisticsSectionMCP() {
+    static ToolProvider statisticsSectionMCP() {
         McpTransport transport = new StdioMcpTransport.Builder()
             .command(List.of("/usr/local/bin/docker", "run",
                 "-e", "GITHUB_PERSONAL_ACCESS_TOKEN=" + GITHUB_PERSONAL_ACCESS_TOKEN,
