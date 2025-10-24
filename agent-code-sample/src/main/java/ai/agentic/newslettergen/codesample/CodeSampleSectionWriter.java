@@ -50,7 +50,7 @@ public interface CodeSampleSectionWriter {
         
         Generate the complete "Some Code" section now:
         """)
-    @Agent(outputName = "codeSampleSection", description = "Generates a practical Java code example that demonstrates the latest LangChain4j features, best practices, and real-world usage patterns for newsletter readers")
+    @Agent(outputKey = "codeSampleSection", description = "Generates a practical Java code example that demonstrates the latest LangChain4j features, best practices, and real-world usage patterns for newsletter readers")
     Result<String> write(@V("toLangchain4jVersion") String toLangchain4jVersion);
 
     @ChatModelSupplier

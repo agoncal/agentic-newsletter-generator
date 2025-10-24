@@ -13,7 +13,7 @@ public class WriteStatisticsSection {
         StatisticsSectionWriter statisticsSectionWriter = AgenticServices.agentBuilder(StatisticsSectionWriter.class)
             .chatModel(statisticsSectionModel())
             .toolProvider(statisticsSectionMCP())
-            .outputName("newsletter")
+            .outputKey("newsletter")
             .build();
 
         Result<String> newsletterSection = statisticsSectionWriter.write("1.5");

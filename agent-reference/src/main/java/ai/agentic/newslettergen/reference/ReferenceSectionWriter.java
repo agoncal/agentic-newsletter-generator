@@ -58,7 +58,7 @@ public interface ReferenceSectionWriter {
         
         Generate the complete "References" section now, ensuring it's ready for direct integration into the newsletter:
         """)
-    @Agent(outputName = "referenceSection", description = "Curates comprehensive reference documentation, tutorials, learning resources, and community links related to LangChain4j to help newsletter readers discover valuable educational materials")
+    @Agent(outputKey = "referenceSection", description = "Curates comprehensive reference documentation, tutorials, learning resources, and community links related to LangChain4j to help newsletter readers discover valuable educational materials")
     Result<String> write(@V("toLangchain4jVersion") String toLangchain4jVersion);
 
     @ChatModelSupplier

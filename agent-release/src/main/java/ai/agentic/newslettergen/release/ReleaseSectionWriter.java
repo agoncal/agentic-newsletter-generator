@@ -103,7 +103,7 @@ public interface ReleaseSectionWriter {
         
         Generate the complete release section now, ensuring it's ready for direct integration into the newsletter:
         """)
-    @Agent(outputName = "releaseSection", description = "Analyzes and summarizes LangChain4j software releases including version updates, new features, bug fixes, breaking changes, and migration guidance from release notes and changelogs")
+    @Agent(outputKey = "releaseSection", description = "Analyzes and summarizes LangChain4j software releases including version updates, new features, bug fixes, breaking changes, and migration guidance from release notes and changelogs")
     Result<String> write(@V("fromLangchain4jVersion") String fromLangchain4jVersion,
                          @V("toLangchain4jVersion") String toLangchain4jVersion);
 

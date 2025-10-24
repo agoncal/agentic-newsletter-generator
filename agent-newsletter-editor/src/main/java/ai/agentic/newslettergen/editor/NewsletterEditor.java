@@ -61,7 +61,7 @@ public interface NewsletterEditor {
         * Completeness: Include current month/year in title and ensure all content is relevant
         * Quality: Produce a polished, professional newsletter ready for distribution
         """)
-    @Agent(outputName = "newsletter", description = "Compiles, edits, and formats the complete monthly newsletter by integrating content from all specialized agents, ensuring consistency, removing duplications, and producing a polished Markdown publication ready for distribution")
+    @Agent(outputKey = "newsletter", description = "Compiles, edits, and formats the complete monthly newsletter by integrating content from all specialized agents, ensuring consistency, removing duplications, and producing a polished Markdown publication ready for distribution")
     String editAndCompileNewsletter(
 //        @V("statisticsSection") String statisticsSection,
 //        @V("releaseSection") String releaseSection,

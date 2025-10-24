@@ -11,7 +11,7 @@ public class WriteReferenceSection {
 
         ReferenceSectionWriter referenceSectionWriter = AgenticServices.agentBuilder(ReferenceSectionWriter.class)
             .chatModel(referenceSectionModel())
-            .outputName("newsletter")
+            .outputKey("newsletter")
             .build();
 
         Result<String> newsletterSection = referenceSectionWriter.write("1.5");

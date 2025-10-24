@@ -11,7 +11,7 @@ public class WriteCodeSampleSection {
 
         CodeSampleSectionWriter codeSampleSectionWriter = AgenticServices.agentBuilder(CodeSampleSectionWriter.class)
             .chatModel(codeSampleSectionModel())
-            .outputName("newsletter")
+            .outputKey("newsletter")
             .build();
 
         Result<String> newsletterSection = codeSampleSectionWriter.write("1.5");

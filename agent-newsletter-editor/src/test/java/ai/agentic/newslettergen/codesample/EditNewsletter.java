@@ -10,7 +10,7 @@ public class EditNewsletter {
 
         NewsletterEditor newsletterEditor = AgenticServices.agentBuilder(NewsletterEditor.class)
             .chatModel(newsletterEditorModel())
-            .outputName("newsletter")
+            .outputKey("newsletter")
             .build();
 
         String newsletter = newsletterEditor.editAndCompileNewsletter("1.2", "1.5");

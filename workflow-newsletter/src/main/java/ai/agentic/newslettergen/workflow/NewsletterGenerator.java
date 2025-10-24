@@ -26,7 +26,7 @@ public class NewsletterGenerator {
                 ReferenceSectionWriter.class,
                 StatisticsSectionWriter.class,
                 NewsletterEditor.class)
-            .outputName("newsletter")
+            .outputKey("newsletter")
             .build();
 
         String newsletter = (String) newsletterGenerator.invoke(input);

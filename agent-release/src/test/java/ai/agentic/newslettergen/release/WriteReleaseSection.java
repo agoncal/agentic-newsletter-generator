@@ -13,7 +13,7 @@ public class WriteReleaseSection {
         ReleaseSectionWriter releaseSectionWriter = AgenticServices.agentBuilder(ReleaseSectionWriter.class)
             .chatModel(releaseSectionModel())
             .toolProvider(releaseSectionMCP())
-            .outputName("newsletter")
+            .outputKey("newsletter")
             .build();
 
         Result<String> newsletterSection = releaseSectionWriter.write("1.2", "1.5");
