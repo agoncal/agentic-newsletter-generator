@@ -2,7 +2,17 @@
 
 Multi-agent Java system that generates monthly technology newsletters using real-time data and intelligent content curation
 
-This project creates an intelligent newsletter generation system using multiple specialized AI agents that work together to produce monthly technology newsletters. Built in Java using Quarkus, LangChain4j 1.5.0, LangChain4j Agentic for agent orchestration, MCP servers and Azure AI Foundry with various language models, this agentic application automatically gathers GitHub statistics (stars, forks, releases), analyzes community engagement, summarizes release notes, curates code examples, and compiles everything into a newsletter ready for email distribution. Each agent has a specific role - data collection, content analysis, writing, and formatting - creating a scalable solution for technology companies, developer communities, and tech enthusiasts who want to stay informed about specific technologies without manual research.
+This project creates an intelligent newsletter generation system using multiple specialized AI agents that work together to produce monthly technology newsletters. Built in Java 21 using Quarkus 3.28.0, LangChain4j 1.8.0, LangChain4j Agentic for agent orchestration, MCP servers and Azure AI Foundry with various language models, this agentic application automatically gathers GitHub statistics (stars, forks, releases), analyzes community engagement, summarizes release notes, curates code examples, and compiles everything into a newsletter ready for email distribution. Each agent has a specific role - data collection, content analysis, writing, and formatting - creating a scalable solution for technology companies, developer communities, and tech enthusiasts who want to stay informed about specific technologies without manual research.
+
+## Technology Stack
+
+- **Java 21** - Target runtime version
+- **Quarkus 3.28.0** - Web framework for all agent modules
+- **LangChain4j 1.8.0** - AI/LLM integration and agentic orchestration
+- **Maven** - Multi-module build system
+- **Azure AI Foundry** - Cloud AI service with Phi-4 and GPT model deployments
+- **GitHub MCP Server** - Model Context Protocol for GitHub data integration
+- **Tinylog 2.7.0** - Logging framework
 
 ## Agents
 
@@ -46,6 +56,88 @@ Collects and analyzes GitHub statistics such as star counts, fork numbers, contr
 
 Compiles and formats all content from the specialized agents into a cohesive, well-structured newsletter. This agent takes the raw output from statistics, releases, references, and code sample agents and creates the final newsletter with proper formatting, flow, and editorial polish ready for distribution.
 
+## Getting Started
+
+### Prerequisites
+
+- Java 21 or later
+- Maven 3.8+
+- Azure AI Foundry account with deployed models
+- GitHub Personal Access Token (for MCP integration)
+
+### Environment Variables
+
+Before running the application, set the following environment variables:
+
+```bash
+# Azure AI Foundry configuration
+export AZURE_AI_FOUNDRY_KEY="your-azure-ai-foundry-api-key"
+export AZURE_AI_FOUNDRY_ENDPOINT="https://your-endpoint.openai.azure.com/openai/deployments/"
+
+# GitHub MCP Server configuration
+export GITHUB_PERSONAL_ACCESS_TOKEN="your-github-personal-access-token"
+```
+
+### Building the Project
+
+```bash
+# Build all modules
+mvn clean package
+
+# Build and run tests
+mvn clean verify
+```
+
+### Running the Newsletter Generator
+
+Run the complete workflow to generate a newsletter:
+
+```bash
+cd workflow-newsletter
+mvn exec:java -Dexec.mainClass="ai.agentic.newslettergen.workflow.NewsletterGenerator"
+```
+
+Or run in Quarkus dev mode for hot reload:
+
+```bash
+cd workflow-newsletter
+./mvnw quarkus:dev
+```
+
+### Running Individual Agents
+
+Each agent can be run independently for testing:
+
+```bash
+# Run statistics agent in dev mode
+cd agent-statistics
+./mvnw quarkus:dev
+
+# Run code sample agent
+cd agent-code-sample
+./mvnw quarkus:dev
+
+# Run newsletter editor agent
+cd agent-newsletter-editor
+./mvnw quarkus:dev
+```
+
+## Project Structure
+
+This is a multi-module Maven project with the following structure:
+
+- **agent-statistics** - Collects GitHub statistics using MCP
+- **agent-reference** - Gathers reference documentation
+- **agent-release** - Analyzes release notes
+- **agent-code-sample** - Generates code examples
+- **agent-newsletter-editor** - Compiles final newsletter
+- **workflow-newsletter** - Orchestrates all agents using LangChain4j Agentic
+- **commons** - Shared utilities and constants
+- **samples** - Standalone examples for testing
+- **infrastructure/** - Azure deployment scripts
+
+Each agent is a self-contained Quarkus application with its own dedicated Azure AI model deployment. The workflow-newsletter module depends on all agent modules and orchestrates them in sequence using LangChain4j's Agentic framework.
+
 ## Infrastructure
 
 This project is designed to run on Azure AI Foundry with automated infrastructure deployment scripts.
@@ -74,9 +166,12 @@ The system uses Azure AI Foundry for hosting AI models with individual model dep
 The deployment creates:
 - Azure Resource Group (`rg-hack2025agenticnews{username}`)
 - Azure AI Foundry service with multiple model deployments
-- Individual model instances for each specialized agent:
-  - Phi-4 models for statistics, references, code sample, and newsletter editor agents
-  - gpt-5-mini model for the releases agent
+- Individual model deployments for each specialized agent:
+  - **agent-code-sample-writer-model**: Phi-4 (Microsoft format)
+  - **agent-reference-writer-model**: Phi-4 (Microsoft format)
+  - **agent-release-writer-model**: gpt-5-mini (OpenAI format)
+  - **agent-statistics-writer-model**: Phi-4 (Microsoft format)
+  - **agent-newsletter-editor-model**: Phi-4 (Microsoft format)
 - Required environment variables for service connectivity
 
 ### GitHub Integration
