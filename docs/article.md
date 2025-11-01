@@ -2,173 +2,172 @@
 
 ## What Are Agents?
 
-An agent is a system that combines several capabilities to perform complex tasks autonomously. At its core, an agent merges a system prompt, a user prompt, a language model, memory, retrieval-augmented generation (RAG), tools, and the Model Context Protocol (MCP) into a cohesive system. Rather than making a single LLM call and accepting the response, agents reason through problems iteratively, breaking tasks into steps, invoking tools when needed, and adapting based on results.
-
-Think of an agent like a knowledgeable colleague who doesn't just answer questions—they think through problems, gather information from various sources, use external tools, and refine their approach based on feedback. When you ask an agent to accomplish something, it observes the current state, reasons about what needs to happen next, takes action, and repeats this cycle until the task completes or it recognises completion is not possible.
-
-The key difference between a simple LLM call and an agent is autonomy. With an LLM, you ask a question and get an answer. With an agent, you assign a task and the agent figures out the steps needed to accomplish it.
+An agent is a system that combines several capabilities to perform complex tasks autonomously. At its core, an agent merges a **system prompt**, a **user prompt**, a **model**, **memory**, retrieval-augmented generation (**RAG**), **tools**, and the Model Context Protocol (**MCP**) into a cohesive system. Think of an agent like a knowledgeable colleague who doesn't just answer questions—they think through problems, gather information from various sources, use external tools, and refine their approach based on feedback. 
 
 ## Agents in LangChain4j
 
-LangChain4j provides the `langchain4j-agentic` module (currently experimental) to build agentic systems. An agent in LangChain4j is defined as an interface with a single method annotated with `@Agent`. This simple design makes agents feel natural to Java developers.
+LangChain4j provides the `langchain4j-agentic` module to build agentic systems. Agents can be built using two approaches:
 
-Here's a minimal agent definition:
+- **Programmatic approach**: Build agents using fluent builders with `AgenticServices.agentBuilder()`, explicitly configuring each aspect (chat model, tools, memory, etc.)
+- **Declarative approach**: Define agents as interfaces with annotations that encapsulate all configuration within the interface itself
+
+This article focuses on the **declarative approach**, which offers a key advantage: it encapsulates the complete agent behavior—prompts, model configuration, tools, memory, and callbacks—into a single interface that can be packaged in a separate JAR file. This makes agents highly portable and reusable across different applications.
+
+An agent in LangChain4j is defined as an interface with a single method annotated with `@Agent`. LangChain4j provides rich annotations for declarative agent configuration:
+
+| Annotation                        | Purpose                                                                                                                                                              |
+|-----------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **`@Agent`**                      | Marks the method as an agent. Includes `outputKey` (where results are stored in AgenticScope) and `description` (what this agent does—crucial for supervisor agents) |
+| **`@UserMessage`**                | Defines the prompt template with placeholders like `{{variable}}`                                                                                                    |
+| **`@SystemMessage`**              | Defines the system-level instructions that set the agent's role and behavior constraints                                                                             |
+| **`@ChatModelSupplier`**          | Provides the LLM configuration for this agent                                                                                                                        |
+| **`@ToolProviderSupplier`**       | Provides external tools (e.g., MCP servers, REST APIs)                                                                                                               |
+| **`@ChatMemoryProviderSupplier`** | Provides chat memory for stateful conversations                                                                                                                      |
+| **`@ContentRetrieverSupplier`**   | Provides content retrieval for RAG patterns                                                                                                                          |
+| **`@RetrievalAugmentorSupplier`** | Configures the retrieval augmentation strategy                                                                                                                       |
+| **`@BeforeAgentInvocation`**      | Callback invoked before agent execution                                                                                                                              |
+| **`@AfterAgentInvocation`**       | Callback invoked after agent completion                                                                                                                              |
+
+## Building Declarative Agents
+
+A declarative agent is defined entirely through its interface annotations. All supplier methods (`@ChatModelSupplier`, `@ToolProviderSupplier`, etc.) must be `static` and typically take no arguments (except `@ChatMemoryProviderSupplier` which requires a memory ID parameter). This approach keeps all agent configuration in one place, making it easy to understand, test, and deploy.
+
+Here's a complete example showing all available configuration options:
 
 ```java
 public interface ReleaseSectionWriter {
 
+    @SystemMessage("""
+        You are a specialized release analysis agent.
+        """)
     @UserMessage("""
-            Analyze the following LangChain4j release notes and create a concise summary.
-            Include version number, major features, bug fixes, and breaking changes.
-            Release notes: {{releaseNotes}}
-            """)
+        Analyze release notes from version {{fromLangchain4jVersion}}
+        to {{toLangchain4jVersion}} and create a summary.
+        """)
     @Agent(
         outputKey = "releaseSection",
-        description = "Analyzes and summarizes LangChain4j software releases including "
-            + "version updates, new features, bug fixes, breaking changes, and "
-            + "migration guidance from release notes and changelogs"
+        description = "Analyzes and summarizes software releases"
     )
-    String writeReleaseSection(@V("releaseNotes") String releaseNotes);
+    Result<String> write(@V("fromLangchain4jVersion") String fromVersion,
+                         @V("toLangchain4jVersion") String toVersion);
+
+    @ChatModelSupplier
+    static ChatModel chatModel() {
+        // Configure Chat Model
+    }
+
+    @ToolProviderSupplier
+    static ToolProvider toolProvider() {
+        // Configure MCP or other external tools
+    }
+
+    @ChatMemoryProviderSupplier
+    static ChatMemory chatMemory(Object memoryId) {
+        // Configure Memory
+    }
+
+    @RetrievalAugmentorSupplier
+    static RetrievalAugmentor retrievalAugmentor() {
+        // Configure RAG
+    }
+
+    @BeforeAgentInvocation
+    static void beforeInvocation(AgentRequest request) {
+        System.out.println("Starting agent: " + request.agentName());
+    }
+
+    @AfterAgentInvocation
+    static void afterInvocation(AgentResponse response) {
+        System.out.println("Completed: " + response.output());
+    }
 }
 ```
 
-Notice the key annotations. The `@Agent` annotation marks this method as an agent and provides two important properties: `outputKey` (the name under which this agent's result will be stored) and `description` (what this agent does—crucial for orchestration). The `@V` annotation binds parameters to named variables that the agent can access.
+### Invoking Declarative Agents
 
-To create an instance of this agent, you use `AgenticServices`:
+When using declarative annotations, agent building is automatic:
 
 ```java
+// Create the agent (configuration is pulled from annotations)
 ReleaseSectionWriter releaseWriter = AgenticServices
     .agentBuilder(ReleaseSectionWriter.class)
-    .chatModel(chatModel)
-    .outputKey("releaseSection")
     .build();
-```
 
-## Building Agents
+// Invoke the agent
+Result<String> result = releaseWriter.write("1.2", "1.5");
+String releaseSection = result.content();
 
-Building an agent involves three steps: defining the agent interface, creating the agent instance, and invoking it with input data.
-
-### Step 1: Define the Agent Interface
-
-Your agent interface specifies what it does through prompts and parameters:
-
-```java
-public interface CodeSampleSectionWriter {
-
-    @UserMessage("""
-            Based on the latest LangChain4j release features: {{features}},
-            generate a practical Java code example that demonstrates how to use them.
-            The example should be concise, focused, and show best practices.
-            """)
-    @Agent(
-        outputKey = "codeSampleSection",
-        description = "Generates a practical Java code example that demonstrates "
-            + "the latest LangChain4j features, best practices, and real-world "
-            + "usage patterns for newsletter readers"
-    )
-    String generateCodeSample(@V("features") String features);
-}
-```
-
-### Step 2: Build the Agent
-
-Create an agent instance using the agent builder:
-
-```java
-CodeSampleSectionWriter codeSampleWriter = AgenticServices
-    .agentBuilder(CodeSampleSectionWriter.class)
-    .chatModel(chatModel)
-    .outputKey("codeSampleSection")
-    .build();
-```
-
-Optionally, you can add memory, tools, or observability:
-
-```java
-CodeSampleSectionWriter codeSampleWriter = AgenticServices
-    .agentBuilder(CodeSampleSectionWriter.class)
-    .chatModel(chatModel)
-    .outputKey("codeSampleSection")
-    .beforeAgentInvocation(request -> 
-        System.out.println("Generating code sample with features: " + request.inputs().get("features")))
-    .afterAgentInvocation(response -> 
-        System.out.println("Code sample generated successfully"))
-    .build();
-```
-
-### Step 3: Invoke the Agent
-
-Call your agent like you would any method:
-
-```java
-String releaseSection = releaseWriter.writeReleaseSection(releaseNotes);
-String codeSample = codeSampleWriter.generateCodeSample(features);
+// Access metadata
+System.out.println("Tokens used: " + result.tokenUsage());
 ```
 
 ## Orchestrating Multiple Agents
 
-The real power of agents emerges when you combine multiple agents into a workflow. LangChain4j provides several orchestration patterns. For our newsletter example, we'll use a **sequential workflow**—where agents execute one after another, passing results between them.
-
-### The Newsletter Generator Example
-
-Imagine building an automated newsletter about LangChain4j releases. You need one agent to write about the release, another to create code samples, and a coordinator to orchestrate them.
-
-First, define your orchestration interface:
+The real power of agents emerges when you combine multiple agents into a workflow. LangChain4j provides several orchestration patterns. For our newsletter example, we'll use a **sequential workflow**—where agents execute one after another, passing results between them.  The actual newsletter generator orchestrates five specialized agents in sequence. Here's the real implementation:
 
 ```java
-public interface NewsletterGenerator {
+public class NewsletterGenerator {
 
-    @Agent
-    String generateNewsletter(@V("releaseNotes") String releaseNotes, 
-                              @V("features") String features);
+    public static void main(String[] args) {
+
+        Map<String, Object> input = Map.of(
+            "fromLangchain4jVersion", "1.2",
+            "toLangchain4jVersion", "1.5"
+        );
+
+        UntypedAgent newsletterGenerator = AgenticServices
+            .sequenceBuilder()
+            .subAgents(CodeSampleSectionWriter.class,
+                ReleaseSectionWriter.class,
+                ReferenceSectionWriter.class,
+                StatisticsSectionWriter.class,
+                NewsletterEditor.class)
+            .outputKey("newsletter")
+            .build();
+
+        String newsletter = (String) newsletterGenerator.invoke(input);
+
+        System.out.println(newsletter);
+    }
 }
-```
-
-Then orchestrate the agents into a sequence:
-
-```java
-ReleaseSectionWriter releaseWriter = AgenticServices
-    .agentBuilder(ReleaseSectionWriter.class)
-    .chatModel(chatModel)
-    .outputKey("releaseSection")
-    .build();
-
-CodeSampleSectionWriter codeSampleWriter = AgenticServices
-    .agentBuilder(CodeSampleSectionWriter.class)
-    .chatModel(chatModel)
-    .outputKey("codeSampleSection")
-    .build();
-
-NewsletterGenerator newsletterGenerator = AgenticServices
-    .sequenceBuilder(NewsletterGenerator.class)
-    .subAgents(releaseWriter, codeSampleWriter)
-    .outputKey("newsletter")
-    .output(agenticScope -> {
-        String releaseSection = agenticScope.readState("releaseSection", "");
-        String codeSampleSection = agenticScope.readState("codeSampleSection", "");
-        
-        return "# LangChain4j Newsletter\n\n"
-            + "## Release Updates\n" + releaseSection + "\n\n"
-            + "## Code Sample\n" + codeSampleSection;
-    })
-    .build();
-
-String newsletter = newsletterGenerator.generateNewsletter(releaseNotes, features);
 ```
 
 Here's what happens:
 
-1. You invoke `generateNewsletter()` with release notes and features.
+1. You create input parameters in a `Map<String, Object>` with version information.
 2. LangChain4j creates an `AgenticScope`—a shared data store for all agents in the workflow.
-3. The `releaseWriter` agent executes first, analysing the release notes and storing its result under the key `"releaseSection"`.
-4. The `codeSampleWriter` agent executes next, generating code examples and storing its result under the key `"codeSampleSection"`.
-5. The `output` function combines both results into a formatted newsletter.
+3. The `CodeSampleSectionWriter` agent executes first, generating code examples and storing its result under `"codeSampleSection"`.
+4. The `ReleaseSectionWriter` agent executes next, analyzing releases using GitHub MCP tools and storing under `"releaseSection"`.
+5. The `ReferenceSectionWriter` agent gathers documentation links and stores under `"referenceSection"`.
+6. The `StatisticsSectionWriter` agent collects GitHub statistics using MCP tools and stores under `"statisticsSection"`.
+7. The `NewsletterEditor` agent executes last, reading all previous sections from the scope and compiling them into the final newsletter.
+8. The final newsletter is returned as a string.
+
+Notice that we pass agent **classes** (like `CodeSampleSectionWriter.class`) to the sequence builder, not instances. LangChain4j builds and configures each agent automatically using their `@ChatModelSupplier` and `@ToolProviderSupplier` methods.
 
 ### Understanding AgenticScope
 
-The `AgenticScope` is the glue that connects agents. It's a shared map of variables that agents read from and write to. When you invoke an agent with `@V("releaseNotes") String releaseNotes`, LangChain4j reads that value from the `AgenticScope`. When an agent completes, its `outputKey` determines which variable in the scope receives the result.
+The `AgenticScope` is the glue that connects agents. It's a shared map of variables that agents read from and write to. Here's how it works in the newsletter generator:
 
-This design allows agents to collaborate without direct knowledge of each other—they simply consume and produce data in a shared workspace.
+1. **Initial Input**: The `Map<String, Object>` input is loaded into the scope with keys like `"fromLangchain4jVersion"` and `"toLangchain4jVersion"`.
+
+2. **Agent Reads**: When an agent method has parameters like `@V("toLangchain4jVersion") String toLangchain4jVersion`, LangChain4j reads that value from the scope.
+
+3. **Agent Writes**: When an agent completes, its result is stored in the scope under its `outputKey`. For example, `CodeSampleSectionWriter` stores its output under `"codeSampleSection"`.
+
+4. **Final Compilation**: The `NewsletterEditor` agent can access all previous outputs via template variables in its `@UserMessage` prompt:
+   ```java
+   @UserMessage("""
+       Compile the following sections into a complete newsletter:
+
+       {{codeSampleSection}}
+       {{releaseSection}}
+       {{referenceSection}}
+       {{statisticsSection}}
+       """)
+   ```
+
+This design allows agents to collaborate without direct knowledge of each other—they simply consume and produce data in a shared workspace. Each agent is independently testable and can be developed in isolation.
 
 ### Workflow Patterns
 
@@ -191,6 +190,6 @@ With LangChain4j's agent framework, you get:
 - **Observability**: Track what agents do through callbacks and logging.
 - **Safety**: Built-in error handling and recovery mechanisms.
 
-The newsletter generator example demonstrates these concepts in practice—multiple focused agents collaborating to produce a polished output. As your needs grow, you can add more agents (an editor agent for final polish, a distribution agent to send emails) and compose them with additional workflow patterns.
+The newsletter generator example demonstrates these concepts in practice—five focused agents collaborating to produce a polished output. Each agent has a specific role: generating code samples, analyzing releases, gathering references, collecting statistics, and editing the final newsletter. As your needs grow, you can add more agents (a distribution agent to send emails, a quality assurance agent to verify content) and compose them with additional workflow patterns.
 
 Start by building a single agent for a focused task. Once you're comfortable, orchestrate multiple agents into workflows. You'll find that agents offer a powerful, intuitive way to build sophisticated AI applications in Java.
