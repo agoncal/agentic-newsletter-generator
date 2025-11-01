@@ -1,7 +1,5 @@
 # Building Agents with LangChain4j
 
-## What Are Agents?
-
 An agent is a system that combines several capabilities to perform complex tasks autonomously. At its core, an agent merges a **system prompt**, a **user prompt**, a **model**, **memory**, retrieval-augmented generation (**RAG**), **tools**, and the Model Context Protocol (**MCP**) into a cohesive system. Think of an agent like a knowledgeable colleague who doesn't just answer questions—they think through problems, gather information from various sources, use external tools, and refine their approach based on feedback. 
 
 ## Agents in LangChain4j
@@ -15,18 +13,6 @@ This article focuses on the **declarative approach**, which offers a key advanta
 
 An agent in LangChain4j is defined as an interface with a single method annotated with `@Agent`. LangChain4j provides rich annotations for declarative agent configuration:
 
-| Annotation                        | Purpose                                                                                                                                                              |
-|-----------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **`@Agent`**                      | Marks the method as an agent. Includes `outputKey` (where results are stored in AgenticScope) and `description` (what this agent does—crucial for supervisor agents) |
-| **`@UserMessage`**                | Defines the prompt template with placeholders like `{{variable}}`                                                                                                    |
-| **`@SystemMessage`**              | Defines the system-level instructions that set the agent's role and behavior constraints                                                                             |
-| **`@ChatModelSupplier`**          | Provides the LLM configuration for this agent                                                                                                                        |
-| **`@ToolProviderSupplier`**       | Provides external tools (e.g., MCP servers, REST APIs)                                                                                                               |
-| **`@ChatMemoryProviderSupplier`** | Provides chat memory for stateful conversations                                                                                                                      |
-| **`@ContentRetrieverSupplier`**   | Provides content retrieval for RAG patterns                                                                                                                          |
-| **`@RetrievalAugmentorSupplier`** | Configures the retrieval augmentation strategy                                                                                                                       |
-| **`@BeforeAgentInvocation`**      | Callback invoked before agent execution                                                                                                                              |
-| **`@AfterAgentInvocation`**       | Callback invoked after agent completion                                                                                                                              |
 
 ## Building Declarative Agents
 
@@ -180,16 +166,8 @@ Beyond sequential workflows, LangChain4j supports:
 
 ## Conclusion
 
-Agents transform how you build AI applications. Instead of stringing together LLM calls, you define focused agents that specialise in specific tasks, then orchestrate them into workflows that solve complex problems.
+Agents transform how you build AI applications by allowing you to define focused agents that specialise in specific tasks and orchestrate them into workflows that solve complex problems, rather than stringing together individual LLM calls. LangChain4j's agent framework brings simplicity through Java interfaces with annotations, composability through builders that combine agents without complex wiring, flexibility to mix sequential, parallel, conditional, and autonomous patterns, observability to track agent behavior through callbacks and logging, and built-in error handling for safety. The newsletter generator example demonstrates these concepts in practice with five focused agents—each handling code samples, release analysis, reference gathering, statistics collection, or final editing—collaborating to produce a polished output. As your needs grow, you can add more agents and compose them with additional workflow patterns, whether that's a distribution agent to send emails or a quality assurance agent to verify content. Start by building a single agent for a focused task, then orchestrate multiple agents into workflows—you'll find that agents offer a powerful, intuitive way to build sophisticated AI applications in Java.
 
-With LangChain4j's agent framework, you get:
+---
 
-- **Simplicity**: Agents are just Java interfaces with annotations.
-- **Composability**: Combine agents into workflows using builders—no complex wiring required.
-- **Flexibility**: Mix sequential, parallel, conditional, and autonomous patterns.
-- **Observability**: Track what agents do through callbacks and logging.
-- **Safety**: Built-in error handling and recovery mechanisms.
-
-The newsletter generator example demonstrates these concepts in practice—five focused agents collaborating to produce a polished output. Each agent has a specific role: generating code samples, analyzing releases, gathering references, collecting statistics, and editing the final newsletter. As your needs grow, you can add more agents (a distribution agent to send emails, a quality assurance agent to verify content) and compose them with additional workflow patterns.
-
-Start by building a single agent for a focused task. Once you're comfortable, orchestrate multiple agents into workflows. You'll find that agents offer a powerful, intuitive way to build sophisticated AI applications in Java.
+**P.S.** Thanks to Mario Fusco for helping me out on this issue.
