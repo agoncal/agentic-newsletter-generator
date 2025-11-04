@@ -17,6 +17,9 @@
   <properties>
     <!-- LangChain4j -->
     <langchain4j.version>1.8.0</langchain4j.version>
+    <!-- Other -->
+    <dotenv.version>3.2.0</dotenv.version>
+    <tinylog.version>2.7.0</tinylog.version>
     <!-- Plugins -->
     <compiler-plugin.version>3.14.1</compiler-plugin.version>
     <!-- Project -->
@@ -49,6 +52,21 @@
     <dependency>
       <groupId>dev.langchain4j</groupId>
       <artifactId>langchain4j</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.github.cdimascio</groupId>
+      <artifactId>dotenv-java</artifactId>
+      <version>${dotenv.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.tinylog</groupId>
+      <artifactId>tinylog-impl</artifactId>
+      <version>${tinylog.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.tinylog</groupId>
+      <artifactId>slf4j-tinylog</artifactId>
+      <version>${tinylog.version}</version>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
