@@ -1,45 +1,45 @@
 {
-    "model": "agent-release-writer-model",
-    "messages": [
-        {
-            "role": "user",
-            "content": "What are the last 3 tags of the LangChain4j repository at https://github.com/langchain4j/langchain4j?"
-        }
-    ],
-    "temperature": 1.0,
-    "stream": false,
-    "tools": [
-        {
-            "type": "function",
-            "function": {
-                "name": "list_tags",
-                "description": "List git tags in a GitHub repository",
-                "parameters": {
-                    "type": "object",
-                    "properties": {
-                        "owner": {
-                            "type": "string",
-                            "description": "Repository owner"
-                        },
-                        "page": {
-                            "type": "number",
-                            "description": "Page number for pagination (min 1)"
-                        },
-                        "perPage": {
-                            "type": "number",
-                            "description": "Results per page for pagination (min 1, max 100)"
-                        },
-                        "repo": {
-                            "type": "string",
-                            "description": "Repository name"
-                        }
-                    },
-                    "required": [
-                        "owner",
-                        "repo"
-                    ]
-                }
+  "model": "agent-release-writer-model",
+  "messages": [
+    {
+      "role": "user",
+      "content": "What are the last 3 tags of the LangChain4j repository at https://github.com/langchain4j/langchain4j?"
+    }
+  ],
+  "temperature": 1.0,
+  "stream": false,
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "list_tags",
+        "description": "List git tags in a GitHub repository",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "owner": {
+              "type": "string",
+              "description": "Repository owner"
+            },
+            "page": {
+              "type": "number",
+              "description": "Page number for pagination (min 1)"
+            },
+            "perPage": {
+              "type": "number",
+              "description": "Results per page for pagination (min 1, max 100)"
+            },
+            "repo": {
+              "type": "string",
+              "description": "Repository name"
             }
+          },
+          "required": [
+            "owner",
+            "repo"
+          ]
         }
-    ]
+      }
+    }
+  ]
 }

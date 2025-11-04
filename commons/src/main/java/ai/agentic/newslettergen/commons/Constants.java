@@ -2,7 +2,11 @@ package ai.agentic.newslettergen.commons;
 
 public class Constants {
 
-    // Azure AI Foundry
+    // System properties
+    static {
+        System.setProperty("org.slf4j.simpleLogger.defaultLogLevel", "info");
+    }
+
     public static final String AZURE_AI_FOUNDRY_KEY = System.getenv("AZURE_AI_FOUNDRY_KEY");
     public static final String AZURE_AI_FOUNDRY_ENDPOINT = System.getenv("AZURE_AI_FOUNDRY_ENDPOINT");
 

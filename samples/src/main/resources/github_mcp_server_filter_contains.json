@@ -1,103 +1,103 @@
 {
-    "model": "agent-release-writer-model",
-    "messages": [
-        {
-            "role": "user",
-            "content": "What are the last 3 tags of the LangChain4j repository at https://github.com/langchain4j/langchain4j?"
+  "model": "agent-release-writer-model",
+  "messages": [
+    {
+      "role": "user",
+      "content": "What are the last 3 tags of the LangChain4j repository at https://github.com/langchain4j/langchain4j?"
+    }
+  ],
+  "temperature": 1.0,
+  "stream": false,
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "list_tags",
+        "description": "List git tags in a GitHub repository",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "owner": {
+              "type": "string",
+              "description": "Repository owner"
+            },
+            "page": {
+              "type": "number",
+              "description": "Page number for pagination (min 1)"
+            },
+            "perPage": {
+              "type": "number",
+              "description": "Results per page for pagination (min 1, max 100)"
+            },
+            "repo": {
+              "type": "string",
+              "description": "Repository name"
+            }
+          },
+          "required": [
+            "owner",
+            "repo"
+          ]
         }
-    ],
-    "temperature": 1.0,
-    "stream": false,
-    "tools": [
-        {
-            "type": "function",
-            "function": {
-                "name": "list_tags",
-                "description": "List git tags in a GitHub repository",
-                "parameters": {
-                    "type": "object",
-                    "properties": {
-                        "owner": {
-                            "type": "string",
-                            "description": "Repository owner"
-                        },
-                        "page": {
-                            "type": "number",
-                            "description": "Page number for pagination (min 1)"
-                        },
-                        "perPage": {
-                            "type": "number",
-                            "description": "Results per page for pagination (min 1, max 100)"
-                        },
-                        "repo": {
-                            "type": "string",
-                            "description": "Repository name"
-                        }
-                    },
-                    "required": [
-                        "owner",
-                        "repo"
-                    ]
-                }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_release_by_tag",
+        "description": "Get a specific release by its tag name in a GitHub repository",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "owner": {
+              "type": "string",
+              "description": "Repository owner"
+            },
+            "repo": {
+              "type": "string",
+              "description": "Repository name"
+            },
+            "tag": {
+              "type": "string",
+              "description": "Tag name (e.g., 'v1.0.0')"
             }
-        },
-        {
-            "type": "function",
-            "function": {
-                "name": "get_release_by_tag",
-                "description": "Get a specific release by its tag name in a GitHub repository",
-                "parameters": {
-                    "type": "object",
-                    "properties": {
-                        "owner": {
-                            "type": "string",
-                            "description": "Repository owner"
-                        },
-                        "repo": {
-                            "type": "string",
-                            "description": "Repository name"
-                        },
-                        "tag": {
-                            "type": "string",
-                            "description": "Tag name (e.g., 'v1.0.0')"
-                        }
-                    },
-                    "required": [
-                        "owner",
-                        "repo",
-                        "tag"
-                    ]
-                }
-            }
-        },
-        {
-            "type": "function",
-            "function": {
-                "name": "get_tag",
-                "description": "Get details about a specific git tag in a GitHub repository",
-                "parameters": {
-                    "type": "object",
-                    "properties": {
-                        "owner": {
-                            "type": "string",
-                            "description": "Repository owner"
-                        },
-                        "repo": {
-                            "type": "string",
-                            "description": "Repository name"
-                        },
-                        "tag": {
-                            "type": "string",
-                            "description": "Tag name"
-                        }
-                    },
-                    "required": [
-                        "owner",
-                        "repo",
-                        "tag"
-                    ]
-                }
-            }
+          },
+          "required": [
+            "owner",
+            "repo",
+            "tag"
+          ]
         }
-    ]
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_tag",
+        "description": "Get details about a specific git tag in a GitHub repository",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "owner": {
+              "type": "string",
+              "description": "Repository owner"
+            },
+            "repo": {
+              "type": "string",
+              "description": "Repository name"
+            },
+            "tag": {
+              "type": "string",
+              "description": "Tag name"
+            }
+          },
+          "required": [
+            "owner",
+            "repo",
+            "tag"
+          ]
+        }
+      }
+    }
+  ]
 }

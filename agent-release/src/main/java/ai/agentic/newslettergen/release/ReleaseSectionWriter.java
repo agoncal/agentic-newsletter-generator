@@ -73,7 +73,7 @@ public interface ReleaseSectionWriter {
         * **Google Vertex AI**: [GOOGLE_FEATURES]
         * **Amazon Bedrock**: [AMAZON_FEATURES]
         * **OpenAI**: [OPENAI_FEATURES]
-
+        
         INSTRUCTIONS:
         * Replace all placeholder values [LIKE_THIS] with realistic current data
         * Complete Independence: Generate a self-contained section that needs no additional editing

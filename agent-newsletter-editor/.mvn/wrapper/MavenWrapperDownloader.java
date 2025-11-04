@@ -59,7 +59,7 @@ public final class MavenWrapperDownloader {
     }
 
     private static void downloadFileFromURL(URL wrapperUrl, Path wrapperJarPath)
-            throws IOException {
+        throws IOException {
         log(" - Downloading to: " + wrapperJarPath);
         if (System.getenv("MVNW_USERNAME") != null && System.getenv("MVNW_PASSWORD") != null) {
             final String username = System.getenv("MVNW_USERNAME");
@@ -72,9 +72,9 @@ public final class MavenWrapperDownloader {
             });
         }
         Path temp = wrapperJarPath
-                .getParent()
-                .resolve(wrapperJarPath.getFileName() + "."
-                        + Long.toUnsignedString(ThreadLocalRandom.current().nextLong()) + ".tmp");
+            .getParent()
+            .resolve(wrapperJarPath.getFileName() + "."
+                + Long.toUnsignedString(ThreadLocalRandom.current().nextLong()) + ".tmp");
         try (InputStream inStream = wrapperUrl.openStream()) {
             Files.copy(inStream, temp, StandardCopyOption.REPLACE_EXISTING);
             Files.move(temp, wrapperJarPath, StandardCopyOption.REPLACE_EXISTING);

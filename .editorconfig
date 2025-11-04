@@ -3,14 +3,19 @@ root = true
 [*]
 charset = utf-8
 end_of_line = lf
-indent_size = 2
+indent_size = 4
 indent_style = space
 insert_final_newline = false
 max_line_length = 160
-tab_width = 2
+tab_width = 4
 trim_trailing_whitespace = false
 
-[{*.xml,*.xsd,*.xsl,*.xslt}]
+[*.{xml,xsd,xsl,xslt,yaml,yml,json}]
 indent_size = 2
 tab_width = 2
 max_line_length = 512
+
+[*.md]
+# Disable max line length for Markdown (unlimited)
+max_line_length = off
+# (If a tool doesn't understand 'off', you can alternatively use 0)

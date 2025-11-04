@@ -1,6 +1,6 @@
 # Building Agents with LangChain4j
 
-An agent is a system that combines several capabilities to perform complex tasks autonomously. At its core, an agent merges a **system prompt**, a **user prompt**, a **model**, **memory**, retrieval-augmented generation (**RAG**), **tools**, and the Model Context Protocol (**MCP**) into a cohesive system. Think of an agent like a knowledgeable colleague who doesn't just answer questions—they think through problems, gather information from various sources, use external tools, and refine their approach based on feedback. 
+An agent is a system that combines several capabilities to perform complex tasks autonomously. At its core, an agent merges a **system prompt**, a **user prompt**, a **model**, **memory**, retrieval-augmented generation (**RAG**), **tools**, and the Model Context Protocol (**MCP**) into a cohesive system. Think of an agent like a knowledgeable colleague who doesn't just answer questions—they think through problems, gather information from various sources, use external tools, and refine their approach based on feedback.
 
 ## Agents in LangChain4j
 
@@ -12,7 +12,6 @@ LangChain4j provides the `langchain4j-agentic` module to build agentic systems. 
 This article focuses on the **declarative approach**, which offers a key advantage: it encapsulates the complete agent behavior—prompts, model configuration, tools, memory, and callbacks—into a single interface that can be packaged in a separate JAR file. This makes agents highly portable and reusable across different applications.
 
 An agent in LangChain4j is defined as an interface with a single method annotated with `@Agent`. LangChain4j provides rich annotations for declarative agent configuration:
-
 
 ## Building Declarative Agents
 
@@ -76,20 +75,22 @@ When using declarative annotations, agent building is automatic:
 ```java
 // Create the agent (configuration is pulled from annotations)
 ReleaseSectionWriter releaseWriter = AgenticServices
-    .agentBuilder(ReleaseSectionWriter.class)
-    .build();
+        .agentBuilder(ReleaseSectionWriter.class)
+        .build();
 
 // Invoke the agent
 Result<String> result = releaseWriter.write("1.2", "1.5");
 String releaseSection = result.content();
 
 // Access metadata
-System.out.println("Tokens used: " + result.tokenUsage());
+System.out.
+
+println("Tokens used: "+result.tokenUsage());
 ```
 
 ## Orchestrating Multiple Agents
 
-The real power of agents emerges when you combine multiple agents into a workflow. LangChain4j provides several orchestration patterns. For our newsletter example, we'll use a **sequential workflow**—where agents execute one after another, passing results between them.  The actual newsletter generator orchestrates five specialized agents in sequence. Here's the real implementation:
+The real power of agents emerges when you combine multiple agents into a workflow. LangChain4j provides several orchestration patterns. For our newsletter example, we'll use a **sequential workflow**—where agents execute one after another, passing results between them. The actual newsletter generator orchestrates five specialized agents in sequence. Here's the real implementation:
 
 ```java
 public class NewsletterGenerator {
@@ -166,7 +167,8 @@ Beyond sequential workflows, LangChain4j supports:
 
 ## Conclusion
 
-Agents transform how you build AI applications by allowing you to define focused agents that specialise in specific tasks and orchestrate them into workflows that solve complex problems, rather than stringing together individual LLM calls. LangChain4j's agent framework brings simplicity through Java interfaces with annotations, composability through builders that combine agents without complex wiring, flexibility to mix sequential, parallel, conditional, and autonomous patterns, observability to track agent behavior through callbacks and logging, and built-in error handling for safety. The newsletter generator example demonstrates these concepts in practice with five focused agents—each handling code samples, release analysis, reference gathering, statistics collection, or final editing—collaborating to produce a polished output. As your needs grow, you can add more agents and compose them with additional workflow patterns, whether that's a distribution agent to send emails or a quality assurance agent to verify content. Start by building a single agent for a focused task, then orchestrate multiple agents into workflows—you'll find that agents offer a powerful, intuitive way to build sophisticated AI applications in Java.
+Agents transform how you build AI applications by allowing you to define focused agents that specialise in specific tasks and orchestrate them into workflows that solve complex problems, rather than stringing together individual LLM calls. LangChain4j's agent framework brings simplicity through Java interfaces with annotations, composability through builders that combine agents without complex wiring, flexibility to mix sequential, parallel, conditional, and autonomous patterns, observability to track agent behavior through callbacks and logging, and built-in error handling for safety. The newsletter generator example demonstrates these concepts in practice with five focused agents—each handling code samples, release analysis, reference gathering, statistics collection, or final editing—collaborating to produce a polished output. As your needs grow, you can add more agents and compose them with additional workflow patterns, whether that's a distribution agent to send emails or a
+quality assurance agent to verify content. Start by building a single agent for a focused task, then orchestrate multiple agents into workflows—you'll find that agents offer a powerful, intuitive way to build sophisticated AI applications in Java.
 
 ---
 

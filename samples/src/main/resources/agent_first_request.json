@@ -1,530 +1,530 @@
 {
-    "model": "agent-release-writer-model",
-    "messages": [
-        {
-            "role": "user",
-            "content": "You are a specialized release analysis agent for LangChain4j newsletter creation. Your role is to generate a complete, standalone \"What's New Since the Last Newsletter?\" section that covers recent LangChain4j developments from version 1.2 to version 1.5. Base your work on the LangChain4j release notes located in the LangChain4j GitHub repository at https://github.com/langchain4j/langchain4j.\n\nGenerate a complete release section with the following structure and content:\n\n## What's New Since the Last Newsletter?\n\n[WRITE_AN_INTRODUCTION]\n\n* **[FEATURE_1]**: [DESCRIPTION_1]\n* **[FEATURE_2]**: [DESCRIPTION_2]\n* **[FEATURE_3]**: [DESCRIPTION_3]\n* **[FEATURE_4]**: [DESCRIPTION_4]\n* **[FEATURE_5]**: [DESCRIPTION_5]\n\n### Release Pace\n\n[WRITE_AN_INTRODUCTION]\n\n* [[VERSION_1]](https://github.com/langchain4j/langchain4j/releases/tag/[VERSION_1]) released in [MONTH_YEAR_1]\n* [[VERSION_2]](https://github.com/langchain4j/langchain4j/releases/tag/[VERSION_2]) released in [MONTH_YEAR_2]\n* [[VERSION_3]](https://github.com/langchain4j/langchain4j/releases/tag/[VERSION_3]) released in [MONTH_YEAR_3]\n\n### Azure AI Support\n\nAzure support continues to be a priority with several Microsoft contributors actively improving the integration. Recent Azure AI enhancements include:\n\n* [AZURE_FEATURE_1]\n* [AZURE_FEATURE_2]\n* [AZURE_FEATURE_3]\n* [AZURE_FEATURE_4]\n\n\n### Other Models Support\n\nOther major model providers have also significantly invested in enhancing their LangChain4j integrations.\n* **Google Vertex AI**: [GOOGLE_FEATURES]\n* **Amazon Bedrock**: [AMAZON_FEATURES]\n* **OpenAI**: [OPENAI_FEATURES]\n\nINSTRUCTIONS:\n* Replace all placeholder values [LIKE_THIS] with realistic current data\n* Complete Independence: Generate a self-contained section that needs no additional editing\n* Version Coverage: Analyze changes from 1.2 to 1.5\n* Feature Focus: Highlight the most significant new features and improvements\n* Release Tracking: Include recent version releases with proper GitHub links\n* Provider Coverage: Cover major AI model provider integrations and updates\n* Proper Formatting: Use correct Markdown syntax for all headers and links\n\nEDITORIAL GUIDELINES:\n* New Features: Focus on the most impactful additions and changes\n* Release History: Include 8-10 recent releases with proper linking\n* Azure Coverage: Detailed Azure AI integration improvements and statistics\n* Provider Updates: Cover Google, Amazon, OpenAI, and other major providers\n* Breaking Changes: Mention any significant API changes or migrations\n* Performance Improvements: Highlight optimization and enhancement work\n* Community Impact: Include metrics about issue resolution and PR activity\n\nOUTPUT STRUCTURE:\n* Start with \"What's New\" section highlighting major developments\n* Include \"Release Pace\" section with chronological version history\n* Add \"Azure AI Support\" section with detailed Azure integration updates\n* Include \"Other Models Support\" section covering additional providers\n* Ensure all sections flow logically and provide comprehensive coverage\n\n**TONE:** Informative, comprehensive, and focused on providing valuable insights into LangChain4j development progress for Java developers.\n\nGenerate the complete release section now, ensuring it's ready for direct integration into the newsletter:\n"
+  "model": "agent-release-writer-model",
+  "messages": [
+    {
+      "role": "user",
+      "content": "You are a specialized release analysis agent for LangChain4j newsletter creation. Your role is to generate a complete, standalone \"What's New Since the Last Newsletter?\" section that covers recent LangChain4j developments from version 1.2 to version 1.5. Base your work on the LangChain4j release notes located in the LangChain4j GitHub repository at https://github.com/langchain4j/langchain4j.\n\nGenerate a complete release section with the following structure and content:\n\n## What's New Since the Last Newsletter?\n\n[WRITE_AN_INTRODUCTION]\n\n* **[FEATURE_1]**: [DESCRIPTION_1]\n* **[FEATURE_2]**: [DESCRIPTION_2]\n* **[FEATURE_3]**: [DESCRIPTION_3]\n* **[FEATURE_4]**: [DESCRIPTION_4]\n* **[FEATURE_5]**: [DESCRIPTION_5]\n\n### Release Pace\n\n[WRITE_AN_INTRODUCTION]\n\n* [[VERSION_1]](https://github.com/langchain4j/langchain4j/releases/tag/[VERSION_1]) released in [MONTH_YEAR_1]\n* [[VERSION_2]](https://github.com/langchain4j/langchain4j/releases/tag/[VERSION_2]) released in [MONTH_YEAR_2]\n* [[VERSION_3]](https://github.com/langchain4j/langchain4j/releases/tag/[VERSION_3]) released in [MONTH_YEAR_3]\n\n### Azure AI Support\n\nAzure support continues to be a priority with several Microsoft contributors actively improving the integration. Recent Azure AI enhancements include:\n\n* [AZURE_FEATURE_1]\n* [AZURE_FEATURE_2]\n* [AZURE_FEATURE_3]\n* [AZURE_FEATURE_4]\n\n\n### Other Models Support\n\nOther major model providers have also significantly invested in enhancing their LangChain4j integrations.\n* **Google Vertex AI**: [GOOGLE_FEATURES]\n* **Amazon Bedrock**: [AMAZON_FEATURES]\n* **OpenAI**: [OPENAI_FEATURES]\n\nINSTRUCTIONS:\n* Replace all placeholder values [LIKE_THIS] with realistic current data\n* Complete Independence: Generate a self-contained section that needs no additional editing\n* Version Coverage: Analyze changes from 1.2 to 1.5\n* Feature Focus: Highlight the most significant new features and improvements\n* Release Tracking: Include recent version releases with proper GitHub links\n* Provider Coverage: Cover major AI model provider integrations and updates\n* Proper Formatting: Use correct Markdown syntax for all headers and links\n\nEDITORIAL GUIDELINES:\n* New Features: Focus on the most impactful additions and changes\n* Release History: Include 8-10 recent releases with proper linking\n* Azure Coverage: Detailed Azure AI integration improvements and statistics\n* Provider Updates: Cover Google, Amazon, OpenAI, and other major providers\n* Breaking Changes: Mention any significant API changes or migrations\n* Performance Improvements: Highlight optimization and enhancement work\n* Community Impact: Include metrics about issue resolution and PR activity\n\nOUTPUT STRUCTURE:\n* Start with \"What's New\" section highlighting major developments\n* Include \"Release Pace\" section with chronological version history\n* Add \"Azure AI Support\" section with detailed Azure integration updates\n* Include \"Other Models Support\" section covering additional providers\n* Ensure all sections flow logically and provide comprehensive coverage\n\n**TONE:** Informative, comprehensive, and focused on providing valuable insights into LangChain4j development progress for Java developers.\n\nGenerate the complete release section now, ensuring it's ready for direct integration into the newsletter:\n"
+    }
+  ],
+  "temperature": 1.0,
+  "stream": false,
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "list_branches",
+        "description": "List branches in a GitHub repository",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "owner": {
+              "type": "string",
+              "description": "Repository owner"
+            },
+            "page": {
+              "type": "number",
+              "description": "Page number for pagination (min 1)"
+            },
+            "perPage": {
+              "type": "number",
+              "description": "Results per page for pagination (min 1, max 100)"
+            },
+            "repo": {
+              "type": "string",
+              "description": "Repository name"
+            }
+          },
+          "required": [
+            "owner",
+            "repo"
+          ]
         }
-    ],
-    "temperature": 1.0,
-    "stream": false,
-    "tools": [
-        {
-            "type": "function",
-            "function": {
-                "name": "list_branches",
-                "description": "List branches in a GitHub repository",
-                "parameters": {
-                    "type": "object",
-                    "properties": {
-                        "owner": {
-                            "type": "string",
-                            "description": "Repository owner"
-                        },
-                        "page": {
-                            "type": "number",
-                            "description": "Page number for pagination (min 1)"
-                        },
-                        "perPage": {
-                            "type": "number",
-                            "description": "Results per page for pagination (min 1, max 100)"
-                        },
-                        "repo": {
-                            "type": "string",
-                            "description": "Repository name"
-                        }
-                    },
-                    "required": [
-                        "owner",
-                        "repo"
-                    ]
-                }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "list_commits",
+        "description": "Get list of commits of a branch in a GitHub repository",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "owner": {
+              "type": "string",
+              "description": "Repository owner"
+            },
+            "page": {
+              "type": "number",
+              "description": "Page number for pagination (min 1)"
+            },
+            "perPage": {
+              "type": "number",
+              "description": "Results per page for pagination (min 1, max 100)"
+            },
+            "repo": {
+              "type": "string",
+              "description": "Repository name"
+            },
+            "sha": {
+              "type": "string",
+              "description": "SHA or Branch name"
             }
-        },
-        {
-            "type": "function",
-            "function": {
-                "name": "list_commits",
-                "description": "Get list of commits of a branch in a GitHub repository",
-                "parameters": {
-                    "type": "object",
-                    "properties": {
-                        "owner": {
-                            "type": "string",
-                            "description": "Repository owner"
-                        },
-                        "page": {
-                            "type": "number",
-                            "description": "Page number for pagination (min 1)"
-                        },
-                        "perPage": {
-                            "type": "number",
-                            "description": "Results per page for pagination (min 1, max 100)"
-                        },
-                        "repo": {
-                            "type": "string",
-                            "description": "Repository name"
-                        },
-                        "sha": {
-                            "type": "string",
-                            "description": "SHA or Branch name"
-                        }
-                    },
-                    "required": [
-                        "owner",
-                        "repo"
-                    ]
-                }
-            }
-        },
-        {
-            "type": "function",
-            "function": {
-                "name": "get_me",
-                "description": "Get details of the authenticated GitHub user. Use this when a request includes \"me\", \"my\". The output will not change unless the user changes their profile, so only call this once.",
-                "parameters": {
-                    "type": "object",
-                    "properties": {
-                        "reason": {
-                            "type": "string",
-                            "description": "Optional: the reason for requesting the user information"
-                        }
-                    },
-                    "required": []
-                }
-            }
-        },
-        {
-            "type": "function",
-            "function": {
-                "name": "search_repositories",
-                "description": "Search for GitHub repositories",
-                "parameters": {
-                    "type": "object",
-                    "properties": {
-                        "page": {
-                            "type": "number",
-                            "description": "Page number for pagination (min 1)"
-                        },
-                        "perPage": {
-                            "type": "number",
-                            "description": "Results per page for pagination (min 1, max 100)"
-                        },
-                        "query": {
-                            "type": "string",
-                            "description": "Search query"
-                        }
-                    },
-                    "required": [
-                        "query"
-                    ]
-                }
-            }
-        },
-        {
-            "type": "function",
-            "function": {
-                "name": "create_branch",
-                "description": "Create a new branch in a GitHub repository",
-                "parameters": {
-                    "type": "object",
-                    "properties": {
-                        "branch": {
-                            "type": "string",
-                            "description": "Name for new branch"
-                        },
-                        "from_branch": {
-                            "type": "string",
-                            "description": "Source branch (defaults to repo default)"
-                        },
-                        "owner": {
-                            "type": "string",
-                            "description": "Repository owner"
-                        },
-                        "repo": {
-                            "type": "string",
-                            "description": "Repository name"
-                        }
-                    },
-                    "required": [
-                        "owner",
-                        "repo",
-                        "branch"
-                    ]
-                }
-            }
-        },
-        {
-            "type": "function",
-            "function": {
-                "name": "get_file_contents",
-                "description": "Get the contents of a file or directory from a GitHub repository",
-                "parameters": {
-                    "type": "object",
-                    "properties": {
-                        "branch": {
-                            "type": "string",
-                            "description": "Branch to get contents from"
-                        },
-                        "owner": {
-                            "type": "string",
-                            "description": "Repository owner (username or organization)"
-                        },
-                        "path": {
-                            "type": "string",
-                            "description": "Path to file/directory"
-                        },
-                        "repo": {
-                            "type": "string",
-                            "description": "Repository name"
-                        }
-                    },
-                    "required": [
-                        "owner",
-                        "repo",
-                        "path"
-                    ]
-                }
-            }
-        },
-        {
-            "type": "function",
-            "function": {
-                "name": "get_commit",
-                "description": "Get details for a commit from a GitHub repository",
-                "parameters": {
-                    "type": "object",
-                    "properties": {
-                        "owner": {
-                            "type": "string",
-                            "description": "Repository owner"
-                        },
-                        "page": {
-                            "type": "number",
-                            "description": "Page number for pagination (min 1)"
-                        },
-                        "perPage": {
-                            "type": "number",
-                            "description": "Results per page for pagination (min 1, max 100)"
-                        },
-                        "repo": {
-                            "type": "string",
-                            "description": "Repository name"
-                        },
-                        "sha": {
-                            "type": "string",
-                            "description": "Commit SHA, branch name, or tag name"
-                        }
-                    },
-                    "required": [
-                        "owner",
-                        "repo",
-                        "sha"
-                    ]
-                }
-            }
-        },
-        {
-            "type": "function",
-            "function": {
-                "name": "delete_file",
-                "description": "Delete a file from a GitHub repository",
-                "parameters": {
-                    "type": "object",
-                    "properties": {
-                        "branch": {
-                            "type": "string",
-                            "description": "Branch to delete the file from"
-                        },
-                        "message": {
-                            "type": "string",
-                            "description": "Commit message"
-                        },
-                        "owner": {
-                            "type": "string",
-                            "description": "Repository owner (username or organization)"
-                        },
-                        "path": {
-                            "type": "string",
-                            "description": "Path to the file to delete"
-                        },
-                        "repo": {
-                            "type": "string",
-                            "description": "Repository name"
-                        }
-                    },
-                    "required": [
-                        "owner",
-                        "repo",
-                        "path",
-                        "message",
-                        "branch"
-                    ]
-                }
-            }
-        },
-        {
-            "type": "function",
-            "function": {
-                "name": "create_repository",
-                "description": "Create a new GitHub repository in your account",
-                "parameters": {
-                    "type": "object",
-                    "properties": {
-                        "autoInit": {
-                            "type": "boolean",
-                            "description": "Initialize with README"
-                        },
-                        "description": {
-                            "type": "string",
-                            "description": "Repository description"
-                        },
-                        "name": {
-                            "type": "string",
-                            "description": "Repository name"
-                        },
-                        "private": {
-                            "type": "boolean",
-                            "description": "Whether repo should be private"
-                        }
-                    },
-                    "required": [
-                        "name"
-                    ]
-                }
-            }
-        },
-        {
-            "type": "function",
-            "function": {
-                "name": "fork_repository",
-                "description": "Fork a GitHub repository to your account or specified organization",
-                "parameters": {
-                    "type": "object",
-                    "properties": {
-                        "organization": {
-                            "type": "string",
-                            "description": "Organization to fork to"
-                        },
-                        "owner": {
-                            "type": "string",
-                            "description": "Repository owner"
-                        },
-                        "repo": {
-                            "type": "string",
-                            "description": "Repository name"
-                        }
-                    },
-                    "required": [
-                        "owner",
-                        "repo"
-                    ]
-                }
-            }
-        },
-        {
-            "type": "function",
-            "function": {
-                "name": "create_or_update_file",
-                "description": "Create or update a single file in a GitHub repository. If updating, you must provide the SHA of the file you want to update.",
-                "parameters": {
-                    "type": "object",
-                    "properties": {
-                        "branch": {
-                            "type": "string",
-                            "description": "Branch to create/update the file in"
-                        },
-                        "content": {
-                            "type": "string",
-                            "description": "Content of the file"
-                        },
-                        "message": {
-                            "type": "string",
-                            "description": "Commit message"
-                        },
-                        "owner": {
-                            "type": "string",
-                            "description": "Repository owner (username or organization)"
-                        },
-                        "path": {
-                            "type": "string",
-                            "description": "Path where to create/update the file"
-                        },
-                        "repo": {
-                            "type": "string",
-                            "description": "Repository name"
-                        },
-                        "sha": {
-                            "type": "string",
-                            "description": "SHA of file being replaced (for updates)"
-                        }
-                    },
-                    "required": [
-                        "owner",
-                        "repo",
-                        "path",
-                        "content",
-                        "message",
-                        "branch"
-                    ]
-                }
-            }
-        },
-        {
-            "type": "function",
-            "function": {
-                "name": "search_code",
-                "description": "Search for code across GitHub repositories",
-                "parameters": {
-                    "type": "object",
-                    "properties": {
-                        "order": {
-                            "type": "string",
-                            "description": "Sort order",
-                            "enum": [
-                                "asc",
-                                "desc"
-                            ]
-                        },
-                        "page": {
-                            "type": "number",
-                            "description": "Page number for pagination (min 1)"
-                        },
-                        "perPage": {
-                            "type": "number",
-                            "description": "Results per page for pagination (min 1, max 100)"
-                        },
-                        "q": {
-                            "type": "string",
-                            "description": "Search query using GitHub code search syntax"
-                        },
-                        "sort": {
-                            "type": "string",
-                            "description": "Sort field ('indexed' only)"
-                        }
-                    },
-                    "required": [
-                        "q"
-                    ]
-                }
-            }
-        },
-        {
-            "type": "function",
-            "function": {
-                "name": "list_tags",
-                "description": "List git tags in a GitHub repository",
-                "parameters": {
-                    "type": "object",
-                    "properties": {
-                        "owner": {
-                            "type": "string",
-                            "description": "Repository owner"
-                        },
-                        "page": {
-                            "type": "number",
-                            "description": "Page number for pagination (min 1)"
-                        },
-                        "perPage": {
-                            "type": "number",
-                            "description": "Results per page for pagination (min 1, max 100)"
-                        },
-                        "repo": {
-                            "type": "string",
-                            "description": "Repository name"
-                        }
-                    },
-                    "required": [
-                        "owner",
-                        "repo"
-                    ]
-                }
-            }
-        },
-        {
-            "type": "function",
-            "function": {
-                "name": "push_files",
-                "description": "Push multiple files to a GitHub repository in a single commit",
-                "parameters": {
-                    "type": "object",
-                    "properties": {
-                        "branch": {
-                            "type": "string",
-                            "description": "Branch to push to"
-                        },
-                        "files": {
-                            "type": "array",
-                            "description": "Array of file objects to push, each object with path (string) and content (string)",
-                            "items": {
-                                "type": "object",
-                                "properties": {
-                                    "content": {
-                                        "type": "string",
-                                        "description": "file content"
-                                    },
-                                    "path": {
-                                        "type": "string",
-                                        "description": "path to the file"
-                                    }
-                                },
-                                "required": [
-                                    "path",
-                                    "content"
-                                ]
-                            }
-                        },
-                        "message": {
-                            "type": "string",
-                            "description": "Commit message"
-                        },
-                        "owner": {
-                            "type": "string",
-                            "description": "Repository owner"
-                        },
-                        "repo": {
-                            "type": "string",
-                            "description": "Repository name"
-                        }
-                    },
-                    "required": [
-                        "owner",
-                        "repo",
-                        "branch",
-                        "files",
-                        "message"
-                    ]
-                }
-            }
-        },
-        {
-            "type": "function",
-            "function": {
-                "name": "get_tag",
-                "description": "Get details about a specific git tag in a GitHub repository",
-                "parameters": {
-                    "type": "object",
-                    "properties": {
-                        "owner": {
-                            "type": "string",
-                            "description": "Repository owner"
-                        },
-                        "repo": {
-                            "type": "string",
-                            "description": "Repository name"
-                        },
-                        "tag": {
-                            "type": "string",
-                            "description": "Tag name"
-                        }
-                    },
-                    "required": [
-                        "owner",
-                        "repo",
-                        "tag"
-                    ]
-                }
-            }
+          },
+          "required": [
+            "owner",
+            "repo"
+          ]
         }
-    ]
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_me",
+        "description": "Get details of the authenticated GitHub user. Use this when a request includes \"me\", \"my\". The output will not change unless the user changes their profile, so only call this once.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "reason": {
+              "type": "string",
+              "description": "Optional: the reason for requesting the user information"
+            }
+          },
+          "required": []
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "search_repositories",
+        "description": "Search for GitHub repositories",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "page": {
+              "type": "number",
+              "description": "Page number for pagination (min 1)"
+            },
+            "perPage": {
+              "type": "number",
+              "description": "Results per page for pagination (min 1, max 100)"
+            },
+            "query": {
+              "type": "string",
+              "description": "Search query"
+            }
+          },
+          "required": [
+            "query"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "create_branch",
+        "description": "Create a new branch in a GitHub repository",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "branch": {
+              "type": "string",
+              "description": "Name for new branch"
+            },
+            "from_branch": {
+              "type": "string",
+              "description": "Source branch (defaults to repo default)"
+            },
+            "owner": {
+              "type": "string",
+              "description": "Repository owner"
+            },
+            "repo": {
+              "type": "string",
+              "description": "Repository name"
+            }
+          },
+          "required": [
+            "owner",
+            "repo",
+            "branch"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_file_contents",
+        "description": "Get the contents of a file or directory from a GitHub repository",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "branch": {
+              "type": "string",
+              "description": "Branch to get contents from"
+            },
+            "owner": {
+              "type": "string",
+              "description": "Repository owner (username or organization)"
+            },
+            "path": {
+              "type": "string",
+              "description": "Path to file/directory"
+            },
+            "repo": {
+              "type": "string",
+              "description": "Repository name"
+            }
+          },
+          "required": [
+            "owner",
+            "repo",
+            "path"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_commit",
+        "description": "Get details for a commit from a GitHub repository",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "owner": {
+              "type": "string",
+              "description": "Repository owner"
+            },
+            "page": {
+              "type": "number",
+              "description": "Page number for pagination (min 1)"
+            },
+            "perPage": {
+              "type": "number",
+              "description": "Results per page for pagination (min 1, max 100)"
+            },
+            "repo": {
+              "type": "string",
+              "description": "Repository name"
+            },
+            "sha": {
+              "type": "string",
+              "description": "Commit SHA, branch name, or tag name"
+            }
+          },
+          "required": [
+            "owner",
+            "repo",
+            "sha"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "delete_file",
+        "description": "Delete a file from a GitHub repository",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "branch": {
+              "type": "string",
+              "description": "Branch to delete the file from"
+            },
+            "message": {
+              "type": "string",
+              "description": "Commit message"
+            },
+            "owner": {
+              "type": "string",
+              "description": "Repository owner (username or organization)"
+            },
+            "path": {
+              "type": "string",
+              "description": "Path to the file to delete"
+            },
+            "repo": {
+              "type": "string",
+              "description": "Repository name"
+            }
+          },
+          "required": [
+            "owner",
+            "repo",
+            "path",
+            "message",
+            "branch"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "create_repository",
+        "description": "Create a new GitHub repository in your account",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "autoInit": {
+              "type": "boolean",
+              "description": "Initialize with README"
+            },
+            "description": {
+              "type": "string",
+              "description": "Repository description"
+            },
+            "name": {
+              "type": "string",
+              "description": "Repository name"
+            },
+            "private": {
+              "type": "boolean",
+              "description": "Whether repo should be private"
+            }
+          },
+          "required": [
+            "name"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "fork_repository",
+        "description": "Fork a GitHub repository to your account or specified organization",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "organization": {
+              "type": "string",
+              "description": "Organization to fork to"
+            },
+            "owner": {
+              "type": "string",
+              "description": "Repository owner"
+            },
+            "repo": {
+              "type": "string",
+              "description": "Repository name"
+            }
+          },
+          "required": [
+            "owner",
+            "repo"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "create_or_update_file",
+        "description": "Create or update a single file in a GitHub repository. If updating, you must provide the SHA of the file you want to update.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "branch": {
+              "type": "string",
+              "description": "Branch to create/update the file in"
+            },
+            "content": {
+              "type": "string",
+              "description": "Content of the file"
+            },
+            "message": {
+              "type": "string",
+              "description": "Commit message"
+            },
+            "owner": {
+              "type": "string",
+              "description": "Repository owner (username or organization)"
+            },
+            "path": {
+              "type": "string",
+              "description": "Path where to create/update the file"
+            },
+            "repo": {
+              "type": "string",
+              "description": "Repository name"
+            },
+            "sha": {
+              "type": "string",
+              "description": "SHA of file being replaced (for updates)"
+            }
+          },
+          "required": [
+            "owner",
+            "repo",
+            "path",
+            "content",
+            "message",
+            "branch"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "search_code",
+        "description": "Search for code across GitHub repositories",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "order": {
+              "type": "string",
+              "description": "Sort order",
+              "enum": [
+                "asc",
+                "desc"
+              ]
+            },
+            "page": {
+              "type": "number",
+              "description": "Page number for pagination (min 1)"
+            },
+            "perPage": {
+              "type": "number",
+              "description": "Results per page for pagination (min 1, max 100)"
+            },
+            "q": {
+              "type": "string",
+              "description": "Search query using GitHub code search syntax"
+            },
+            "sort": {
+              "type": "string",
+              "description": "Sort field ('indexed' only)"
+            }
+          },
+          "required": [
+            "q"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "list_tags",
+        "description": "List git tags in a GitHub repository",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "owner": {
+              "type": "string",
+              "description": "Repository owner"
+            },
+            "page": {
+              "type": "number",
+              "description": "Page number for pagination (min 1)"
+            },
+            "perPage": {
+              "type": "number",
+              "description": "Results per page for pagination (min 1, max 100)"
+            },
+            "repo": {
+              "type": "string",
+              "description": "Repository name"
+            }
+          },
+          "required": [
+            "owner",
+            "repo"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "push_files",
+        "description": "Push multiple files to a GitHub repository in a single commit",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "branch": {
+              "type": "string",
+              "description": "Branch to push to"
+            },
+            "files": {
+              "type": "array",
+              "description": "Array of file objects to push, each object with path (string) and content (string)",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "content": {
+                    "type": "string",
+                    "description": "file content"
+                  },
+                  "path": {
+                    "type": "string",
+                    "description": "path to the file"
+                  }
+                },
+                "required": [
+                  "path",
+                  "content"
+                ]
+              }
+            },
+            "message": {
+              "type": "string",
+              "description": "Commit message"
+            },
+            "owner": {
+              "type": "string",
+              "description": "Repository owner"
+            },
+            "repo": {
+              "type": "string",
+              "description": "Repository name"
+            }
+          },
+          "required": [
+            "owner",
+            "repo",
+            "branch",
+            "files",
+            "message"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_tag",
+        "description": "Get details about a specific git tag in a GitHub repository",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "owner": {
+              "type": "string",
+              "description": "Repository owner"
+            },
+            "repo": {
+              "type": "string",
+              "description": "Repository name"
+            },
+            "tag": {
+              "type": "string",
+              "description": "Tag name"
+            }
+          },
+          "required": [
+            "owner",
+            "repo",
+            "tag"
+          ]
+        }
+      }
+    }
+  ]
 }
