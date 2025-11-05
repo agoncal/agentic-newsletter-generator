@@ -9,9 +9,9 @@
   </parent>
 
   <groupId>ai.agentic.newsletter.generator</groupId>
-  <artifactId>workflow-newsletter</artifactId>
+  <artifactId>newsletter-generator</artifactId>
   <version>1.0.0-SNAPSHOT</version>
-  <name>Newsletter Generator :: Workflow Newsletter</name>
+  <name>Newsletter Generator :: Newsletter Generator</name>
 
   <properties>
     <!-- LangChain4j -->
