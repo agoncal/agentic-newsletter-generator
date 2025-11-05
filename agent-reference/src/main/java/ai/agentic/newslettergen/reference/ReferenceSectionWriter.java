@@ -5,6 +5,8 @@ import static ai.agentic.newslettergen.commons.Constants.AZURE_AI_FOUNDRY_ENDPOI
 import static ai.agentic.newslettergen.commons.Constants.AZURE_AI_FOUNDRY_KEY;
 import static ai.agentic.newslettergen.commons.Constants.IS_LOGGING_ENABLED;
 import dev.langchain4j.agentic.Agent;
+import dev.langchain4j.agentic.agent.AgentRequest;
+import dev.langchain4j.agentic.declarative.BeforeAgentInvocation;
 import dev.langchain4j.agentic.declarative.ChatModelSupplier;
 import dev.langchain4j.model.chat.ChatModel;
 import dev.langchain4j.model.openai.OpenAiChatModel;
@@ -17,19 +19,7 @@ import java.time.Duration;
 public interface ReferenceSectionWriter {
 
     @UserMessage("""
-        You are a specialized reference curation agent for LangChain4j newsletter creation. Your role is to generate a complete, standalone "References" section that provides valuable learning resources and links for LangChain4j {{toLangchain4jVersion}} users.
-        
-        Generate a complete "References" section with the following structure and content:
-        
-        ## References
-        
-        [WRITE_AN_INTRODUCTION]
-        
-        * [TITLE_1](URL_1)
-        * [TITLE_2](URL_2)
-        * [TITLE_3](URL_3)
-        * [TITLE_4](URL_4)
-        * [TITLE_5](URL_5)
+        You are a specialized reference curation agent for the LangChain4j newsletter creation. Your role is to generate a complete, standalone "References" section that provides valuable learning resources and links for LangChain4j {{toLangchain4jVersion}} users.
         
         INSTRUCTIONS:
         * Replace all placeholder values [LIKE_THIS] with realistic current data
@@ -54,11 +44,19 @@ public interface ReferenceSectionWriter {
         * Additional learning resources and tutorials
         * Ensure all links are properly formatted and functional
         
-        **TONE:** Helpful, informative, and focused on providing immediate value to Java developers learning LangChain4j.
+        Generate the complete "References" section, ensuring it's ready for direct integration into the newsletter with the following structure:
         
-        Generate the complete "References" section now, ensuring it's ready for direct integration into the newsletter:
+        ## References
+        
+        [WRITE_AN_INTRODUCTION]
+        
+        * [TITLE_1](URL_1)
+        * [TITLE_2](URL_2)
+        * [TITLE_3](URL_3)
+        * [TITLE_4](URL_4)
+        * [TITLE_5](URL_5)
         """)
-    @Agent(outputKey = "referenceSection", description = "Curates comprehensive reference documentation, tutorials, learning resources, and community links related to LangChain4j to help newsletter readers discover valuable educational materials")
+    @Agent(outputKey = "referenceSection", name = "referenceSectionWriter", description = "Curates comprehensive reference documentation, tutorials, learning resources, and community links related to LangChain4j to help newsletter readers discover valuable educational materials")
     Result<String> write(@V("toLangchain4jVersion") String toLangchain4jVersion);
 
     @ChatModelSupplier
@@ -72,5 +70,10 @@ public interface ReferenceSectionWriter {
             .logRequests(IS_LOGGING_ENABLED)
             .logResponses(IS_LOGGING_ENABLED)
             .build();
+    }
+
+    @BeforeAgentInvocation
+    static void beforeInvocation(AgentRequest request) {
+        System.out.println("\n \u001B[32m  Invoking " + request.toString() + " \u001B[0m \n");
     }
 }

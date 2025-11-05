@@ -64,7 +64,7 @@ Compiles and formats all content from the specialized agents into a cohesive, we
 
 ### Environment Variables
 
-Before running the application, set the following environment variables:
+Before running the application, set the following environment variables (or in an `.env` file at the project root):
 
 ```bash
 # Azure AI Foundry configuration
@@ -180,6 +180,15 @@ Uses [GitHub MCP Server](https://github.com/github/github-mcp-server) via Model 
 - Release notes and changelog access
 - Documentation and code sample extraction
 - Community engagement analysis
+
+The Docker image is located at https://github.com/github/github-mcp-server/pkgs/container/github-mcp-server.
+
+```bash
+docker run -i --rm \
+  -e GITHUB_PERSONAL_ACCESS_TOKEN=$GITHUB_PERSONAL_ACCESS_TOKEN \
+  -e GITHUB_TOOLSETS="all" \
+  ghcr.io/github/github-mcp-server
+```
 
 ## References
 

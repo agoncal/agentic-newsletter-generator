@@ -32,5 +32,6 @@ public class NewsletterGenerator {
         String newsletter = (String) newsletterGenerator.invoke(input);
 
         System.out.println(newsletter);
+        System.exit(0);
     }
 }

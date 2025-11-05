@@ -5,6 +5,8 @@ import static ai.agentic.newslettergen.commons.Constants.AZURE_AI_FOUNDRY_ENDPOI
 import static ai.agentic.newslettergen.commons.Constants.AZURE_AI_FOUNDRY_KEY;
 import static ai.agentic.newslettergen.commons.Constants.IS_LOGGING_ENABLED;
 import dev.langchain4j.agentic.Agent;
+import dev.langchain4j.agentic.agent.AgentRequest;
+import dev.langchain4j.agentic.declarative.BeforeAgentInvocation;
 import dev.langchain4j.agentic.declarative.ChatModelSupplier;
 import dev.langchain4j.model.chat.ChatModel;
 import dev.langchain4j.model.openai.OpenAiChatModel;
@@ -19,6 +21,26 @@ public interface NewsletterEditor {
         The current date is {{current_date}}
         
         You are a professional newsletter editor specializing in LangChain4j technology publications. Your role is to compile, edit, and format a comprehensive LangChain4j newsletter (from version {{fromLangchain4jVersion}} to version {{toLangchain4jVersion}}) by integrating content from specialized agents.
+        
+        INSTRUCTIONS:
+        * Follow the EXACT structure and Markdown formatting shown above
+        * Replace all placeholder values [LIKE_THIS] with realistic current data
+        * Maintain professional tone and accurate information
+        * Ensure all links are properly formatted
+        * Create compelling content that matches the established newsletter style
+        * Ensure the newsletter flows naturally and provides valuable information to Java developers
+        
+        EDITORIAL GUIDELINES:
+        * Integration: Seamlessly combine all sections into a cohesive narrative
+        * Consistency: Ensure uniform tone, style, and formatting throughout
+        * Deduplication: Remove any repeated information between sections
+        * Flow: Add smooth transitions and connecting text where needed
+        * Accuracy: Maintain factual accuracy and fix any inconsistencies
+        * Formatting: Ensure proper Markdown headers, links, and code blocks
+        * Completeness: Include current month/year in title and ensure all content is relevant
+        * Quality: Produce a polished, professional newsletter ready for distribution
+        
+        Generate a complete LangChain4j Newsletter with the following structure and content:
         
         # LangChain4j Newsletter – [CURRENT_MONTH] [CURRENT_YEAR]
         
@@ -43,30 +65,9 @@ public interface NewsletterEditor {
         
         {{referenceSection}}
         
-        INSTRUCTIONS:
-        * Follow the EXACT structure and Markdown formatting shown above
-        * Replace all placeholder values [LIKE_THIS] with realistic current data
-        * Maintain professional tone and accurate information
-        * Ensure all links are properly formatted
-        * Create compelling content that matches the established newsletter style
-        * Ensure the newsletter flows naturally and provides valuable information to Java developers
-        
-        EDITORIAL GUIDELINES:
-        * Integration: Seamlessly combine all sections into a cohesive narrative
-        * Consistency: Ensure uniform tone, style, and formatting throughout
-        * Deduplication: Remove any repeated information between sections
-        * Flow: Add smooth transitions and connecting text where needed
-        * Accuracy: Maintain factual accuracy and fix any inconsistencies
-        * Formatting: Ensure proper Markdown headers, links, and code blocks
-        * Completeness: Include current month/year in title and ensure all content is relevant
-        * Quality: Produce a polished, professional newsletter ready for distribution
         """)
-    @Agent(outputKey = "newsletter", description = "Compiles, edits, and formats the complete monthly newsletter by integrating content from all specialized agents, ensuring consistency, removing duplications, and producing a polished Markdown publication ready for distribution")
+    @Agent(outputKey = "newsletter", name = "newsletterEditor", description = "Compiles, edits, and formats the complete monthly newsletter by integrating content from all specialized agents, ensuring consistency, removing duplications, and producing a polished Markdown publication ready for distribution")
     String editAndCompileNewsletter(
-//        @V("statisticsSection") String statisticsSection,
-//        @V("releaseSection") String releaseSection,
-//        @V("referenceSection") String referenceSection,
-//        @V("codeSampleSection") String codeSampleSection,
         @V("fromLangchain4jVersion") String fromLangchain4jVersion,
         @V("toLangchain4jVersion") String toLangchain4jVersion
     );
@@ -82,5 +83,10 @@ public interface NewsletterEditor {
             .logRequests(IS_LOGGING_ENABLED)
             .logResponses(IS_LOGGING_ENABLED)
             .build();
+    }
+
+    @BeforeAgentInvocation
+    static void beforeInvocation(AgentRequest request) {
+        System.out.println("\n \u001B[32m  Invoking " + request.toString() + " \u001B[0m \n");
     }
 }

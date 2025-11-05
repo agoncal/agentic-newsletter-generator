@@ -5,6 +5,8 @@ import static ai.agentic.newslettergen.commons.Constants.AZURE_AI_FOUNDRY_ENDPOI
 import static ai.agentic.newslettergen.commons.Constants.AZURE_AI_FOUNDRY_KEY;
 import static ai.agentic.newslettergen.commons.Constants.IS_LOGGING_ENABLED;
 import dev.langchain4j.agentic.Agent;
+import dev.langchain4j.agentic.agent.AgentRequest;
+import dev.langchain4j.agentic.declarative.BeforeAgentInvocation;
 import dev.langchain4j.agentic.declarative.ChatModelSupplier;
 import dev.langchain4j.model.chat.ChatModel;
 import dev.langchain4j.model.openai.OpenAiChatModel;
@@ -17,17 +19,7 @@ import java.time.Duration;
 public interface CodeSampleSectionWriter {
 
     @UserMessage("""
-        You are a specialized Java code generation agent for LangChain4j newsletter creation. Your role is to generate a complete, standalone "Some Code" section that showcases practical Java code examples using LangChain4j {{toLangchain4jVersion}}.
-        
-        Generate a complete "Some Code" section with the following structure and content:
-        
-        ## Some Code
-        
-        WRITE_AN_INTRODUCTION]
-        
-        ```java
-        [COMPLETE_WORKING_JAVA_CODE_EXAMPLE]
-        ```
+        You are a specialized Java code generation agent for the LangChain4j newsletter creation. Your role is to generate a short, standalone "Some Code" section that showcases practical Java code examples using LangChain4j {{toLangchain4jVersion}}.
         
         INSTRUCTIONS:
         * Replace all placeholder values [LIKE_THIS] with realistic current data
@@ -48,9 +40,18 @@ public interface CodeSampleSectionWriter {
         * Use clear variable names and modern Java practices
         * TONE: Professional, educational, and immediately actionable for Java developers working with LangChain4j.
         
-        Generate the complete "Some Code" section now:
+        Generate the complete "Some Code" section, ensuring it's ready for direct integration into the newsletter with the following structure:
+        
+        ## Some Code
+        
+        [WRITE_AN_INTRODUCTION]
+        
+        ```java
+        [COMPLETE_WORKING_JAVA_CODE_EXAMPLE]
+        ```
+        
         """)
-    @Agent(outputKey = "codeSampleSection", description = "Generates a practical Java code example that demonstrates the latest LangChain4j features, best practices, and real-world usage patterns for newsletter readers")
+    @Agent(outputKey = "codeSampleSection", name = "codeSampleSectionWriter", description = "Generates a practical Java code example that demonstrates the latest LangChain4j features, best practices, and real-world usage patterns for newsletter readers")
     Result<String> write(@V("toLangchain4jVersion") String toLangchain4jVersion);
 
     @ChatModelSupplier
@@ -64,5 +65,10 @@ public interface CodeSampleSectionWriter {
             .logRequests(IS_LOGGING_ENABLED)
             .logResponses(IS_LOGGING_ENABLED)
             .build();
+    }
+
+    @BeforeAgentInvocation
+    static void beforeInvocation(AgentRequest request) {
+        System.out.println("\n \u001B[32m  Invoking " + request.toString() + " \u001B[0m \n");
     }
 }

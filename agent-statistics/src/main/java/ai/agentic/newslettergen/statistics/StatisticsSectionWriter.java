@@ -6,6 +6,8 @@ import static ai.agentic.newslettergen.commons.Constants.AZURE_AI_FOUNDRY_KEY;
 import static ai.agentic.newslettergen.commons.Constants.GITHUB_PERSONAL_ACCESS_TOKEN;
 import static ai.agentic.newslettergen.commons.Constants.IS_LOGGING_ENABLED;
 import dev.langchain4j.agentic.Agent;
+import dev.langchain4j.agentic.agent.AgentRequest;
+import dev.langchain4j.agentic.declarative.BeforeAgentInvocation;
 import dev.langchain4j.agentic.declarative.ChatModelSupplier;
 import dev.langchain4j.agentic.declarative.ToolProviderSupplier;
 import dev.langchain4j.mcp.McpToolProvider;
@@ -26,24 +28,7 @@ import java.util.List;
 public interface StatisticsSectionWriter {
 
     @UserMessage("""
-        You are a specialized statistics collection agent for LangChain4j newsletter creation. Your role is to generate a complete, standalone "Some Numbers" section that provides quantitative insights into LangChain4j {{toLangchain4jVersion}} project health and community engagement. Base your statistics on the LangChain4j GitHub repository located at https://github.com/langchain4j/langchain4j.
-        
-        Generate a complete statistics section with the following structure and content:
-        
-        ## Some Numbers
-        
-        [WRITE_AN_INTRODUCTION]
-        
-        * [LangChain4j main GitHub repository](https://github.com/langchain4j/langchain4j):
-          * GitHub repository created in May 2023
-          * [CURRENT_STARS]k stars, [WATCHING] watching, [FORKS]K forks
-          * [CONTRIBUTORS] contributors
-          * [CLOSED_ISSUES] closed issues, [CLOSED_PRS] closed Pull Requests
-          * Used by [USED_BY]K other repositories
-        * Integration:
-          * Supports [MODEL_PROVIDERS] model providers (Azure OpenAI, OpenAI, Amazon Bedrock…)
-          * Supports [EMBEDDING_STORES] embedding stores (Azure AI Search, Cassandra, MongoDB…)
-          * Integrates with [JAVA_RUNTIMES] Java runtimes (Quarkus, SpringBoot, Helidon, Micronaut)
+        You are a specialized statistics collection agent for the LangChain4j newsletter creation. Your role is to generate a complete, standalone "Some Numbers" section that provides quantitative insights into LangChain4j {{toLangchain4jVersion}} project health and community engagement. Base your statistics on the LangChain4j GitHub repository located at https://github.com/langchain4j/langchain4j.
         
         INSTRUCTIONS:
         * Replace all placeholder values [LIKE_THIS] with realistic current data
@@ -67,11 +52,24 @@ public interface StatisticsSectionWriter {
         * Focus on numbers that demonstrate project health and adoption
         * Ensure all metrics are properly formatted and linked
         
-        **TONE:** Factual, precise, and focused on providing quantitative insights into LangChain4j project success and community engagement.
+        Generate the complete "Some Numbers" section, ensuring it's ready for direct integration into the newsletter with the following structure:
         
-        Generate the complete statistics section now, ensuring it's ready for direct integration into the newsletter:
+        ## Some Numbers
+        
+        [WRITE_AN_INTRODUCTION]
+        
+        * [LangChain4j main GitHub repository](https://github.com/langchain4j/langchain4j):
+          * GitHub repository created in May 2023
+          * [CURRENT_STARS]k stars, [WATCHING] watching, [FORKS]K forks
+          * [CONTRIBUTORS] contributors
+          * [CLOSED_ISSUES] closed issues, [CLOSED_PRS] closed Pull Requests
+          * Used by [USED_BY]K other repositories
+        * Integration:
+          * Supports [MODEL_PROVIDERS] model providers (Azure OpenAI, OpenAI, Amazon Bedrock…)
+          * Supports [EMBEDDING_STORES] embedding stores (Azure AI Search, Cassandra, MongoDB…)
+          * Integrates with [JAVA_RUNTIMES] Java runtimes (Quarkus, SpringBoot, Helidon, Micronaut)
         """)
-    @Agent(outputKey = "statisticsSection", description = "Collects and analyzes GitHub repository metrics including stars, forks, contributors, issues, and pull requests to provide quantitative insights into LangChain4j project health and community engagement")
+    @Agent(outputKey = "statisticsSection", name = "statisticsSectionWriter", description = "Collects and analyzes GitHub repository metrics including stars, forks, contributors, issues, and pull requests to provide quantitative insights into LangChain4j project health and community engagement")
     Result<String> write(@V("toLangchain4jVersion") String toLangchain4jVersion);
 
     @ChatModelSupplier
@@ -91,10 +89,12 @@ public interface StatisticsSectionWriter {
     static ToolProvider statisticsSectionMCP() {
         McpTransport transport = new StdioMcpTransport.Builder()
             .command(List.of("/usr/local/bin/docker", "run",
+                "--rm",
+                "-i",
                 "-e", "GITHUB_PERSONAL_ACCESS_TOKEN=" + GITHUB_PERSONAL_ACCESS_TOKEN,
                 "-e", "GITHUB_TOOLSETS=repos",
                 "-e", "GITHUB_READ_ONLY=1",
-                "-i", "ghcr.io/github/github-mcp-server"))
+                "ghcr.io/github/github-mcp-server"))
             .logEvents(IS_LOGGING_ENABLED)
             .build();
 
@@ -105,6 +105,12 @@ public interface StatisticsSectionWriter {
 
         return McpToolProvider.builder()
             .mcpClients(mcpClient)
+            .filterToolNames("list_tags", "get_release_by_tag")
             .build();
+    }
+
+    @BeforeAgentInvocation
+    static void beforeInvocation(AgentRequest request) {
+        System.out.println("\n \u001B[32m  Invoking " + request.toString() + " \u001B[0m \n");
     }
 }
