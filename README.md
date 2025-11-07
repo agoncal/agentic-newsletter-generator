@@ -190,6 +190,12 @@ docker run -i --rm \
   ghcr.io/github/github-mcp-server
 ```
 
+Using the Docker Compose file you can run the MCP server locally:
+
+```bash
+docker compose -p vintagestore -f infrastructure/mcp-github.yml up -d
+```
+
 ## References
 
 * LangChain4j
