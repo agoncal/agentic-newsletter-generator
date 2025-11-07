@@ -50,7 +50,7 @@ public class InvokeGitHubMCPServer {
             .baseUrl(AZURE_AI_FOUNDRY_ENDPOINT)
             .modelName(AGENT_RELEASE_MODEL)
             .temperature(1.0)
-            .timeout(Duration.ofMinutes(1))
+            .timeout(Duration.ofMinutes(2))
             .logRequests(IS_LOGGING_ENABLED)
             .logResponses(IS_LOGGING_ENABLED)
             .build();

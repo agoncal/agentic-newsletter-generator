@@ -1,0 +1,52 @@
+{#include base.html}
+
+{#title}Newsletter Generated{/title}
+
+{#body}
+<div class="row">
+  <div class="col-12">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h1>Newsletter Generated</h1>
+      <a href="/newsletter" class="btn btn-primary">Generate Another</a>
+    </div>
+
+    <ul class="nav nav-tabs mb-3" id="tabs" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="rendered-tab" data-bs-toggle="tab" data-bs-target="#rendered" type="button" role="tab">
+          Rendered Markdown
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="raw-tab" data-bs-toggle="tab" data-bs-target="#raw" type="button" role="tab">
+          Raw Markdown
+        </button>
+      </li>
+    </ul>
+
+    <div class="tab-content">
+      <div class="tab-pane fade show active" id="rendered" role="tabpanel">
+        <div class="card">
+          <div class="card-body">
+            <div id="rendered-content"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-pane fade" id="raw" role="tabpanel">
+        <div class="card">
+          <div class="card-body">
+            <pre><code>{newsletter}</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const newsletter = `{newsletter}`;
+document.getElementById('rendered-content').innerHTML = marked.parse(newsletter);
+</script>
+
+{/body}
+{/include}

@@ -21,7 +21,7 @@ public class Constants {
     public static final String GITHUB_PERSONAL_ACCESS_TOKEN = getenv("GITHUB_PERSONAL_ACCESS_TOKEN");
 
     // LangChain4j
-    public static final boolean IS_LOGGING_ENABLED = false;
+    public static final boolean IS_LOGGING_ENABLED = Boolean.parseBoolean(getenv("IS_LOGGING_ENABLED"));
 
     private static String getenv(String propertyName) {
 
@@ -56,9 +56,8 @@ public class Constants {
             return propertyValue;
         }
 
-        Logger.error("ERROR: Missing environment variable:" + propertyName);
-        Logger.error("   Set it in your .env file or export it");
-        System.exit(1);
-        return null;
+        String errorMsg = "ERROR: Missing environment variable: " + propertyName + ". Set it in your .env file or export it";
+        Logger.error(errorMsg);
+        throw new IllegalStateException(errorMsg);
     }
 }

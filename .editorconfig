@@ -10,7 +10,7 @@ max_line_length = 160
 tab_width = 4
 trim_trailing_whitespace = false
 
-[*.{xml,xsd,xsl,xslt,yaml,yml,json}]
+[*.{xml,xsd,xsl,xslt,yaml,yml,json,htm,html}]
 indent_size = 2
 tab_width = 2
 max_line_length = 512
@@ -18,4 +18,3 @@ max_line_length = 512
 [*.md]
 # Disable max line length for Markdown (unlimited)
 max_line_length = off
-# (If a tool doesn't understand 'off', you can alternatively use 0)

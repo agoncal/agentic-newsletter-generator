@@ -1,0 +1,39 @@
+{#include base.html}
+
+{#title}Newsletter Generator{/title}
+
+{#body}
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <h1 class="text-center mb-4">LangChain4j Newsletter Generator</h1>
+
+    {#form uri:Application.generate}
+      <div class="mb-3">
+        <label for="fromLangchain4jVersion" class="form-label">From Version</label>
+        <input type="text"
+               class="form-control"
+               id="fromLangchain4jVersion"
+               name="fromLangchain4jVersion"
+               value="1.2"
+               required>
+      </div>
+
+      <div class="mb-3">
+        <label for="toLangchain4jVersion" class="form-label">To Version</label>
+        <input type="text"
+               class="form-control"
+               id="toLangchain4jVersion"
+               name="toLangchain4jVersion"
+               value="1.5"
+               required>
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100">
+        Generate Newsletter
+      </button>
+    {/form}
+  </div>
+</div>
+
+{/body}
+{/include}

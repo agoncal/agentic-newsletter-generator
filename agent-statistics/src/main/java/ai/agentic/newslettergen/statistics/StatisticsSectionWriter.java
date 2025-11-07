@@ -81,7 +81,7 @@ public interface StatisticsSectionWriter {
             .baseUrl(AZURE_AI_FOUNDRY_ENDPOINT)
             .modelName(AGENT_STATISTICS_MODEL)
             .temperature(1.0)
-            .timeout(Duration.ofMinutes(1))
+            .timeout(Duration.ofMinutes(2))
             .logRequests(IS_LOGGING_ENABLED)
             .logResponses(IS_LOGGING_ENABLED)
             .build();
@@ -113,11 +113,11 @@ public interface StatisticsSectionWriter {
 
     @BeforeAgentInvocation
     static void beforeInvocation(AgentRequest request) {
-        System.out.println("\n \u001B[32m  Invoking " + request.toString() + " \u001B[0m \n");
+        System.out.println("\u001B[32m  Invoking " + request.agentName() + " with request " + request + " \u001B[0m \n");
     }
 
     @AfterAgentInvocation
     static void afterInvocation(AgentResponse response) {
-        System.out.println("Invoked " + response.toString());
+        System.out.println("Invoked " + response.agentName() + " with request " + response);
     }
 }
