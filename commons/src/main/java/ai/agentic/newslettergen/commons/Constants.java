@@ -21,7 +21,7 @@ public class Constants {
     public static final String GITHUB_PERSONAL_ACCESS_TOKEN = getenv("GITHUB_PERSONAL_ACCESS_TOKEN");
 
     // LangChain4j
-    public static final boolean IS_LOGGING_ENABLED = true;
+    public static final boolean IS_LOGGING_ENABLED = false;
 
     private static String getenv(String propertyName) {
 

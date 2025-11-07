@@ -7,6 +7,8 @@ import static ai.agentic.newslettergen.commons.Constants.GITHUB_PERSONAL_ACCESS_
 import static ai.agentic.newslettergen.commons.Constants.IS_LOGGING_ENABLED;
 import dev.langchain4j.agentic.Agent;
 import dev.langchain4j.agentic.agent.AgentRequest;
+import dev.langchain4j.agentic.agent.AgentResponse;
+import dev.langchain4j.agentic.declarative.AfterAgentInvocation;
 import dev.langchain4j.agentic.declarative.BeforeAgentInvocation;
 import dev.langchain4j.agentic.declarative.ChatModelSupplier;
 import dev.langchain4j.agentic.declarative.ToolProviderSupplier;
@@ -145,5 +147,10 @@ public interface ReleaseSectionWriter {
     @BeforeAgentInvocation
     static void beforeInvocation(AgentRequest request) {
         System.out.println("\n \u001B[32m  Invoking " + request.toString() + " \u001B[0m \n");
+    }
+
+    @AfterAgentInvocation
+    static void afterInvocation(AgentResponse response) {
+        System.out.println("Invoked " + response.toString());
     }
 }

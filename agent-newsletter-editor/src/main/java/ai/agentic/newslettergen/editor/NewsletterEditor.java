@@ -6,10 +6,13 @@ import static ai.agentic.newslettergen.commons.Constants.AZURE_AI_FOUNDRY_KEY;
 import static ai.agentic.newslettergen.commons.Constants.IS_LOGGING_ENABLED;
 import dev.langchain4j.agentic.Agent;
 import dev.langchain4j.agentic.agent.AgentRequest;
+import dev.langchain4j.agentic.agent.AgentResponse;
+import dev.langchain4j.agentic.declarative.AfterAgentInvocation;
 import dev.langchain4j.agentic.declarative.BeforeAgentInvocation;
 import dev.langchain4j.agentic.declarative.ChatModelSupplier;
 import dev.langchain4j.model.chat.ChatModel;
 import dev.langchain4j.model.openai.OpenAiChatModel;
+import dev.langchain4j.service.Result;
 import dev.langchain4j.service.UserMessage;
 import dev.langchain4j.service.V;
 
@@ -67,9 +70,13 @@ public interface NewsletterEditor {
         
         """)
     @Agent(outputKey = "newsletter", name = "newsletterEditor", description = "Compiles, edits, and formats the complete monthly newsletter by integrating content from all specialized agents, ensuring consistency, removing duplications, and producing a polished Markdown publication ready for distribution")
-    String editAndCompileNewsletter(
+    Result<String> editAndCompileNewsletter(
         @V("fromLangchain4jVersion") String fromLangchain4jVersion,
-        @V("toLangchain4jVersion") String toLangchain4jVersion
+        @V("toLangchain4jVersion") String toLangchain4jVersion,
+        @V("statisticsSection") Result<String> statisticsSection,
+        @V("releaseSection") Result<String> releaseSection,
+        @V("codeSampleSection") Result<String> codeSampleSection,
+        @V("referenceSection") Result<String> referenceSection
     );
 
     @ChatModelSupplier
@@ -88,5 +95,10 @@ public interface NewsletterEditor {
     @BeforeAgentInvocation
     static void beforeInvocation(AgentRequest request) {
         System.out.println("\n \u001B[32m  Invoking " + request.toString() + " \u001B[0m \n");
+    }
+
+    @AfterAgentInvocation
+    static void afterInvocation(AgentResponse response) {
+        System.out.println("Invoked " + response.toString());
     }
 }
