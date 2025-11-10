@@ -20,7 +20,7 @@
     <langchain4j-community.version>1.8.0-beta15</langchain4j-community.version>
     <tinylog.version>2.7.0</tinylog.version>
     <!-- Plugins -->
-    <exec-plugin.version>3.5.1</exec-plugin.version>
+    <exec-plugin.version>3.6.2</exec-plugin.version>
     <!-- Project -->
     <maven.compiler.release>21</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
