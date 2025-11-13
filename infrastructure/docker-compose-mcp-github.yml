@@ -1,0 +1,7 @@
+services:
+  mcp-github:
+    image: ghcr.io/github/github-mcp-server:latest
+    ports:
+      - 8780:8780
+    environment:
+      - GITHUB_PERSONAL_ACCESS_TOKEN=$GITHUB_PERSONAL_ACCESS_TOKEN

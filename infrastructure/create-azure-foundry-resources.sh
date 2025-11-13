@@ -6,91 +6,11 @@
 # Check the resource providers that are installed with `az provider list --query "[?registrationState=='Registered'].{Namespace:namespace,State:registrationState}" --output table`
 # Register the CognitiveServices provider if it's not registered with `az provider register --namespace 'Microsoft.CognitiveServices'`
 
-
-printf "%s\n" "-----------------------------------"
-printf "%s\n" "Setting up environment variables..."
-printf "%s\n" "-----------------------------------"
-export UNIQUE_IDENTIFIER=${GITHUB_USER:-$(whoami)}
-export PROJECT="agenticnewsletter"
-export RESOURCE_GROUP="rg-$PROJECT"
-export LOCATION="swedencentral" # check https://learn.microsoft.com/azure/ai-foundry/reference/region-support
-export TAG="$PROJECT"
-export AZURE_AI_FOUNDRY_NAME="ai-$PROJECT"
-
-# Agent Code Sample Writer (writes Java code)
-export AGENT_CODE_SAMPLE="agent-code-sample-writer"
-export AGENT_CODE_SAMPLE_DEPLOYMENT="$AGENT_CODE_SAMPLE-model"
-export AGENT_CODE_SAMPLE_MODEL_FORMAT="OpenAI"
-export AGENT_CODE_SAMPLE_MODEL_NAME="o4-mini"
-export AGENT_CODE_SAMPLE_MODEL_VERSION="2025-04-16"
-export AGENT_CODE_SAMPLE_SKU_CAPACITY="10"
-export AGENT_CODE_SAMPLE_SKU_NAME="GlobalStandard"
-
-# Agent Reference Writer (searches the web)
-export AGENT_REFERENCE="agent-reference-writer"
-export AGENT_REFERENCE_DEPLOYMENT="$AGENT_REFERENCE-model"
-export AGENT_REFERENCE_MODEL_FORMAT="Microsoft"
-export AGENT_REFERENCE_MODEL_NAME="Phi-4"
-export AGENT_REFERENCE_MODEL_VERSION="7"
-export AGENT_REFERENCE_SKU_CAPACITY="1"
-export AGENT_REFERENCE_SKU_NAME="GlobalStandard"
-
-# Agent Release Writer (uses tools, needs summarization)
-export AGENT_RELEASE="agent-release-writer"
-export AGENT_RELEASE_DEPLOYMENT="$AGENT_RELEASE-model"
-export AGENT_RELEASE_MODEL_FORMAT="OpenAI"
-export AGENT_RELEASE_MODEL_NAME="gpt-5-mini"
-export AGENT_RELEASE_MODEL_VERSION="2025-08-07"
-export AGENT_RELEASE_SKU_CAPACITY="10"
-export AGENT_RELEASE_SKU_NAME="GlobalStandard"
-
-# Agent Statistics Writer (uses tools)
-export AGENT_STATISTICS="agent-statistics-writer"
-export AGENT_STATISTICS_DEPLOYMENT="$AGENT_STATISTICS-model"
-export AGENT_STATISTICS_MODEL_FORMAT="OpenAI"
-export AGENT_STATISTICS_MODEL_NAME="gpt-5-mini"
-export AGENT_STATISTICS_MODEL_VERSION="2025-08-07"
-export AGENT_STATISTICS_SKU_CAPACITY="10"
-export AGENT_STATISTICS_SKU_NAME="GlobalStandard"
-
-# Agent Newsletter Editor
-export AGENT_NEWSLETTER="agent-newsletter-editor"
-export AGENT_NEWSLETTER_DEPLOYMENT="$AGENT_NEWSLETTER-model"
-export AGENT_NEWSLETTER_MODEL_FORMAT="OpenAI"
-export AGENT_NEWSLETTER_MODEL_NAME="gpt-5-chat"
-export AGENT_NEWSLETTER_MODEL_VERSION="2025-08-07"
-export AGENT_NEWSLETTER_SKU_CAPACITY="10"
-export AGENT_NEWSLETTER_SKU_NAME="GlobalStandard"
-
-# Setting verbose to true will display extra information
-verbose=false
+source ./azure-setup-env-var.sh
 
 #printf "\n%s\n" "Logging in..."
 #printf "%s\n"   "-------------"
 #az login
-
-
-if [ "$verbose" = true ]; then  
-    printf "\n%s\n" "Checking the Azure account..."
-    printf "%s\n"   "-----------------------------"
-    az account show
-fi
-
-
-if [ "$verbose" = true ]; then  
-    printf "\n%s\n" "Displaying Azure locations..."
-    printf "%s\n"   "-----------------------------"
-    az account list-locations \
-      --query "sort_by([].{Name:name, DisplayName:displayName, RegionalDisplayName:regionalDisplayName}, &Name)" --output table
-fi
-
-
-printf "\n%s\n" "Creating the resource group..."
-printf "%s\n"   "------------------------------"
-az group create \
-  --name "$RESOURCE_GROUP" \
-  --location "$LOCATION" \
-  --tags system="$TAG"
 
 
 if [ "$verbose" = true ]; then  
@@ -186,14 +106,14 @@ az cognitiveservices account deployment create \
   --sku-name "$AGENT_NEWSLETTER_SKU_NAME"
 
 
-printf "\n%s\n" "Displaying environment variables..."
-printf "%s\n"   "-----------------------------------"
+printf "\n%s\n" "Retrieving Azure AI Foundray Variables..."
+printf "%s\n"   "-----------------------------------------"
 export AZURE_AI_FOUNDRY_KEY=$(az cognitiveservices account keys list \
   --name "$AZURE_AI_FOUNDRY_NAME" \
   --resource-group "$RESOURCE_GROUP" \
   --query "key1" \
   --output tsv)
-printf "\n%s\n" "$AZURE_AI_FOUNDRY_KEY"
+printf "\nAZURE_AI_FOUNDRY_KEY=%s\n" "$AZURE_AI_FOUNDRY_KEY"
 
 # Appending `models` at the end of the URL
 export AZURE_AI_FOUNDRY_ENDPOINT=$(az cognitiveservices account show \
@@ -201,4 +121,4 @@ export AZURE_AI_FOUNDRY_ENDPOINT=$(az cognitiveservices account show \
   --resource-group "$RESOURCE_GROUP" \
   --query "properties.endpoint" \
   --output tsv)models
-printf "%s\n" "$AZURE_AI_FOUNDRY_ENDPOINT"
+printf "AZURE_AI_FOUNDRY_ENDPOINT=%s\n" "$AZURE_AI_FOUNDRY_ENDPOINT"

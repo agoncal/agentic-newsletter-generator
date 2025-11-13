@@ -172,6 +172,21 @@ The deployment creates:
     - **agent-newsletter-editor-model**: Phi-4 (Microsoft format)
 - Required environment variables for service connectivity
 
+### Building the Newsletter Generator Docker Image
+
+Check the image with:
+
+```shell
+docker image ls | grep newsletter
+```
+
+Then build the image with
+
+```shell
+mvn clean package -Dquarkus.container-image.build=true
+```
+
+
 ### GitHub Integration
 
 Uses [GitHub MCP Server](https://github.com/github/github-mcp-server) via Model Context Protocol for:
