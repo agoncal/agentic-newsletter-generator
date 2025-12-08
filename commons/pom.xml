@@ -16,7 +16,7 @@
 
   <properties>
     <!-- LangChain4j -->
-    <langchain4j.version>1.8.0</langchain4j.version>
+    <langchain4j.version>1.9.1</langchain4j.version>
     <!-- Other -->
     <dotenv.version>3.2.0</dotenv.version>
     <tinylog.version>2.7.0</tinylog.version>
