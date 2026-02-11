@@ -16,6 +16,7 @@ public class Constants {
     public static final String AGENT_RELEASE_MODEL = "agent-release-writer-model";
     public static final String AGENT_STATISTICS_MODEL = "agent-statistics-writer-model";
     public static final String AGENT_NEWSLETTER_MODEL = "agent-newsletter-editor-model";
+    public static final String AGENT_NEWSLETTER_REVIEWER_MODEL = "agent-newsletter-reviewer-model";
 
     // GitHub MCP Server
     public static final String GITHUB_PERSONAL_ACCESS_TOKEN = getenv("GITHUB_PERSONAL_ACCESS_TOKEN");
